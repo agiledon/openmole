@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+node -e "
+import('$ROOT/.opencode/plugins/bdr.js').then(async (m) => {
+  if (typeof m.BdrPlugin !== 'function') throw new Error('BdrPlugin export missing');
+  const plugin = await m.BdrPlugin();
+  if (typeof plugin.config !== 'function') throw new Error('config hook missing');
+  const config = { skills: { paths: [] }, command: {} };
+  await plugin.config(config);
+  const expected = ['bdr-explore', 'bdr-analyze', 'bdr-plan', 'bdr-apply', 'bdr-archive'];
+  for (const name of expected) {
+    if (!config.command[name]?.template) throw new Error('missing command: ' + name);
+    if (!config.command[name]?.description) throw new Error('missing description: ' + name);
+  }
+  console.log('PASS: bdr.js registers 5 commands');
+}).catch(e => { console.error('FAIL:', e.message); process.exit(1); });
+"
