@@ -1,0 +1,4 @@
+name: refactor-example
+created: 2026-06-05
+scan_scope: src/example/
+status: active   # active | archived

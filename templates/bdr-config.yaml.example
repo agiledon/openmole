@@ -1,0 +1,2 @@
+# 复制到目标项目 bdr/config.yaml
+current_change: null   # 活跃 change 名；explore 新建时更新；archive 后清空

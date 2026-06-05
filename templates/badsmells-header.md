@@ -2,7 +2,7 @@
 
 **版本**：0.1.0
 **状态**：草案
-**依据**：[constitution.md](./constitution.md)、[specification.md](./specification.md)
+**依据**：BDR 规约摘要（见 Skill 内嵌）；change 内 [tasks.md](./tasks.md)
 **修订日期**：{{DATE}}
 
 | 项目 | 说明 |
@@ -15,7 +15,7 @@
 
 ## 1. 说明
 
-- 条目格式见 [specification.md](./specification.md) §4。
+- 条目格式见 Skill 内嵌 specification §4。
 - 升版时填写修订历史「提交版本」（specification §7）。
 
 ---
