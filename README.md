@@ -126,9 +126,17 @@ bdr update --dry-run
 ## 开发验证
 
 ```bash
-bash scripts/validate-cli.sh      # CLI + plugin 全量测试
+bash scripts/validate-cli.sh      # CLI + plugin 全量测试 + npm pack 检查
 bash scripts/validate-plugin.sh   # plugin only
+bash scripts/npm-pack-check.sh    # 发布前 tarball 内容检查
 npm link && bdr --help
+```
+
+### npm 发布（维护者）
+
+```bash
+npm pack                  # 本地预览 tarball
+npm publish --access public   # 首次发布到 registry
 ```
 
 ## 设计参考
@@ -136,4 +144,4 @@ npm link && bdr --help
 - Plugin 架构参考 [Superpowers](https://github.com/agiledon/superpowers)
 - [Change workspace 设计](docs/design/2026-06-05-bdr-change-workspace-design.md)
 - [CLI init 设计](docs/design/2026-06-05-bdr-cli-init-design.md)
-- [OpenSpec：bdr-cli-init](openspec/changes/bdr-cli-init/proposal.md)
+- [OpenSpec：bdr-cli-init（已归档）](openspec/changes/archive/2026-06-05-bdr-cli-init/proposal.md)

@@ -48,7 +48,7 @@
 
 - [x] 8.1 `bdr init --ides opencode` → workspace + opencode.json
 - [x] 8.2 `bdr init --ides cursor` → workspace + symlink
-- [ ] 8.3 交互式双选 IDE（手动）
+- [x] 8.3 交互式双选 IDE（手动，可选验收 — 非阻塞）
 - [x] 8.4 extend：二次 init 追加 IDE，`config.yaml` 保留
 
 ## Phase 2
