@@ -20,8 +20,12 @@
 ## 验证
 
 1. 重启 OpenCode
-2. 使用 `skill` 工具列出 skills → 应看到 `using-bdr`、`bdr-explore` 等
-3. 输入："Run bdr:explore on this project"
+2. 使用 `skill` 工具列出 skills → 应看到 `bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`、`bdr-archive`
+3. 输入：`bdr:explore . demo-change`
+
+## 工作区
+
+目标项目使用 `bdr/config.yaml` + `bdr/changes/<change-name>/`。无需复制任何初始化文档。
 
 ## 故障排查
 
