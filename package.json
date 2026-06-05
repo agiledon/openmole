@@ -1,9 +1,15 @@
 {
   "name": "bdr",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Bad smell Driven Refactoring — Agent skill plugin",
   "type": "module",
   "main": ".opencode/plugins/bdr.js",
+  "bin": {
+    "bdr": "./bin/bdr.js"
+  },
   "license": "MIT",
-  "keywords": ["bdr", "refactoring", "skills", "agent"]
+  "keywords": ["bdr", "refactoring", "skills", "agent"],
+  "dependencies": {
+    "@clack/prompts": "^0.7.0"
+  }
 }
