@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { resolvePackageRoot } from '../lib/package-root.js';
 import { bootstrapWorkspace, updateInstalledIdes, workspacePaths } from '../workspace/bootstrap.js';
 import { readConfigFile } from '../lib/config-yaml.js';
@@ -111,7 +110,7 @@ function printSummary({ targetDir, results, extended, dryRun }) {
 
 export async function runInit(argv) {
   const opts = parseInitArgv(argv);
-  const packageRoot = resolvePackageRoot(fileURLToPath(import.meta.url));
+  const packageRoot = resolvePackageRoot(import.meta.url);
   const version = readPackageVersion(packageRoot);
 
   const ws = bootstrapWorkspace({
