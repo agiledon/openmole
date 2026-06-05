@@ -44,25 +44,34 @@ Plugin 架构参考 [Superpowers](https://github.com/agiledon/superpowers)；BDR
 
 ## 安装
 
-### Cursor（本地 path install）
-
-见 [.cursor/INSTALL.md](.cursor/INSTALL.md)。快速步骤：
+### 推荐：`bdr init`
 
 ```bash
-bash scripts/install-cursor-plugin.sh   # symlink 到 ~/.cursor/plugins/local/bdr
-# Cmd+Q 重启 Cursor
+# 开发期（本仓库）
+cd /path/to/bdr && npm install && npm link
+
+# 在目标项目目录
+cd /path/to/your-project
+bdr init                    # 交互式选择 IDE
+bdr init --ides cursor,opencode   # 非交互
+bdr init --none             # 仅初始化 bdr/ 工作区
 ```
 
-验证 Skills（5 个）与 Commands（`/bdr-explore` … `/bdr-archive`）。
+`bdr init` 会：
 
-### OpenCode
+1. 创建 `bdr/config.yaml`、`bdr/changes/`、`bdr/changes/archive/`
+2. 按所选 IDE 配置 skill/command（Cursor 用户级；OpenCode 项目级 `opencode.json`）
 
-见 [.opencode/INSTALL.md](.opencode/INSTALL.md)。
+### 手动安装（fallback）
+
+**Cursor** — [.cursor/INSTALL.md](.cursor/INSTALL.md)  
+**OpenCode** — [.opencode/INSTALL.md](.opencode/INSTALL.md)
 
 ## 开发验证
 
 ```bash
-bash scripts/validate-plugin.sh
+bash scripts/validate-cli.sh      # CLI + plugin
+bash scripts/validate-plugin.sh   # plugin only
 ```
 
 ## 文档
