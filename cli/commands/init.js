@@ -4,16 +4,13 @@ import { resolvePackageRoot } from '../lib/package-root.js';
 import { bootstrapWorkspace, updateInstalledIdes, workspacePaths } from '../workspace/bootstrap.js';
 import { readConfigFile } from '../lib/config-yaml.js';
 import { promptIdeSelection, ALL_IDE_VALUES } from '../prompts/ide-select.js';
-import { installCursor } from '../adapters/cursor.js';
-import { installOpenCode } from '../adapters/opencode.js';
-import { installClaudeCode } from '../adapters/claude-code.js';
-import { installCodex } from '../adapters/codex.js';
-import { installGeminiCli } from '../adapters/gemini-cli.js';
-
-function readPackageVersion(packageRoot) {
-  const pkg = JSON.parse(fs.readFileSync(path.join(packageRoot, 'package.json'), 'utf8'));
-  return pkg.version || '0.0.0';
-}
+import {
+  readPackageVersion,
+  needsReinstall,
+  installIdes,
+} from '../lib/ide-install.js';
+import { printInstallSummary } from '../lib/summary.js';
+import { mergeGitignoreSnippet } from '../workspace/gitignore.js';
 
 function parseIdesFlag(value) {
   if (!value) return [];
@@ -29,6 +26,7 @@ export function parseInitArgv(argv) {
     force: false,
     global: false,
     dryRun: false,
+    skipGitignore: false,
   };
 
   const positional = [];
@@ -46,6 +44,8 @@ export function parseInitArgv(argv) {
       opts.global = true;
     } else if (arg === '--dry-run') {
       opts.dryRun = true;
+    } else if (arg === '--skip-gitignore') {
+      opts.skipGitignore = true;
     } else if (arg.startsWith('-')) {
       throw new Error(`Unknown option: ${arg}`);
     } else {
@@ -75,67 +75,12 @@ async function resolveSelectedIdes(opts) {
   return promptIdeSelection();
 }
 
-function needsReinstall(targetDir, ide, force) {
-  if (force) return true;
-  switch (ide) {
-    case 'cursor':
-      return !fs.existsSync(
-        path.join(targetDir, '.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md'),
-      );
-    case 'gemini':
-      return !fs.existsSync(
-        path.join(targetDir, '.gemini', 'skills', 'bdr-explore-to-change', 'SKILL.md'),
-      );
-    case 'codex':
-      return !fs.existsSync(path.join(targetDir, 'plugins', 'bdr', '.codex-plugin', 'plugin.json'));
-    default:
-      return false;
-  }
-}
-
 function filterExtendMode(targetDir, ides, force) {
   if (force) return ides;
   const config = readConfigFile(workspacePaths(targetDir).configPath);
   if (!config?.installed_ides?.length) return ides;
   const installed = new Set(config.installed_ides);
   return ides.filter((ide) => !installed.has(ide) || needsReinstall(targetDir, ide, force));
-}
-
-function printSummary({ targetDir, results, extended, dryRun }) {
-  console.log('');
-  console.log(dryRun ? 'Dry run — planned actions:' : 'BDR init complete.');
-  console.log(`  Workspace: ${path.join(targetDir, 'bdr')}`);
-  for (const r of results) {
-    if (r.skipped) {
-      console.log(`  ⚠ ${r.ide}: skipped`);
-    } else if (r.dryRun) {
-      console.log(`  → ${r.ide}: ${r.action}`);
-    } else {
-      console.log(`  ✓ ${r.ide}: ${r.action || 'configured'}`);
-    }
-  }
-  if (extended) {
-    console.log('  (extend mode: existing config preserved)');
-  }
-  console.log('');
-  console.log('Next steps:');
-  if (results.some((r) => r.ide === 'cursor' && !r.skipped)) {
-    console.log('  • Cursor: 检查项目 .cursor/skills/ 与 .cursor/commands/');
-    console.log('  • Cursor: Cmd+Q 重启后验证 /bdr-explore');
-  }
-  if (results.some((r) => r.ide === 'opencode' && !r.skipped)) {
-    console.log('  • OpenCode: 重启后运行 /bdr-explore . demo-change');
-  }
-  if (results.some((r) => r.ide === 'claude' && !r.skipped)) {
-    console.log('  • Claude Code: 重启后运行 /plugin 确认 bdr 已加载');
-  }
-  if (results.some((r) => r.ide === 'codex' && !r.skipped)) {
-    console.log('  • Codex: 运行 /plugins 或 codex /plugins 确认 bdr 可用');
-  }
-  if (results.some((r) => r.ide === 'gemini' && !r.skipped)) {
-    console.log('  • Gemini CLI: 重启后运行 /skills 确认 bdr-*-change skills');
-  }
-  console.log('  • 运行 /bdr-explore . <change-name> 开始第一个 change');
 }
 
 export async function runInit(argv) {
@@ -157,70 +102,38 @@ export async function runInit(argv) {
   let ides = await resolveSelectedIdes(opts);
   ides = filterExtendMode(opts.targetDir, ides, opts.force);
 
-  const results = [];
+  const installOpts = {
+    packageRoot,
+    targetDir: opts.targetDir,
+    dryRun: opts.dryRun,
+    force: opts.force,
+    global: opts.global,
+  };
 
-  for (const ide of ides) {
-    switch (ide) {
-      case 'cursor':
-        results.push(
-          installCursor({
-            packageRoot,
-            targetDir: opts.targetDir,
-            dryRun: opts.dryRun,
-            force: opts.force,
-          }),
-        );
-        break;
-      case 'opencode':
-        results.push(
-          installOpenCode({
-            packageRoot,
-            targetDir: opts.targetDir,
-            global: opts.global,
-            dryRun: opts.dryRun,
-          }),
-        );
-        break;
-      case 'claude':
-        results.push(
-          installClaudeCode({
-            packageRoot,
-            dryRun: opts.dryRun,
-            force: opts.force,
-          }),
-        );
-        break;
-      case 'codex':
-        results.push(
-          installCodex({
-            packageRoot,
-            targetDir: opts.targetDir,
-            dryRun: opts.dryRun,
-            force: opts.force,
-          }),
-        );
-        break;
-      case 'gemini':
-        results.push(
-          installGeminiCli({
-            packageRoot,
-            targetDir: opts.targetDir,
-            dryRun: opts.dryRun,
-            force: opts.force,
-          }),
-        );
-        break;
-      default:
-        console.warn(`⚠ Unknown IDE: ${ide}`);
-    }
+  const results = installIdes(ides, installOpts);
+
+  if (!opts.skipGitignore && ides.length > 0) {
+    mergeGitignoreSnippet({
+      packageRoot,
+      targetDir: opts.targetDir,
+      dryRun: opts.dryRun,
+    });
   }
 
   if (!opts.dryRun) {
-    const configured = results.filter((r) => !r.skipped).map((r) => r.ide);
+    const configured = results.filter((r) => r.ide && !r.skipped).map((r) => r.ide);
     if (configured.length) {
       updateInstalledIdes(opts.targetDir, configured);
     }
   }
 
-  printSummary({ targetDir: opts.targetDir, results, extended: ws.extended, dryRun: opts.dryRun });
+  const extraLines = ws.extended ? ['(extend mode: existing config preserved)'] : [];
+
+  printInstallSummary({
+    title: 'BDR init',
+    targetDir: opts.targetDir,
+    results,
+    extraLines,
+    dryRun: opts.dryRun,
+  });
 }

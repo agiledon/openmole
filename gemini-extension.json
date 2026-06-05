@@ -1,6 +1,6 @@
 {
   "name": "bdr",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Bad smell Driven Refactoring workflow for Gemini CLI",
   "license": "MIT",
   "keywords": ["bdr", "refactoring", "bad-smells"],

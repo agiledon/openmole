@@ -2,7 +2,7 @@
 
 BDR（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 phase skill；目标项目工件位于 `bdr/changes/<change-name>/`。
 
-**当前版本**：0.3.0（CLI：`bdr init` / `bdr update`）
+**当前版本**：0.4.0（CLI：`bdr init` · `bdr update`）
 
 ## 命令与 Skill
 

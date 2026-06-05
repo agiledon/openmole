@@ -51,6 +51,9 @@
 - [ ] 8.3 交互式双选 IDE（手动）
 - [x] 8.4 extend：二次 init 追加 IDE，`config.yaml` 保留
 
-## Phase 2（不在 Phase A）
+## Phase 2
 
-- npm registry、`bdr update`
+- [x] 9.1 `bdr update`：按 `installed_ides` 重装 IDE 配置并刷新 `init_version`
+- [x] 9.2 `templates/bdr-gitignore.snippet` + init/update 合并到项目 `.gitignore`
+- [x] 9.3 `package.json`：`files` / `repository` / `engines` / `publishConfig`（npm registry 就绪）
+- [x] 9.4 测试：`test-update.sh`、`test-init-gitignore.sh`、`test-package-publish.sh`

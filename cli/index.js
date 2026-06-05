@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { runInit } from './commands/init.js';
+import { runUpdate } from './commands/update.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -14,22 +15,31 @@ function printHelp() {
   console.log(`bdr — Bad smell Driven Refactoring CLI (${readVersion()})
 
 Usage:
-  bdr init [path] [options]   Initialize BDR workspace and configure AI IDEs
-  bdr --help                  Show this help
-  bdr --version               Show version
+  bdr init [path] [options]    Initialize BDR workspace and configure AI IDEs
+  bdr update [path] [options]  Re-install IDE configs from installed_ides
+  bdr --help                     Show this help
+  bdr --version                  Show version
 
 Init options:
-  --ides <list>    Comma-separated: cursor,opencode,gemini,claude,codex
-  --all            Configure all IDEs
-  --none           Workspace only, skip IDE configuration
-  --force          Overwrite existing config
-  --global         Write OpenCode config to user-level (~/.config/opencode/)
-  --dry-run        Print planned actions without writing files
+  --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex
+  --all               Configure all IDEs
+  --none              Workspace only, skip IDE configuration
+  --force             Overwrite existing config
+  --global            Write OpenCode config to user-level (~/.config/opencode/)
+  --dry-run           Print planned actions without writing files
+  --skip-gitignore    Do not merge templates/bdr-gitignore.snippet
+
+Update options:
+  --global            Pass --global to OpenCode adapter when re-installing
+  --dry-run           Print planned actions without writing files
+  --skip-gitignore    Do not refresh .gitignore BDR snippet
 
 Examples:
   bdr init
   bdr init . --ides cursor,opencode
   bdr init /path/to/project --none
+  bdr update
+  bdr update . --dry-run
 `);
 }
 
@@ -51,6 +61,11 @@ export async function main(argv) {
 
   if (cmd === 'init') {
     await runInit(rest);
+    return;
+  }
+
+  if (cmd === 'update') {
+    await runUpdate(rest);
     return;
   }
 

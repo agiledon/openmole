@@ -68,3 +68,17 @@ export function updateInstalledIdes(targetDir, newIdes) {
   writeConfigFile(configPath, config);
   return config;
 }
+
+export function refreshInitMetadata(targetDir, packageVersion, dryRun = false) {
+  const { configPath } = workspacePaths(targetDir);
+  const config = readConfigFile(configPath);
+  if (!config) {
+    throw new Error(`Missing config: ${configPath}`);
+  }
+  config.init_version = packageVersion;
+  config.init_at = new Date().toISOString();
+  if (!dryRun) {
+    writeConfigFile(configPath, config);
+  }
+  return config;
+}
