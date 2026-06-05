@@ -1,0 +1,14 @@
+schema: spec-driven
+
+# Per-artifact rules (optional)
+context: |
+  Tech stack:
+  - Markdown + YAML frontmatter: skills (SKILL.md), commands, agents
+  - JSON: .cursor-plugin, .claude-plugin, .codex-plugin, gemini-extension.json
+  - Bash: hooks (session-start), scripts/, tests/
+  - JavaScript ESM: .opencode/plugins/bdr.js (Node built-ins only, zero npm deps)
+  - Minimal package.json: type module, no runtime dependencies
+  - Harness docs: AGENTS.md, CLAUDE.md, GEMINI.md
+  - License: MIT
+  - Zero third-party runtime dependencies
+  - BDR domain: bad smell driven refactoring; docs/prd/ is spec source of truth
