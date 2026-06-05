@@ -26,7 +26,7 @@ description: bdr:plan — 从未清除/部分残余坏味道生成 tasks.md
 - ID 格式：`B-T序号`
 - 使用 `templates/tasks-entry.md` 字段
 - 保留 `templates/tasks-header.md` 中的 §1 执行约定
-- 每任务步骤：① 补测 / ② 测绿 / ③ 重构 / ④ 测绿 / ⑤ 用户确认
+- 每任务步骤（constitution §4）：① 确认条目 / ② 补测 / ③ 测绿 / ④ 重构 / ⑤ 回归测绿 / ⑥ 用户确认
 - **不得** 编造无 badsmells 条目支撑的任务
 
 ## 可选

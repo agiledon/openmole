@@ -29,7 +29,7 @@ description: bdr:explore — 扫描源码并按 specification §4 产出 badsmel
 - **§2.0 索引**：BS-ID | 状态（未清除/部分残余/已消除）| 说明
 - 每条目七字段表格（specification §4）：ID、标题、位置、描述、对齐原则、消除标准、风险与约束
 - 行为变更风险须标注 `[SDD]`
-- 升版时更新修订历史，填写「提交版本」（specification §7）
+- 升版时更新修订历史，填写「提交版本」（specification §7）：运行 `git rev-parse HEAD` 获取 SHA；工作区未提交则填 `—`
 
 ## 自检清单（写入前）
 
