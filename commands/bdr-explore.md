@@ -1,4 +1,5 @@
 ---
+name: bdr-explore
 description: 创建或继续 BDR change，扫描坏味道写入 bdr/changes/<name>/badsmells.md
 ---
 
