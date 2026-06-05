@@ -1,46 +1,64 @@
 ---
 name: bdr-analyze
-description: bdr:analyze — badsmells 与 tasks 差分（A～F）并同步 analysis.md
+description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～F）
 ---
 
 # BDR Analyze — 差分分析
 
 ## 何时使用
 
-- `badsmells.md` 版本或实质性内容变更后 **必须** 运行
-- `bdr:plan` 或 `bdr:apply` 前发现 tasks 与 badsmells 不一致
+- 当前 change 的 `badsmells.md` 变更后 **必须** 运行
+- `bdr:plan` / `bdr:apply` 前发现 tasks 与 badsmells 不一致
 
-## 前置步骤
+## 工作区解析
 
-1. 加载 `using-bdr`，解析 `{docs_root}`
-2. 读取 `{docs_root}/badsmells.md`、`tasks.md`、`analysis.md`
+1. 读取 `bdr/config.yaml` → `current_change`
+2. `{change_dir}` = `bdr/changes/{change_name}/`
+3. 无 `current_change` → **停止**，提示先 `bdr:explore`
 
-## 强制差分步骤（analysis.md §2）
+## 强制差分步骤
 
 | 步骤 | 动作 |
 |------|------|
-| A | 列出 badsmells 当前全部 BS-ID |
-| B | 列出 tasks 各任务引用的 BS-ID |
-| C | 新增 BS-ID → tasks 增补 B-Txx |
-| D | 删除/合并 BS-ID → 删除或改写孤儿任务 |
+| A | 列出 `{change_dir}/badsmells.md` 全部 BS-ID |
+| B | 列出 `{change_dir}/tasks.md` 各任务 BS-ID |
+| C | 新增 BS-ID → 增补 B-Txx |
+| D | 删除/合并 BS-ID → 处理孤儿任务 |
 | E | 验收标准变更 → 同步 DoD |
-| F | 摘要写入 analysis.md §2.1 + 修订历史（提交版本） |
-
-## 三角检查（analysis.md §3）
-
-- 宪法 ↔ 元规约
-- 元规约 ↔ badsmells（§4 字段、`[SDD]`）
-- badsmells ↔ 任务（无遗漏、无孤儿）
-- 任务 ↔ 宪法（DoD 含测绿 + 用户确认）
-- BDR ↔ SDD
-
-## RED FLAGS
-
-- 差分未完成即进入 plan/apply
-- 发现冲突先改代码而非文档
+| F | 摘要写入 `{change_dir}/analysis.md` §2.1 + 修订历史 |
 
 ## 输出
 
-更新 `{docs_root}/analysis.md` §2.1 与 `{docs_root}/tasks.md`（必要时）。
+更新 `{change_dir}/analysis.md` 与 `{change_dir}/tasks.md`（必要时）。模板：`templates/analysis-header.md`
 
-模板：`templates/analysis-header.md`
+## BDR 规约摘要（内嵌于各 Skill，非独立文件）
+
+### constitution §3 — 八项第一性原则
+
+清晰性、一致性、可读性、复用性、可扩展性、健壮性、安全性、简洁性。
+
+### constitution §4 — 标准重构步骤
+
+1. 确认坏味道条目
+2. 确定测试覆盖；无覆盖则先写测试
+3. 运行测试 → 全绿
+4. 执行重构（最小 diff，对准 BS-ID）
+5. 回归测试 → 全绿
+6. **用户确认**（未确认不得标记完成）
+
+### constitution §5 — 执行粒度
+
+每次 `bdr:apply` 仅处理一个未完成任务。
+
+### specification §4 — badsmells 条目
+
+七字段 + §2.0 状态：**未清除** / **已消除** / **部分残余**。
+
+### specification §7 — 修订历史
+
+升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
+
+## RED FLAGS
+
+- 差分未完成即 plan/apply
+- 发现冲突先改代码而非文档

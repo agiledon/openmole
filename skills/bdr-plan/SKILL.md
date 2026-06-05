@@ -7,35 +7,52 @@ description: bdr:plan — 从未清除/部分残余坏味道生成 tasks.md
 
 ## 何时使用
 
-用户运行 `bdr:plan`，或在 analyze 完成后需要生成/更新重构任务。
+用户运行 `bdr:plan`，或在 analyze 完成后生成/更新任务。
+
+## 工作区解析
+
+1. 读取 `bdr/config.yaml` → `current_change`
+2. `{change_dir}` = `bdr/changes/{change_name}/`
+3. 无 `current_change` → **停止**，提示先 `bdr:explore`
 
 ## 门禁
 
-若 `badsmells.md` 版本 **高于** `tasks.md` 页眉「依据」中的 badsmells 版本：
-- **停止**
-- 提示先运行 `bdr:analyze`
-
-## 前置步骤
-
-1. 加载 `using-bdr`
-2. 读取 `{docs_root}/badsmells.md` §2.0 索引
-3. 选取状态为 **未清除** 或 **部分残余** 的条目
+若 `{change_dir}/badsmells.md` 版本 **高于** 同目录 `tasks.md` 页眉依据版本 → **停止**，先 `bdr:analyze`
 
 ## 任务生成
 
-- ID 格式：`B-T序号`
-- 使用 `templates/tasks-entry.md` 字段
-- 保留 `templates/tasks-header.md` 中的 §1 执行约定
-- 每任务步骤（constitution §4）：① 确认条目 / ② 补测 / ③ 测绿 / ④ 重构 / ⑤ 回归测绿 / ⑥ 用户确认
-- **不得** 编造无 badsmells 条目支撑的任务
+1. 读取 `{change_dir}/badsmells.md` §2.0
+2. 选取 **未清除** / **部分残余** 条目
+3. ID：`B-T序号`；模板：`templates/tasks-entry.md`、`tasks-header.md`
+4. 每任务六步：确认 → 补测 → 测绿 → 重构 → 回归 → 用户确认
+5. 写入 `{change_dir}/tasks.md` §3
 
-## 可选
+## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
-- 备注覆盖率基线（`pytest --cov`、`jacoco`）
+### constitution §3 — 八项第一性原则
 
-## 输出
+清晰性、一致性、可读性、复用性、可扩展性、健壮性、安全性、简洁性。
 
-写入/更新 `{docs_root}/tasks.md` §3 backlog；升版时填写修订历史「提交版本」。
+### constitution §4 — 标准重构步骤
+
+1. 确认坏味道条目
+2. 确定测试覆盖；无覆盖则先写测试
+3. 运行测试 → 全绿
+4. 执行重构（最小 diff，对准 BS-ID）
+5. 回归测试 → 全绿
+6. **用户确认**（未确认不得标记完成）
+
+### constitution §5 — 执行粒度
+
+每次 `bdr:apply` 仅处理一个未完成任务。
+
+### specification §4 — badsmells 条目
+
+七字段 + §2.0 状态：**未清除** / **已消除** / **部分残余**。
+
+### specification §7 — 修订历史
+
+升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
 
 ## RED FLAGS
 

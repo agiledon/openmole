@@ -1,6 +1,6 @@
 ---
 name: bdr-explore
-description: bdr:explore — 扫描源码并按 specification §4 产出 badsmells.md
+description: bdr:explore — 创建/继续 change，扫描源码产出 badsmells.md
 ---
 
 # BDR Explore — 识别坏味道
@@ -9,42 +9,81 @@ description: bdr:explore — 扫描源码并按 specification §4 产出 badsmel
 
 用户运行 `bdr:explore` 或需要识别/更新坏味道清单时。
 
-## 前置步骤
+## 工作区解析
 
-1. 加载 `using-bdr`，解析 `{docs_root}`
-2. 读取 `{docs_root}/constitution.md` §3（八项第一性原则）
-3. 读取 `{docs_root}/specification.md` §3 优先级、§4 条目格式
+1. 读取 `bdr/config.yaml` → `current_change`
+2. `{change_dir}` = `bdr/changes/{change_name}/`
+3. 无 `bdr/config.yaml` → 提示从 `templates/bdr-config.yaml.example` 创建
+
+## D3 生命周期
+
+| 条件 | 行为 |
+|------|------|
+| 无 `current_change` | 新建 change；名称由 `[change-name]` 指定或 Agent 提议 + **用户确认** |
+| 有 active change 且未传 `[change-name]` | **询问**：继续当前（升版 badsmells）/ 新建 change |
+| 显式 `[change-name]` | 目录不存在则创建；存在则在该 change 内升版 |
+
+新建 change 时：
+
+1. 创建 `bdr/changes/<name>/`、`.bdr-change.yaml`（见 `templates/bdr-change.yaml`）
+2. 更新 `bdr/config.yaml` 的 `current_change`
+
+## 跨 change 去重（步骤 0）
+
+1. 扫描 `bdr/changes/*/badsmells.md` 与 `bdr/changes/archive/*/badsmells.md` §2.0
+2. 构建 BS-ID 与指纹 `(规范化路径, Fowler 标签)`
+3. 已消除同指纹 → **跳过**，注明原 change
+4. 未清除/部分残余于其他 change → **警告**，不得静默重复
 
 ## 扫描流程
 
-1. **确定范围**：目标路径（默认 `.`），列出主要源文件
-2. **检测语言**：Python / Java / TypeScript 等，加载对应最佳实践
-3. **识别坏味道**：对照 Fowler 标签 + constitution §3 + SOLID + 迪米特法则
-4. **分配 BS-ID**：`BS-<CATEGORY>-<NNN>`（CLARITY、CONSIST、REUSE、ROBUST、SEC、SIMPLE）
-5. **写入** `{docs_root}/badsmells.md`
+1. **确定范围**：`[path]` 默认 `.`
+2. **检测语言**：Python / Java / TypeScript 等
+3. **识别坏味道**：Fowler + §3 原则 + SOLID
+4. **分配 BS-ID**：`BS-<CATEGORY>-<NNN>`
+5. **写入** `{change_dir}/badsmells.md`
 
 ## 输出格式
 
-- 文首元信息（版本、状态、依据、日期）
-- **§2.0 索引**：BS-ID | 状态（未清除/部分残余/已消除）| 说明
-- 每条目七字段表格（specification §4）：ID、标题、位置、描述、对齐原则、消除标准、风险与约束
-- 行为变更风险须标注 `[SDD]`
-- 升版时更新修订历史，填写「提交版本」（specification §7）：运行 `git rev-parse HEAD` 获取 SHA；工作区未提交则填 `—`
-
-## 自检清单（写入前）
-
-- [ ] 每条有稳定 BS-ID 与 Fowler 标签
-- [ ] §2.0 索引与正文条目一致
-- [ ] 七项必填字段齐全
-- [ ] 新条目状态为 **未清除**
-- [ ] 已消除条目保留审计时可不改正文
+- 使用 `templates/badsmells-header.md` + `badsmells-entry.md`
+- §2.0 索引；七字段表格；升版时 `git rev-parse HEAD` 填提交版本
 
 ## 语言附录
 
-**Python**：pytest、unittest.mock；关注模块体量、循环依赖、重复逻辑  
-**Java**：JUnit、Mockito；关注 Large Class、Long Method、包边界  
-**TypeScript**：jest/vitest；关注 any 滥用、上帝模块
+**Python**：pytest、unittest.mock  
+**Java**：JUnit、Mockito  
+**TypeScript**：jest/vitest
 
-## 模板
+## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
-新建时使用 `templates/badsmells-header.md` + `badsmells-entry.md`；无文件时从 `docs/reference/bdr/badsmells.md` 参考结构。
+### constitution §3 — 八项第一性原则
+
+清晰性、一致性、可读性、复用性、可扩展性、健壮性、安全性、简洁性。
+
+### constitution §4 — 标准重构步骤
+
+1. 确认坏味道条目
+2. 确定测试覆盖；无覆盖则先写测试
+3. 运行测试 → 全绿
+4. 执行重构（最小 diff，对准 BS-ID）
+5. 回归测试 → 全绿
+6. **用户确认**（未确认不得标记完成）
+
+### constitution §5 — 执行粒度
+
+每次 `bdr:apply` 仅处理一个未完成任务。
+
+### specification §4 — badsmells 条目
+
+七字段 + §2.0 状态：**未清除** / **已消除** / **部分残余**。
+
+### specification §7 — 修订历史
+
+升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
+
+## RED FLAGS
+
+- 跳过测绿直接重构
+- 无代码证据编造坏味道
+- 跨 change 静默重复同一坏味道
+- `[SDD]` 标记项未获批准即改生产代码
