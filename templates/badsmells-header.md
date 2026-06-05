@@ -1,0 +1,28 @@
+# 坏味道规约文档（BDR Bad Smells）
+
+**版本**：0.1.0
+**状态**：草案
+**依据**：[constitution.md](./constitution.md)、[specification.md](./specification.md)
+**修订日期**：{{DATE}}
+
+| 项目 | 说明 |
+|------|------|
+| **文档定位** | BDR 坏味道环节正式规约载体 |
+| **统计范围** | {{SCAN_SCOPE}} |
+| **关联任务** | 见 [tasks.md](./tasks.md) |
+
+---
+
+## 1. 说明
+
+- 条目格式见 [specification.md](./specification.md) §4。
+- 升版时填写修订历史「提交版本」（specification §7）。
+
+---
+
+## 2. 坏味道条目
+
+### 2.0 索引与消除状态
+
+| BS-ID | 状态 | 说明 |
+|-------|------|------|
