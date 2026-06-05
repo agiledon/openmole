@@ -32,4 +32,6 @@ BDR 插件目前依赖手工安装（Cursor symlink、OpenCode 手改 `opencode.
 
 ## Delivery
 
-参考 OpenSpec `init` UX；**Phase A** 实现 Cursor + OpenCode 适配器与 workspace bootstrap；**Phase B** 补齐 Claude Code、Codex、Gemini CLI 适配器（依赖对应 manifest 就绪）。
+参考 OpenSpec `init` UX；**方案 1** 单包 `cli/`。**Phase A** Cursor + OpenCode + workspace + config 元数据；**Phase B** 三 IDE manifest；registry **Phase 2**。
+
+Brainstorming 决策见 [`docs/design/2026-06-05-bdr-cli-init-design.md`](../../../docs/design/2026-06-05-bdr-cli-init-design.md)。

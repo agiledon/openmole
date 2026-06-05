@@ -1,55 +1,56 @@
-## 1. CLI 骨架
+## 1. CLI 骨架（方案 1）
 
-- [ ] 1.1 新增 `bin/bdr.js` shebang 入口与 `cli/index.js` 命令路由
-- [ ] 1.2 `package.json` 增加 `bin.bdr`；CLI 依赖 `@clack/prompts`（plugin 本体不引用）
-- [ ] 1.3 实现 `--help`、`init --help` 与 `--dry-run` / `--force` / `--ides` 参数解析
+- [ ] 1.1 新增 `bin/bdr.js`、`cli/index.js` 路由（init / --help / --version）
+- [ ] 1.2 `package.json`：`bin.bdr`；`dependencies: { "@clack/prompts": "..." }`（plugin 不引用）
+- [ ] 1.3 `cli/commands/init.js`：解析 `--ides` / `--all` / `--none` / `--force` / `--global` / `--dry-run`
 
-## 2. 交互式 IDE 选择
+## 2. config.yaml 与 workspace
 
-- [ ] 2.1 `cli/prompts/ide-select.js`：multiselect 列出 Cursor、OpenCode、Gemini CLI、Claude Code、Codex
-- [ ] 2.2 非 TTY 或 `--ides` 时跳过交互
-- [ ] 2.3 支持 `--ides all` / `--none`
+- [ ] 2.1 更新 `templates/bdr-config.yaml.example`：`installed_ides`、`init_version`、`init_at`
+- [ ] 2.2 `cli/lib/config-yaml.js`：读/写/合并 YAML（零依赖或最小 yaml 解析）
+- [ ] 2.3 `cli/workspace/bootstrap.js`：创建 `bdr/changes/`、`bdr/changes/archive/`
+- [ ] 2.4 extend 模式：已存在 config 时 skip（除非 `--force`）；更新 `installed_ides`
 
-## 3. 工作区 bootstrap
+## 3. 交互式 IDE 选择
 
-- [ ] 3.1 `cli/workspace/init.js`：创建 `bdr/config.yaml`、`bdr/changes/`、`bdr/changes/archive/`
-- [ ] 3.2 已存在时 extend 模式（skip config，除非 `--force`）
-- [ ] 3.3 从 `templates/bdr-config.yaml.example` 复制内容
+- [ ] 3.1 `cli/prompts/ide-select.js`：5 IDE multiselect（Cursor、OpenCode、Gemini CLI、Claude Code、Codex）
+- [ ] 3.2 非 TTY 或 `--ides` 时跳过交互
 
-## 4. IDE 适配器 — Phase A（MVP）
+## 4. 包路径与 adapter — Phase A
 
-- [ ] 4.1 `cli/adapters/cursor.js`：symlink package root → `~/.cursor/plugins/local/bdr`
-- [ ] 4.2 `cli/adapters/opencode.js`：merge `plugin` 路径到项目 `opencode.json`（可选 `--global`）
-- [ ] 4.3 BDR 包根路径解析（`import.meta.url` + `BDR_HOME`）
-- [ ] 4.4 init 完成后打印 Cursor Cmd+Q、OpenCode 重启验证提示
+- [ ] 4.1 `cli/lib/package-root.js`：`BDR_HOME` / `import.meta.url`
+- [ ] 4.2 `cli/adapters/cursor.js`：用户级 symlink → `~/.cursor/plugins/local/bdr`
+- [ ] 4.3 `cli/adapters/opencode.js`：项目级 merge `opencode.json`；`--global` 写用户配置
+- [ ] 4.4 `cli/adapters/_stub.js`：Claude/Codex/Gemini warn-and-skip
+- [ ] 4.5 init 结束打印验证清单（Cmd+Q / 重启 OpenCode / `/bdr-explore`）
 
-## 5. IDE 适配器 — Phase B
+## 5. IDE adapter — Phase B
 
-- [ ] 5.1 补全 `.claude-plugin/` manifest + `cli/adapters/claude-code.js`
-- [ ] 5.2 补全 `.codex-plugin/` manifest + `cli/adapters/codex.js`
-- [ ] 5.3 补全 `gemini-extension.json` + `cli/adapters/gemini-cli.js`
-- [ ] 5.4 Phase A 中对未就绪 IDE 的 warn-and-skip 行为
+- [ ] 5.1 `.claude-plugin/` + `cli/adapters/claude-code.js`
+- [ ] 5.2 `.codex-plugin/` + `cli/adapters/codex.js`
+- [ ] 5.3 `gemini-extension.json` + `cli/adapters/gemini-cli.js`
 
 ## 6. 测试
 
-- [ ] 6.1 `tests/cli/test-init-workspace.sh`：temp dir 断言目录与 config.yaml
-- [ ] 6.2 `tests/cli/test-init-dry-run.sh`：无文件写入
-- [ ] 6.3 `tests/cli/test-init-ides-flag.sh`：非交互 `--ides none` / `cursor`
-- [ ] 6.4 更新 `scripts/validate-plugin.sh` 或新增 `scripts/validate-cli.sh`
+- [ ] 6.1 `tests/cli/test-init-workspace.sh`
+- [ ] 6.2 `tests/cli/test-init-dry-run.sh`
+- [ ] 6.3 `tests/cli/test-init-ides-flag.sh`
+- [ ] 6.4 `tests/cli/test-init-extend.sh`：`installed_ides` 追加
+- [ ] 6.5 `scripts/validate-cli.sh` 或扩展 `validate-plugin.sh`
 
-## 7. 文档与迁移
+## 7. 文档
 
-- [ ] 7.1 README：推荐 `bdr init` 为首选安装方式
-- [ ] 7.2 `scripts/install-cursor-plugin.sh` 委托 `bdr init --ides cursor`（或标注 deprecated）
+- [ ] 7.1 README：`npm link` 开发 + 目标 `npm install -g bdr && bdr init`
+- [ ] 7.2 `install-cursor-plugin.sh` 委托 `bdr init --ides cursor`
 - [ ] 7.3 更新 `.cursor/INSTALL.md`、`.opencode/INSTALL.md`
 
 ## 8. 验收
 
-- [ ] 8.1 空目录 `bdr init --ides opencode` → workspace + opencode.json
-- [ ] 8.2 空目录 `bdr init --ides cursor` → workspace + symlink
-- [ ] 8.3 交互式多选（手动）：两 IDE 同选
-- [ ] 8.4 extend 模式：二次 init 追加 IDE 不破坏 config
+- [ ] 8.1 `bdr init --ides opencode` → workspace + opencode.json
+- [ ] 8.2 `bdr init --ides cursor` → workspace + symlink
+- [ ] 8.3 交互式双选 IDE（手动）
+- [ ] 8.4 extend：二次 init 追加 IDE，`config.yaml` 保留 `current_change`
 
 ## Phase 2（不在 Phase A）
 
-- npm registry 发布、`bdr update`、gitignore 模板
+- npm registry、`bdr update`

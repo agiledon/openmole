@@ -44,7 +44,23 @@ When run interactively without `--ides`, `bdr init` SHALL present a multi-select
 
 - **WHEN** `bdr/config.yaml` already exists and `--force` is not set
 - **THEN** init SHALL NOT overwrite `bdr/config.yaml`
-- **AND** SHALL only append IDE configurations not yet present
+- **AND** SHALL only append IDE configurations for IDEs not listed in `installed_ides`
+
+### Requirement: init records metadata in config.yaml
+
+`bdr init` SHALL write `installed_ides`, `init_version`, and `init_at` into `bdr/config.yaml` alongside `current_change`.
+
+#### Scenario: Fresh init metadata
+
+- **WHEN** init creates a new `bdr/config.yaml`
+- **THEN** the file SHALL include `installed_ides` as a list of configured IDE identifiers
+- **AND** SHALL include `init_version` matching the BDR CLI package version
+- **AND** SHALL include `init_at` as an ISO-8601 timestamp
+
+#### Scenario: Extend updates installed_ides
+
+- **WHEN** init runs in extend mode and successfully configures a new IDE
+- **THEN** init SHALL append that IDE to `installed_ides` without removing existing entries
 
 ### Requirement: init configures selected IDEs for BDR skills and commands
 
