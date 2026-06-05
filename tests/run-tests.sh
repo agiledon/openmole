@@ -2,7 +2,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-for t in tests/plugin/*.sh tests/opencode/*.sh; do
+for t in tests/plugin/*.sh tests/opencode/*.sh tests/cli/*.sh; do
   [[ -f "$t" ]] || continue
   echo "==> $t"
   bash "$t"
