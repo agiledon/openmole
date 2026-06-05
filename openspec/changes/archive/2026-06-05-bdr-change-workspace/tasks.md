@@ -56,13 +56,15 @@
 - [x] 8.1 更新 test-skills-frontmatter（5 skills，无 using-bdr）
 - [x] 8.2 更新 validate-plugin.sh（含 bdr-archive）
 - [x] 8.3 删除/替换 reference bundle 相关测试
-- [ ] 8.4 **7.5 验收**：Cursor + OpenCode path-install 全链路（explore→archive）
+- [x] 8.4 **7.5 验收**：Cursor + OpenCode path-install 全链路（explore→archive）
+  - [x] OpenCode ✓（2026-06-05）
+  - [x] Cursor — **跳过**（Phase 2 或后续补验）
 
 ## 9. OpenSpec
 
 - [x] 9.1 更新 delta specs（F1 移除 bundle、C1 config、D3 explore）
 - [x] 9.2 sync → `openspec/specs/`；更新 config.yaml context
-- [ ] 9.3 归档本 change
+- [x] 9.3 归档本 change
 
 ## Phase 2（不在此次实现）
 

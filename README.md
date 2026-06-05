@@ -46,9 +46,14 @@ Plugin 架构参考 [Superpowers](https://github.com/agiledon/superpowers)；BDR
 
 ### Cursor（本地 path install）
 
-1. Clone 本仓库并 path-install
-2. 验证 Skills：`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`、`bdr-archive`
-3. 验证 Commands：`bdr:explore` … `bdr:archive`
+见 [.cursor/INSTALL.md](.cursor/INSTALL.md)。快速步骤：
+
+```bash
+bash scripts/install-cursor-plugin.sh   # symlink 到 ~/.cursor/plugins/local/bdr
+# Cmd+Q 重启 Cursor
+```
+
+验证 Skills（5 个）与 Commands（`/bdr-explore` … `/bdr-archive`）。
 
 ### OpenCode
 
@@ -63,4 +68,4 @@ bash scripts/validate-plugin.sh
 ## 文档
 
 - [整合设计](docs/design/2026-06-05-bdr-change-workspace-design.md)
-- [OpenSpec：bdr-change-workspace](openspec/changes/bdr-change-workspace/proposal.md)
+- [OpenSpec：bdr-change-workspace（已归档）](openspec/changes/archive/2026-06-05-bdr-change-workspace/proposal.md)
