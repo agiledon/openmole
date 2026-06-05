@@ -6,7 +6,9 @@ import { readConfigFile } from '../lib/config-yaml.js';
 import { promptIdeSelection, ALL_IDE_VALUES } from '../prompts/ide-select.js';
 import { installCursor } from '../adapters/cursor.js';
 import { installOpenCode } from '../adapters/opencode.js';
-import { installStub, isPhaseB } from '../adapters/stub.js';
+import { installClaudeCode } from '../adapters/claude-code.js';
+import { installCodex } from '../adapters/codex.js';
+import { installGeminiCli } from '../adapters/gemini-cli.js';
 
 function readPackageVersion(packageRoot) {
   const pkg = JSON.parse(fs.readFileSync(path.join(packageRoot, 'package.json'), 'utf8'));
@@ -73,20 +75,30 @@ async function resolveSelectedIdes(opts) {
   return promptIdeSelection();
 }
 
+function needsReinstall(targetDir, ide, force) {
+  if (force) return true;
+  switch (ide) {
+    case 'cursor':
+      return !fs.existsSync(
+        path.join(targetDir, '.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md'),
+      );
+    case 'gemini':
+      return !fs.existsSync(
+        path.join(targetDir, '.gemini', 'skills', 'bdr-explore-to-change', 'SKILL.md'),
+      );
+    case 'codex':
+      return !fs.existsSync(path.join(targetDir, 'plugins', 'bdr', '.codex-plugin', 'plugin.json'));
+    default:
+      return false;
+  }
+}
+
 function filterExtendMode(targetDir, ides, force) {
   if (force) return ides;
   const config = readConfigFile(workspacePaths(targetDir).configPath);
   if (!config?.installed_ides?.length) return ides;
   const installed = new Set(config.installed_ides);
-  return ides.filter((ide) => {
-    if (!installed.has(ide)) return true;
-    // Re-run Cursor if project .cursor/ is missing (e.g. after adapter fix)
-    if (ide === 'cursor') {
-      const skillPath = path.join(targetDir, '.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md');
-      return !fs.existsSync(skillPath);
-    }
-    return false;
-  });
+  return ides.filter((ide) => !installed.has(ide) || needsReinstall(targetDir, ide, force));
 }
 
 function printSummary({ targetDir, results, extended, dryRun }) {
@@ -114,6 +126,15 @@ function printSummary({ targetDir, results, extended, dryRun }) {
   if (results.some((r) => r.ide === 'opencode' && !r.skipped)) {
     console.log('  • OpenCode: 重启后运行 /bdr-explore . demo-change');
   }
+  if (results.some((r) => r.ide === 'claude' && !r.skipped)) {
+    console.log('  • Claude Code: 重启后运行 /plugin 确认 bdr 已加载');
+  }
+  if (results.some((r) => r.ide === 'codex' && !r.skipped)) {
+    console.log('  • Codex: 运行 /plugins 或 codex /plugins 确认 bdr 可用');
+  }
+  if (results.some((r) => r.ide === 'gemini' && !r.skipped)) {
+    console.log('  • Gemini CLI: 重启后运行 /skills 确认 bdr-*-change skills');
+  }
   console.log('  • 运行 /bdr-explore . <change-name> 开始第一个 change');
 }
 
@@ -139,31 +160,58 @@ export async function runInit(argv) {
   const results = [];
 
   for (const ide of ides) {
-    if (isPhaseB(ide)) {
-      results.push(installStub(ide));
-      continue;
-    }
-
-    if (ide === 'cursor') {
-      results.push(
-        installCursor({
-          packageRoot,
-          targetDir: opts.targetDir,
-          dryRun: opts.dryRun,
-          force: opts.force,
-        }),
-      );
-    } else if (ide === 'opencode') {
-      results.push(
-        installOpenCode({
-          packageRoot,
-          targetDir: opts.targetDir,
-          global: opts.global,
-          dryRun: opts.dryRun,
-        }),
-      );
-    } else {
-      console.warn(`⚠ Unknown IDE: ${ide}`);
+    switch (ide) {
+      case 'cursor':
+        results.push(
+          installCursor({
+            packageRoot,
+            targetDir: opts.targetDir,
+            dryRun: opts.dryRun,
+            force: opts.force,
+          }),
+        );
+        break;
+      case 'opencode':
+        results.push(
+          installOpenCode({
+            packageRoot,
+            targetDir: opts.targetDir,
+            global: opts.global,
+            dryRun: opts.dryRun,
+          }),
+        );
+        break;
+      case 'claude':
+        results.push(
+          installClaudeCode({
+            packageRoot,
+            dryRun: opts.dryRun,
+            force: opts.force,
+          }),
+        );
+        break;
+      case 'codex':
+        results.push(
+          installCodex({
+            packageRoot,
+            targetDir: opts.targetDir,
+            dryRun: opts.dryRun,
+            force: opts.force,
+          }),
+        );
+        break;
+      case 'gemini':
+        results.push(
+          installGeminiCli({
+            packageRoot,
+            targetDir: opts.targetDir,
+            dryRun: opts.dryRun,
+            force: opts.force,
+          }),
+        );
+        break;
+      default:
+        console.warn(`⚠ Unknown IDE: ${ide}`);
     }
   }
 

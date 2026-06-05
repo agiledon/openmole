@@ -26,10 +26,10 @@
 
 ## 5. IDE adapter — Phase B
 
-- [ ] 5.1 `.claude-plugin/` + `cli/adapters/claude-code.js`
-- [ ] 5.2 `.codex-plugin/` + `cli/adapters/codex.js`
-- [ ] 5.3 `gemini-extension.json` + `cli/adapters/gemini-cli.js`
-- [x] 5.4 Phase A warn-and-skip 行为
+- [x] 5.1 `.claude-plugin/` + `cli/adapters/claude-code.js`
+- [x] 5.2 `.codex-plugin/` + `cli/adapters/codex.js`
+- [x] 5.3 `gemini-extension.json` + `cli/adapters/gemini-cli.js`
+- [x] 5.4 Phase A warn-and-skip 行为（Phase B 已实现，移除 stub）
 
 ## 6. 测试
 
@@ -42,7 +42,7 @@
 
 - [x] 7.1 README：`npm link` 开发 + 目标 `npm install -g bdr && bdr init`
 - [x] 7.2 `install-cursor-plugin.sh` 委托 `bdr init --ides cursor`
-- [x] 7.3 更新 `.cursor/INSTALL.md`、`.opencode/INSTALL.md`
+- [x] 7.3 更新 `.cursor/INSTALL.md`、`.opencode/INSTALL.md`、`.claude/INSTALL.md`、`.codex/INSTALL.md`、`.gemini/INSTALL.md`
 
 ## 8. 验收
 

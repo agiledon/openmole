@@ -76,8 +76,10 @@ temp/
 # Agent / local workflow (not part of the plugin artifact)
 .worktrees/
 .private-journal/
-.claude/
-.codex/
+.claude/*
+!.claude/INSTALL.md
+.codex/*
+!.codex/INSTALL.md
 .opencode/local/
 
 # Local BDR overrides (keep .bdr.yaml.example tracked)

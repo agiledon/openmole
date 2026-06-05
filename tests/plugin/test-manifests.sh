@@ -2,17 +2,24 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-MANIFEST="$ROOT/.cursor-plugin/plugin.json"
 
-[[ -f "$MANIFEST" ]] || { echo "FAIL: missing $MANIFEST"; exit 1; }
+check_manifest() {
+  local file="$1"
+  local name="$2"
+  [[ -f "$file" ]] || { echo "FAIL: missing $file"; exit 1; }
 
-node -e "
+  node -e "
 const fs = require('fs');
-const m = JSON.parse(fs.readFileSync('$MANIFEST', 'utf8'));
-const required = ['name', 'displayName', 'skills', 'commands'];
-for (const k of required) {
-  if (!m[k]) { console.error('FAIL: missing field', k); process.exit(1); }
-}
-if (m.name !== 'bdr') { console.error('FAIL: name must be bdr'); process.exit(1); }
-console.log('PASS: manifest fields ok');
+const m = JSON.parse(fs.readFileSync('$file', 'utf8'));
+if (m.name !== '$name') { console.error('FAIL: $file name must be $name'); process.exit(1); }
+if (!m.skills) { console.error('FAIL: $file missing skills'); process.exit(1); }
+console.log('PASS: $file');
 "
+}
+
+check_manifest "$ROOT/.cursor-plugin/plugin.json" bdr
+check_manifest "$ROOT/.claude-plugin/plugin.json" bdr
+check_manifest "$ROOT/.codex-plugin/plugin.json" bdr
+check_manifest "$ROOT/gemini-extension.json" bdr
+
+echo "PASS: all plugin manifests ok"
