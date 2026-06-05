@@ -31,11 +31,29 @@ bdr:explore → 审阅 badsmells.md → bdr:analyze（badsmells 变更时）→ 
 
 ## 安装
 
-（实现完成后补充各 harness 安装说明。）
+### Cursor（本地 path install）
 
-- **Cursor**：`/add-plugin bdr`
-- **Claude Code**：`/plugin install bdr@…`
-- **Codex / OpenCode**：见 `.codex-plugin/`、`.opencode/INSTALL.md`
+1. Clone 本仓库
+2. 在 Cursor Agent 对话中：从本地路径安装插件（指向仓库根目录）
+3. 验证 Skills：`using-bdr`、`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`
+4. 验证 Commands：`bdr:explore`、`bdr:analyze`、`bdr:plan`、`bdr:apply`
+
+### OpenCode
+
+见 [.opencode/INSTALL.md](.opencode/INSTALL.md)。
+
+## 开发验证
+
+```bash
+bash scripts/validate-plugin.sh
+```
+
+手动验收清单：
+
+- [ ] `bdr:explore .` 更新 badsmells 格式正确
+- [ ] badsmells 升版后 `bdr:analyze` 同步 tasks
+- [ ] `bdr:plan` 从 §2.0 开放条目生成 B-Txx
+- [ ] `bdr:apply` 执行单任务并等待用户确认
 
 ## 文档
 
