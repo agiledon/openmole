@@ -1,4 +1,4 @@
-> **进度说明（2026-06-05）**：Phase 1 MVP（Cursor + OpenCode）已实现并通过 `bash scripts/validate-plugin.sh`。标注 **v1.1** 的项为有意延后。
+> **进度说明（2026-06-05）**：Phase 1 MVP（Cursor + OpenCode）已实现并通过 `bash scripts/validate-plugin.sh`。标注 **v1.1** 的项已移至 `bdr-change-workspace` Phase 2。
 
 ## 1. 技术栈骨架
 
@@ -79,5 +79,5 @@
 - [x] 10.3 编写 `tests/opencode/test-plugin-loading.sh`（OpenCode bdr.js 可加载）
 - [x] 10.4 编写 `tests/run-tests.sh` 聚合入口
 - [x] 10.5 编写 `scripts/validate-plugin.sh`（manifest + skill + command 链接）
-- [ ] 10.6 Cursor path-install 手动验证：`bdr:explore` → `bdr:analyze` → `bdr:plan` → `bdr:apply`
+- [ ] 10.6 Cursor path-install 手动验证 — **跳过**（OpenCode ✓；完整验收见 bdr-change-workspace 8.4）
 - [x] 10.7 添加 LICENSE（MIT）与 CHANGELOG 初版

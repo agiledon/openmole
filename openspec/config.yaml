@@ -11,4 +11,5 @@ context: |
   - Harness docs: AGENTS.md, CLAUDE.md, GEMINI.md
   - License: MIT
   - Zero third-party runtime dependencies
-  - BDR domain: bad smell driven refactoring; docs/prd/ is spec source of truth
+  - BDR workspace: bdr/config.yaml + bdr/changes/<change-name>/
+  - Rules embedded in skills (no docs/prd runtime path)

@@ -25,20 +25,21 @@ The framework SHALL use `{project-root}/bdr/` as the BDR workspace. Per-change a
 - **WHEN** the user runs `bdr:analyze`, `bdr:plan`, or `bdr:apply` without specifying a change
 - **THEN** the agent SHALL read and write artifacts under `bdr/changes/{current_change}/`
 
-### Requirement: Constitution and specification resolve from project or plugin bundle
+### Requirement: BDR rules embedded in phase skills
 
-The framework SHALL load `constitution.md` and `specification.md` from `{project}/bdr/` when present; otherwise SHALL read from the plugin bundled `docs/reference/bdr/` without requiring copy-to-project on install.
+The framework SHALL embed constitution and specification summaries directly in each phase skill (`bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, `bdr-archive`). No standalone `constitution.md` or `specification.md` files are required in the plugin package or target project.
 
-#### Scenario: Fresh project without local BDR docs
+#### Scenario: Fresh project without BDR docs
 
-- **WHEN** the target project has no `bdr/constitution.md`
-- **THEN** BDR skills SHALL read constitution and specification from the plugin bundle
+- **WHEN** the target project has no `bdr/` directory
+- **THEN** BDR skills SHALL still execute using embedded rule summaries
 - **AND** SHALL NOT prompt the user to copy reference files during plugin installation
 
-#### Scenario: Project local override
+#### Scenario: Explore creates workspace on first run
 
-- **WHEN** `bdr/constitution.md` exists in the target project
-- **THEN** BDR skills SHALL prefer project-local constitution and specification over the plugin bundle
+- **WHEN** the user runs `bdr:explore` on a project without `bdr/config.yaml`
+- **THEN** the agent SHALL instruct creating `bdr/config.yaml` from `templates/bdr-config.yaml.example`
+- **AND** SHALL proceed without external constitution files
 
 ## REMOVED Requirements
 

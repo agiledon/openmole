@@ -1,48 +1,39 @@
 # bdr-explore
 
-源码扫描与坏味道识别 Skill + `bdr:explore` 命令。
+Scan source and produce badsmells.md within a BDR change directory.
 
 ## Requirements
 
 ### Requirement: bdr-explore scans source and produces badsmells.md
 
-The `bdr-explore` skill and `bdr:explore` command SHALL scan a user-specified directory or project root, identify code bad smells aligned with constitution §3 first principles (clarity, consistency, readability, reuse, extensibility, robustness, security, simplicity), SOLID, Law of Demeter, Martin Fowler refactoring smells, and language-specific best practices. The output SHALL be written to `{docs_root}/badsmells.md`.
+The `bdr-explore` skill and `bdr:explore` command SHALL scan a user-specified directory, identify bad smells aligned with constitution §3 and specification §4, and write output to `bdr/changes/<change-name>/badsmells.md`.
 
-#### Scenario: Full project scan
+#### Scenario: Full project scan with explicit change name
 
-- **WHEN** the user runs `bdr:explore` with target path `.` or omits path defaulting to project root
-- **THEN** the agent SHALL read `{docs_root}/constitution.md` and `{docs_root}/specification.md`
-- **AND** analyze source files under the target path
-- **AND** produce or update `badsmells.md` with entries conforming to specification §4
+- **WHEN** the user runs `bdr:explore . refactor-utils`
+- **THEN** the agent SHALL create `bdr/changes/refactor-utils/`
+- **AND** SHALL write `badsmells.md` under that directory
+
+#### Scenario: Active change continuation prompt
+
+- **WHEN** `bdr/config.yaml` has an active `current_change` and the user runs `bdr:explore` without a new change name
+- **THEN** the agent SHALL ask whether to continue the current change or create a new one
 
 #### Scenario: Scoped directory scan
 
-- **WHEN** the user runs `bdr:explore src/foo`
-- **THEN** the agent SHALL limit analysis to `src/foo` and dependencies directly referenced
-- **AND** SHALL merge findings into the project-wide `badsmells.md` without removing unrelated existing entries unless explicitly superseded
+- **WHEN** the user runs `bdr:explore src/foo my-change`
+- **THEN** the agent SHALL limit analysis to `src/foo`
+- **AND** SHALL write findings to `bdr/changes/my-change/badsmells.md`
 
-### Requirement: Each bad smell entry includes mandatory fields and status
+### Requirement: explore deduplicates against prior changes
 
-Every bad smell entry in `badsmells.md` SHALL include: stable ID (`BS-<CATEGORY>-<NNN>`), title, location (files/symbols), description (with Fowler smell label when applicable), aligned principle (constitution §3), acceptance criteria for elimination, and risk/constraints including `[SDD]` when behavior may change. Each entry SHALL have a status of **未清除**, **已消除**, or **部分残余** recorded in the §2.0 index table.
+Before adding entries, explore SHALL load fingerprints from `bdr/changes/` and `bdr/changes/archive/` and SHALL NOT duplicate smells already tracked.
 
-#### Scenario: Newly identified smell
+#### Scenario: Smell already cleared in archived change
 
-- **WHEN** explore finds a Long Method in `module.py`
-- **THEN** a new entry SHALL be appended with status **未清除**
-- **AND** the §2.0 index SHALL list the BS-ID with status **未清除**
-
-#### Scenario: Previously eliminated smell unchanged
-
-- **WHEN** explore confirms an entry marked **已消除** still meets its acceptance criteria
-- **THEN** the entry status SHALL remain **已消除**
-- **AND** the entry body MAY be retained for audit baseline per existing badsmells conventions
+- **WHEN** explore detects a smell already **已消除** in an archived change
+- **THEN** explore SHALL skip creating a new entry for that fingerprint
 
 ### Requirement: explore updates revision history with commit SHA
 
-When `badsmells.md` version is bumped or a new revision history row is added, the explore skill SHALL instruct filling the **提交版本** column per specification §7 using `git rev-parse HEAD` at commit time, or `—` if uncommitted.
-
-#### Scenario: Document version bump after explore
-
-- **WHEN** explore materially changes badsmells content and increments the document version
-- **THEN** a new row SHALL be added to the revision history table with columns 版本, 日期, 提交版本, 摘要
-- **AND** 提交版本 SHALL be populated according to specification §7 rules
+When revision history gains a row, explore SHALL fill **提交版本** per specification §7 using `git rev-parse HEAD` or `—`.
