@@ -1,0 +1,3 @@
+# 本仓库 BDR 文档根目录（开发期）。
+# 生产项目应使用 docs/bdr/（见 constitution §2.1）。
+docs_root: docs/prd
