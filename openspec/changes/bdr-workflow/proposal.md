@@ -4,7 +4,9 @@ BDR（Bad smell Driven Refactoring，坏味道驱动重构）已在 `docs/prd/` 
 
 ## What Changes
 
-- 新增 **BDR Plugin** 包结构（`.cursor-plugin`、`.claude-plugin`、`.codex-plugin`、`.opencode` 等多 harness 布局），支持多平台安装。
+- 新增 **BDR Plugin** 包结构，分阶段交付：
+  - **Phase 1 MVP（已实现）**：`.cursor-plugin`、`.opencode`、共享 `skills/` / `commands/`
+  - **v1.1**：`.claude-plugin`、`.codex-plugin`、Gemini 扩展、hooks
 - 新增 **核心 Skill 库**：
   - `using-bdr` — 元 Skill，引导 Agent 在 BDR 任务前加载正确 Skill 与工件路径。
   - `bdr-explore` — 对应 `bdr:explore`：扫描指定目录/项目源码，依据 constitution §3 第一性原则、SOLID、迪米特法则、Fowler 重构坏味道及语言最佳实践，输出/更新 `docs/bdr/badsmells.md`（条目含已清除/未清除状态）。
@@ -13,13 +15,22 @@ BDR（Bad smell Driven Refactoring，坏味道驱动重构）已在 `docs/prd/` 
 - 新增 **Commands** 薄层：`bdr:explore`、`bdr:plan`、`bdr:apply`（及 `bdr:analyze` 用于 badsmells 变更后的 tasks 差分同步），各命令委托对应 Skill。
 - 内置 **规约引用**：Skill 运行时读取项目内 `docs/bdr/constitution.md`、`docs/bdr/specification.md`（或 `docs/prd/` 等价路径，可配置）作为约束，不硬编码业务坏味道清单。
 - 新增 **工件模板与校验辅助**：badsmells 条目格式、tasks 任务模板、修订历史「提交版本」列提醒（对齐 specification §7）。
-- 新增 **README 与安装说明**：各 harness 的安装步骤（`/add-plugin bdr`、Claude marketplace、Codex plugins 等）。
+- 新增 **README 与安装说明**：Phase 1 覆盖 Cursor path-install 与 OpenCode（见 `.opencode/INSTALL.md`）；其余 harness 安装见 v1.1。
+
+## Delivery Phases
+
+| 阶段 | 交付物 | 状态 |
+|------|--------|------|
+| Phase 1 MVP | Cursor + OpenCode 插件，5 Skill，4 Command，templates，reference 同步，Shell 测试 | 已实现 |
+| Phase 2 | `docs/bdr/` 路径迁移 | 待做 |
+| Phase 3 | Cursor 全链路手动验收 | 待做 |
+| v1.1 | Claude/Codex/Gemini、hooks、code-reviewer、版本 bump | 延后 |
 
 ## Capabilities
 
 ### New Capabilities
 
-- `bdr-core`: BDR 元 Skill（`using-bdr`）、共享常量（工件路径、状态枚举、门禁摘要）、多 harness 插件清单与 hooks（可选 sessionStart 提示）。
+- `bdr-core`: BDR 元 Skill（`using-bdr`）、共享常量（工件路径、状态枚举、门禁摘要）、多 harness 插件清单（Phase 1：Cursor + OpenCode；v1.1：其余平台 + hooks）。
 - `bdr-explore`: 源码扫描与坏味道识别 Skill + `bdr:explore` 命令；输出符合 specification §4 的 `badsmells.md`。
 - `bdr-plan`: 重构任务分解 Skill + `bdr:plan` 命令；基于未清除坏味道生成符合 constitution §4 的 `tasks.md`。
 - `bdr-apply`: 重构执行 Skill + `bdr:apply` 命令；逐步执行 tasks 并更新状态，强制测绿与用户确认门。
@@ -46,13 +57,17 @@ BDR（Bad smell Driven Refactoring，坏味道驱动重构）已在 `docs/prd/` 
 | **规约 / 模板** | Markdown（`docs/reference/bdr/`、`templates/`） | BDR 工件与参考规约 |
 | **许可证** | MIT | 开源分发 |
 
-**支持 harness**：Cursor、Claude Code、Codex CLI / Codex App、OpenCode、Gemini CLI（extension）、GitHub Copilot CLI（marketplace）。
+**支持 harness**：
+
+- **Phase 1 MVP**：Cursor、OpenCode
+- **v1.1 目标**：Claude Code、Codex CLI / Codex App、Gemini CLI、GitHub Copilot CLI
 
 **刻意不包含**：Python/Java 运行时库、npm 第三方包、独立 CLI 二进制；对用户目标项目的语言扫描由 Agent 调用项目既有工具链（pytest、JUnit 等）完成。
 
 ## Impact
 
-- **新增目录**：`skills/`、`commands/`、`agents/`、`hooks/`、`scripts/`、`tests/`、`templates/`、`.cursor-plugin/`、`.claude-plugin/`、`.codex-plugin/`、`.opencode/plugins/`、根级 `package.json`、`.version-bump.json`、`README.md`、`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`。
+- **新增目录（Phase 1 MVP）**：`skills/`、`commands/`、`scripts/`、`tests/`、`templates/`、`.cursor-plugin/`、`.opencode/plugins/`、`package.json`、`README.md`、`LICENSE`、`CHANGELOG.md`、`docs/reference/bdr/`。
+- **v1.1 新增**：`agents/`、`hooks/`、`.claude-plugin/`、`.codex-plugin/`、`.version-bump.json`、`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`。
 - **与现有文档关系**：`docs/prd/` 中的 constitution、specification、badsmells、tasks、analysis 作为 **权威规约** 被 Skill 引用；框架本身不修改这些文档的业务内容，仅提供自动化执行路径。目标运行时工件路径遵循 constitution §2.1：`docs/bdr/`（可将 `docs/prd/` 作为本仓库开发期别名或迁移目标）。
 - **依赖**：零第三方运行时依赖；Markdown-first Plugin 模型。
 - **用户工作流**：安装 Plugin → `bdr:explore [path]` → 审阅 `badsmells.md` → `bdr:plan` → 审阅 `tasks.md` → `bdr:apply` → 逐任务确认直至坏味道清除。
