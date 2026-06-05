@@ -85,6 +85,11 @@ temp/
 # Local BDR overrides (keep .bdr.yaml.example tracked)
 .bdr.yaml.local
 
+# Dogfooding: bdr init artifacts in this plugin repo
+/bdr/
+/.cursor/skills/bdr-*-change/
+/.cursor/commands/bdr-*.md
+
 # Coverage & test artifacts from target projects
 coverage/
 .coverage.*
