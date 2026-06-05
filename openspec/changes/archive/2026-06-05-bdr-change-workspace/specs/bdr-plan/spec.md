@@ -1,8 +1,8 @@
 ## MODIFIED Requirements
 
-### Requirement: bdr-plan creates tasks from uncleared bad smells
+### Requirement: bdr-plan-change creates tasks from uncleared bad smells
 
-The `bdr-plan` skill and `bdr:plan` command SHALL read `bdr/changes/<current-change>/badsmells.md`, select entries with status **未清除** or **部分残余**, and produce or update `bdr/changes/<current-change>/tasks.md`.
+The `bdr-plan-change` skill and `bdr:plan` command SHALL read `bdr/changes/<current-change>/badsmells.md`, select entries with status **未清除** or **部分残余**, and produce or update `bdr/changes/<current-change>/tasks.md`.
 
 #### Scenario: Plan from current change backlog
 

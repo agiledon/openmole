@@ -3,4 +3,4 @@ name: bdr-analyze
 description: 差分 badsmells.md 与 tasks.md 并同步（BDR analyze 阶段）
 ---
 
-Load and follow the **bdr-analyze** skill.
+Load and follow the **bdr-analyze-change** skill.

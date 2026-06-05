@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: bdr-archive completes and archives a change
+### Requirement: bdr-archive-change completes and archives a change
 
-The `bdr-archive` skill and `bdr:archive` command SHALL verify the current change under `bdr/changes/<change-name>/` for completion (all badsmells **已消除** or intentionally waived, all tasks marked complete) and SHALL move completed changes to `bdr/changes/archive/YYYY-MM-DD-<change-name>/`.
+The `bdr-archive-change` skill and `bdr:archive` command SHALL verify the current change under `bdr/changes/<change-name>/` for completion (all badsmells **已消除** or intentionally waived, all tasks marked complete) and SHALL move completed changes to `bdr/changes/archive/YYYY-MM-DD-<change-name>/`.
 
 #### Scenario: Archive fully completed change
 
@@ -24,10 +24,10 @@ The `bdr-archive` skill and `bdr:archive` command SHALL verify the current chang
 
 ### Requirement: archive command is registered in plugin manifests
 
-Cursor and OpenCode plugin registration SHALL include `bdr-archive` skill and `bdr:archive` command alongside existing BDR commands.
+Cursor and OpenCode plugin registration SHALL include `bdr-archive-change` skill and `bdr:archive` command alongside existing BDR commands.
 
 #### Scenario: Cursor exposes archive command
 
 - **WHEN** BDR plugin is installed in Cursor
 - **THEN** `bdr:archive` SHALL appear in available commands
-- **AND** SHALL load the `bdr-archive` skill when invoked
+- **AND** SHALL load the `bdr-archive-change` skill when invoked

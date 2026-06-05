@@ -1,12 +1,12 @@
-# bdr-apply
+# bdr-apply-change
 
 Execute uncleared tasks in the current change per constitution.
 
 ## Requirements
 
-### Requirement: bdr-apply executes uncleared tasks per constitution
+### Requirement: bdr-apply-change executes uncleared tasks per constitution
 
-The `bdr-apply` skill SHALL read `bdr/changes/<current-change>/tasks.md` and execute the next unchecked task following constitution §4 and §5.
+The `bdr-apply-change` skill SHALL read `bdr/changes/<current-change>/tasks.md` and execute the next unchecked task following constitution §4 and §5.
 
 #### Scenario: Apply within current change
 

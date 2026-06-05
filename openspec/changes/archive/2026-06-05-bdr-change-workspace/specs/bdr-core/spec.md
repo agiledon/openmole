@@ -2,12 +2,12 @@
 
 ### Requirement: Plugin manifest declares BDR skills and commands
 
-The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json` and OpenCode install instructions) that register the `skills/` and `commands/` directories. After this change, manifests SHALL expose skills `bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, and `bdr-archive` (and SHALL NOT register `using-bdr`).
+The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json` and OpenCode install instructions) that register the `skills/` and `commands/` directories. After this change, manifests SHALL expose skills `bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-archive-change` (and SHALL NOT register `using-bdr`).
 
 #### Scenario: Cursor installation
 
 - **WHEN** a user installs the BDR plugin in Cursor via local path
-- **THEN** the agent SHALL expose skills `bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, and `bdr-archive`
+- **THEN** the agent SHALL expose skills `bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-archive-change`
 - **AND** commands `bdr:explore`, `bdr:analyze`, `bdr:plan`, `bdr:apply`, and `bdr:archive` SHALL be available
 
 ### Requirement: BDR workspace and change directory model
@@ -27,7 +27,7 @@ The framework SHALL use `{project-root}/bdr/` as the BDR workspace. Per-change a
 
 ### Requirement: BDR rules embedded in phase skills
 
-The framework SHALL embed constitution and specification summaries directly in each phase skill (`bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, `bdr-archive`). No standalone `constitution.md` or `specification.md` files are required in the plugin package or target project.
+The framework SHALL embed constitution and specification summaries directly in each phase skill (`bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, `bdr-archive-change`). No standalone `constitution.md` or `specification.md` files are required in the plugin package or target project.
 
 #### Scenario: Fresh project without BDR docs
 

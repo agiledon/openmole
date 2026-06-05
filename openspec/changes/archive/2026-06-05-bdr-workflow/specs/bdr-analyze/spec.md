@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: bdr-analyze diffs badsmells against tasks
+### Requirement: bdr-analyze-change diffs badsmells against tasks
 
-The `bdr-analyze` skill and `bdr:analyze` command SHALL compare `{docs_root}/badsmells.md` entries and versions against `{docs_root}/tasks.md` to find coverage gaps, obsolete tasks, dependency conflicts, and DoD mismatches. Output SHALL be recorded in `{docs_root}/analysis.md`.
+The `bdr-analyze-change` skill and `bdr:analyze` command SHALL compare `{docs_root}/badsmells.md` entries and versions against `{docs_root}/tasks.md` to find coverage gaps, obsolete tasks, dependency conflicts, and DoD mismatches. Output SHALL be recorded in `{docs_root}/analysis.md`.
 
 #### Scenario: New bad smell without task
 

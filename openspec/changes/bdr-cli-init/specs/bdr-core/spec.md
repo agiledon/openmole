@@ -13,12 +13,12 @@ The BDR framework SHALL document and support `bdr init` as the primary way to in
 
 ### Requirement: Plugin manifest declares BDR skills and commands
 
-The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json`, OpenCode install via `bdr.js`, and planned `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json`) that register the `skills/` and `commands/` directories. Manifests SHALL expose skills `bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, and `bdr-archive` (and SHALL NOT register `using-bdr`). The `bdr init` CLI SHALL configure these manifests or equivalent paths for Cursor, OpenCode, Gemini CLI, Claude Code, and Codex.
+The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json`, OpenCode install via `bdr.js`, and planned `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json`) that register the `skills/` and `commands/` directories. Manifests SHALL expose skills `bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-archive-change` (and SHALL NOT register `using-bdr`). The `bdr init` CLI SHALL configure these manifests or equivalent paths for Cursor, OpenCode, Gemini CLI, Claude Code, and Codex.
 
 #### Scenario: Cursor installation
 
 - **WHEN** a user installs BDR in Cursor via `bdr init --ides cursor` or local path
-- **THEN** the agent SHALL expose skills `bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, and `bdr-archive`
+- **THEN** the agent SHALL expose skills `bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-archive-change`
 - **AND** commands `/bdr-explore`, `/bdr-analyze`, `/bdr-plan`, `/bdr-apply`, and `/bdr-archive` SHALL be available
 
 #### Scenario: OpenCode installation via init

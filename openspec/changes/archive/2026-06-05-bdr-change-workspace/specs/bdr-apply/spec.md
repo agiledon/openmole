@@ -1,8 +1,8 @@
 ## MODIFIED Requirements
 
-### Requirement: bdr-apply executes uncleared tasks per constitution
+### Requirement: bdr-apply-change executes uncleared tasks per constitution
 
-The `bdr-apply` skill and `bdr:apply` command SHALL read `bdr/changes/<current-change>/tasks.md`, select the next task marked **未执行**, and execute it following constitution §4 and §5.
+The `bdr-apply-change` skill and `bdr:apply` command SHALL read `bdr/changes/<current-change>/tasks.md`, select the next task marked **未执行**, and execute it following constitution §4 and §5.
 
 #### Scenario: Apply within current change
 

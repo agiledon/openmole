@@ -2,6 +2,8 @@
 
 ## 推荐
 
+在**目标项目**目录运行（会在项目内创建 `.cursor/skills/` 与 `.cursor/commands/`）：
+
 ```bash
 npm link   # 在 bdr 仓库根目录
 cd /path/to/your-project
@@ -9,18 +11,17 @@ bdr init --ides cursor
 # Cmd+Q 重启 Cursor
 ```
 
-## 手动 symlink
+验证：
+
+1. 项目内存在 `.cursor/skills/bdr-explore-to-change/SKILL.md`
+2. 项目内存在 `.cursor/commands/bdr-explore.md`（`name: /bdr-explore`）
+3. Agent 输入 `/` → `/bdr-explore` … `/bdr-archive`（command 名不变；对应 skill 为 `bdr-*-change`）
+
+若之前只装过用户级 symlink 而无 `.cursor/`，请重跑：
 
 ```bash
-mkdir -p ~/.cursor/plugins/local
-ln -sfn /absolute/path/to/bdr ~/.cursor/plugins/local/bdr
+bdr init --ides cursor --force
 ```
-
-## 验证
-
-1. **Settings → Rules → Agent Decides** — 5 个 `bdr-*` skill
-2. Agent 输入 `/` — `/bdr-explore` … `/bdr-archive`
-3. `/bdr-explore . demo-change`
 
 ## 故障排查
 

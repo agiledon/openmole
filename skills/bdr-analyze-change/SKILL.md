@@ -1,13 +1,14 @@
 ---
-name: bdr-apply
-description: bdr:apply — 执行当前 change 下一个未完成的 B-Txx
+name: bdr-analyze-change
+description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～F）
 ---
 
-# BDR Apply — 执行重构
+# BDR Analyze — 差分分析
 
 ## 何时使用
 
-用户运行 `bdr:apply`，且当前 change 有未完成任务。
+- 当前 change 的 `badsmells.md` 变更后 **必须** 运行
+- `bdr:plan` / `bdr:apply` 前发现 tasks 与 badsmells 不一致
 
 ## 工作区解析
 
@@ -15,27 +16,20 @@ description: bdr:apply — 执行当前 change 下一个未完成的 B-Txx
 2. `{change_dir}` = `bdr/changes/{change_name}/`
 3. 无 `current_change` → **停止**，提示先 `bdr:explore`
 
-## 选取任务
-
-1. 读取 `{change_dir}/tasks.md` §3
-2. 下一 `[ ]` 的 **B-Txx**，依赖均已 `[x]`
-3. **每次 invocation 仅一个任务**
-
-## 执行步骤
+## 强制差分步骤
 
 | 步骤 | 动作 |
 |------|------|
-| ① | 确认 BS-ID 与 badsmells 一致 |
-| ② | 补测（pytest/JUnit 等） |
-| ③ | 测绿 |
-| ④ | 重构（`[SDD]` 须先确认 SDD 已修订） |
-| ⑤ | 回归测绿 |
-| ⑥ | **用户确认** |
+| A | 列出 `{change_dir}/badsmells.md` 全部 BS-ID |
+| B | 列出 `{change_dir}/tasks.md` 各任务 BS-ID |
+| C | 新增 BS-ID → 增补 B-Txx |
+| D | 删除/合并 BS-ID → 处理孤儿任务 |
+| E | 验收标准变更 → 同步 DoD |
+| F | 摘要写入 `{change_dir}/analysis.md` §2.1 + 修订历史 |
 
-## 完成后
+## 输出
 
-- `{change_dir}/tasks.md` 标记 `[x]`
-- 满足 DoD 时更新 `{change_dir}/badsmells.md` §2.0
+更新 `{change_dir}/analysis.md` 与 `{change_dir}/tasks.md`（必要时）。模板：`templates/analysis-header.md`
 
 ## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -66,6 +60,5 @@ description: bdr:apply — 执行当前 change 下一个未完成的 B-Txx
 
 ## RED FLAGS
 
-- 测试未绿仍标记完成
-- 跳过用户确认
-- 一次 apply 多个任务
+- 差分未完成即 plan/apply
+- 发现冲突先改代码而非文档

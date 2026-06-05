@@ -26,10 +26,10 @@
 | `scripts/sync-reference-docs.sh` | 保持 reference 与 prd 同步 |
 | `scripts/validate-plugin.sh` | 校验 command → skill 引用一致性 |
 | `skills/using-bdr/SKILL.md` | 元 Skill：路由、RED FLAGS |
-| `skills/bdr-explore/SKILL.md` | 扫描 → badsmells.md |
-| `skills/bdr-analyze/SKILL.md` | 差分 A～F → analysis + tasks |
-| `skills/bdr-plan/SKILL.md` | 未清除坏味道 → tasks.md |
-| `skills/bdr-apply/SKILL.md` | 执行单个 B-Txx 任务 |
+| `skills/bdr-explore-to-change/SKILL.md` | 扫描 → badsmells.md |
+| `skills/bdr-analyze-change/SKILL.md` | 差分 A～F → analysis + tasks |
+| `skills/bdr-plan-change/SKILL.md` | 未清除坏味道 → tasks.md |
+| `skills/bdr-apply-change/SKILL.md` | 执行单个 B-Txx 任务 |
 | `commands/bdr-*.md` | 薄 Command → 委托 Skill |
 | `tests/plugin/test-manifests.sh` | 断言 plugin.json 必填字段 |
 | `tests/plugin/test-skills-frontmatter.sh` | 断言 SKILL.md frontmatter |
@@ -423,7 +423,7 @@ ${body}
 ## 验证
 
 1. 重启 OpenCode
-2. 使用 `skill` 工具列出 skills → 应看到 `using-bdr`、`bdr-explore` 等
+2. 使用 `skill` 工具列出 skills → 应看到 `using-bdr`、`bdr-explore-to-change` 等
 3. 输入："Run bdr:explore on this project"
 
 ## 故障排查
@@ -469,10 +469,10 @@ Invoke this skill when the user mentions BDR, bad smells, refactoring workflow, 
 
 | User intent | Skill to load |
 |-------------|---------------|
-| Scan / identify smells | `bdr-explore` |
-| badsmells changed, sync tasks | `bdr-analyze` |
-| Create/update tasks | `bdr-plan` |
-| Execute refactoring | `bdr-apply` |
+| Scan / identify smells | `bdr-explore-to-change` |
+| badsmells changed, sync tasks | `bdr-analyze-change` |
+| Create/update tasks | `bdr-plan-change` |
+| Execute refactoring | `bdr-apply-change` |
 | Ambiguous "refactor" | Check artifact state: no badsmells → explore; stale tasks → analyze; open tasks → apply |
 
 ## Standard Sequence
@@ -529,18 +529,18 @@ echo "PASS: frontmatter ok (${#files[@]} skills)"
 
 ---
 
-### 任务 8：`bdr-explore` Skill + Command
+### 任务 8：`bdr-explore-to-change` Skill + Command
 
 **涉及文件：**
-- 新建：`skills/bdr-explore/SKILL.md`
+- 新建：`skills/bdr-explore-to-change/SKILL.md`
 - 新建：`commands/bdr-explore.md`
 
-- [ ] **步骤 1：创建 `skills/bdr-explore/SKILL.md`**
+- [ ] **步骤 1：创建 `skills/bdr-explore-to-change/SKILL.md`**
 
 Frontmatter：
 ```yaml
 ---
-name: bdr-explore
+name: bdr-explore-to-change
 description: Use for bdr:explore — scan source code and produce badsmells.md per specification §4
 ---
 ```
@@ -560,7 +560,7 @@ description: Use for bdr:explore — scan source code and produce badsmells.md p
 description: Scan source for bad smells and update badsmells.md (BDR explore phase)
 ---
 
-Load and follow the **bdr-explore** skill.
+Load and follow the **bdr-explore-to-change** skill.
 
 Optional argument: target path (default project root).
 
@@ -569,15 +569,15 @@ Example: `bdr:explore src/`
 
 ---
 
-### 任务 9：`bdr-analyze` Skill + Command
+### 任务 9：`bdr-analyze-change` Skill + Command
 
 **涉及文件：**
-- 新建：`skills/bdr-analyze/SKILL.md`
+- 新建：`skills/bdr-analyze-change/SKILL.md`
 - 新建：`commands/bdr-analyze.md`
 
-- [ ] **步骤 1：创建 `skills/bdr-analyze/SKILL.md`**
+- [ ] **步骤 1：创建 `skills/bdr-analyze-change/SKILL.md`**
 
-Frontmatter：`name: bdr-analyze`，`description` 说明 analyze 阶段 — badsmells 与 tasks 差分。
+Frontmatter：`name: bdr-analyze-change`，`description` 说明 analyze 阶段 — badsmells 与 tasks 差分。
 
 正文须实现 `analysis.md` §2 步骤 A～F：
 - A：列出 badsmells 全部 BS-ID
@@ -598,20 +598,20 @@ RED FLAG：差分未完成时不得进入 plan/apply。
 description: Diff badsmells.md against tasks.md and sync (BDR analyze phase)
 ---
 
-Load and follow the **bdr-analyze** skill.
+Load and follow the **bdr-analyze-change** skill.
 ```
 
 ---
 
-### 任务 10：`bdr-plan` Skill + Command
+### 任务 10：`bdr-plan-change` Skill + Command
 
 **涉及文件：**
-- 新建：`skills/bdr-plan/SKILL.md`
+- 新建：`skills/bdr-plan-change/SKILL.md`
 - 新建：`commands/bdr-plan.md`
 
-- [ ] **步骤 1：创建 `skills/bdr-plan/SKILL.md`**
+- [ ] **步骤 1：创建 `skills/bdr-plan-change/SKILL.md`**
 
-Frontmatter：`name: bdr-plan`。
+Frontmatter：`name: bdr-plan-change`。
 
 正文须包含：
 1. 门禁：若 badsmells 版本 > tasks 依据版本，拒绝执行并要求先 analyze
@@ -628,20 +628,20 @@ Frontmatter：`name: bdr-plan`。
 description: Create refactoring tasks from uncleared bad smells (BDR plan phase)
 ---
 
-Load and follow the **bdr-plan** skill.
+Load and follow the **bdr-plan-change** skill.
 ```
 
 ---
 
-### 任务 11：`bdr-apply` Skill + Command
+### 任务 11：`bdr-apply-change` Skill + Command
 
 **涉及文件：**
-- 新建：`skills/bdr-apply/SKILL.md`
+- 新建：`skills/bdr-apply-change/SKILL.md`
 - 新建：`commands/bdr-apply.md`
 
-- [ ] **步骤 1：创建 `skills/bdr-apply/SKILL.md`**
+- [ ] **步骤 1：创建 `skills/bdr-apply-change/SKILL.md`**
 
-Frontmatter：`name: bdr-apply`。
+Frontmatter：`name: bdr-apply-change`。
 
 正文须包含：
 1. 选取下一个未勾选且依赖已满足的 `B-Txx`
@@ -659,7 +659,7 @@ Frontmatter：`name: bdr-apply`。
 description: Execute the next pending BDR refactoring task (BDR apply phase)
 ---
 
-Load and follow the **bdr-apply** skill.
+Load and follow the **bdr-apply-change** skill.
 ```
 
 - [ ] **步骤 3：运行全部自动化测试**
@@ -713,7 +713,7 @@ echo "VALIDATION PASSED"
 
 1. Clone 本仓库
 2. 在 Cursor Agent 对话中：从本地路径安装插件（指向仓库根目录）
-3. 验证 Skills：`using-bdr`、`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`
+3. 验证 Skills：`using-bdr`、`bdr-explore-to-change`、`bdr-analyze-change`、`bdr-plan-change`、`bdr-apply-change`
 4. 验证 Commands：`bdr:explore`、`bdr:analyze`、`bdr:plan`、`bdr:apply`
 
 ### OpenCode

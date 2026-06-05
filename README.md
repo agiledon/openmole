@@ -2,15 +2,17 @@
 
 BDR（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 Skill；目标项目工件位于 `bdr/changes/<change-name>/`。
 
-## 命令
+## 命令与 Skill
 
-| 命令 | 阶段 | 产出 |
-|------|------|------|
-| `bdr:explore` | 创建/继续 change，识别坏味道 | `bdr/changes/<name>/badsmells.md` |
-| `bdr:analyze` | 差分分析 | `analysis.md`、同步 `tasks.md` |
-| `bdr:plan` | 任务分解 | `tasks.md` |
-| `bdr:apply` | 重构执行 | 代码变更 + 状态回写 |
-| `bdr:archive` | 归档 change | `bdr/changes/archive/YYYY-MM-DD-<name>/` |
+| 命令 | Skill | 阶段 |
+|------|-------|------|
+| `bdr:explore` / `/bdr-explore` | `bdr-explore-to-change` | 创建/继续 change，识别坏味道 |
+| `bdr:analyze` / `/bdr-analyze` | `bdr-analyze-change` | 差分分析 |
+| `bdr:plan` / `/bdr-plan` | `bdr-plan-change` | 任务分解 |
+| `bdr:apply` / `/bdr-apply` | `bdr-apply-change` | 重构执行 |
+| `bdr:archive` / `/bdr-archive` | `bdr-archive-change` | 归档至 `bdr/changes/archive/` |
+
+各阶段主要产出：`badsmells.md`、`analysis.md`、`tasks.md`、代码变更。
 
 ## 工作区
 

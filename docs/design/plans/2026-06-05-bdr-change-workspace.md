@@ -22,7 +22,7 @@
 | `templates/badsmells-header.md` | 修改 | 去掉 constitution 外链；依据改为 change 内自洽 |
 | `templates/.bdr.yaml.example` | 删除 | 被 bdr-config 替代 |
 | `skills/using-bdr/` | 删除 | 由五 Skill 自给 |
-| `skills/bdr-archive/` | 新建 | archive 行为 |
+| `skills/bdr-archive-change/` | 新建 | archive 行为 |
 | `skills/bdr-{explore,analyze,plan,apply}/` | 重写 | 工作区 + 规约摘要 |
 | `commands/bdr-archive.md` | 新建 | archive 入口 |
 | `commands/bdr-explore.md` | 修改 | `[path] [change-name]` |
@@ -123,7 +123,7 @@ rm templates/.bdr.yaml.example
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-for skill in bdr-explore bdr-analyze bdr-plan bdr-apply bdr-archive; do
+for skill in bdr-explore-to-change bdr-analyze-change bdr-plan-change bdr-apply-change bdr-archive-change; do
   f="$ROOT/skills/$skill/SKILL.md"
   [[ -f "$f" ]] || { echo "FAIL: missing $f"; exit 1; }
   grep -q 'bdr/config.yaml' "$f" || { echo "FAIL: $f missing bdr/config.yaml"; exit 1; }
@@ -155,7 +155,7 @@ chmod +x tests/plugin/test-workspace-skills.sh tests/plugin/test-no-legacy-paths
 bash tests/run-tests.sh
 ```
 
-预期：`FAIL: missing skills/bdr-archive/SKILL.md` 等。
+预期：`FAIL: missing skills/bdr-archive-change/SKILL.md` 等。
 
 ---
 
@@ -221,23 +221,23 @@ bash tests/opencode/test-plugin-loading.sh
 
 - [ ] **步骤 4：更新 `.opencode/INSTALL.md` 技能列表**
 
-将 `using-bdr` 替换为五 Skill：`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`、`bdr-archive`。
+将 `using-bdr` 替换为五 Skill：`bdr-explore-to-change`、`bdr-analyze-change`、`bdr-plan-change`、`bdr-apply-change`、`bdr-archive-change`。
 
 ---
 
 ### 任务 4：重写 bdr-explore（change 创建、D3、去重）
 
 **Files:**
-- Modify: `skills/bdr-explore/SKILL.md`
+- Modify: `skills/bdr-explore-to-change/SKILL.md`
 - Modify: `commands/bdr-explore.md`
 
-- [ ] **步骤 1：重写 `skills/bdr-explore/SKILL.md`**
+- [ ] **步骤 1：重写 `skills/bdr-explore-to-change/SKILL.md`**
 
 frontmatter:
 
 ```yaml
 ---
-name: bdr-explore
+name: bdr-explore-to-change
 description: bdr:explore — 创建/继续 change，扫描源码产出 badsmells.md
 ---
 ```
@@ -271,7 +271,7 @@ description: bdr:explore — 创建/继续 change，扫描源码产出 badsmells
 description: 创建或继续 BDR change，扫描坏味道写入 bdr/changes/<name>/badsmells.md
 ---
 
-Load and follow the **bdr-explore** skill.
+Load and follow the **bdr-explore-to-change** skill.
 
 参数：`[path]` 扫描范围（默认 `.`）；`[change-name]` kebab-case 变更名（可选）。
 
@@ -283,9 +283,9 @@ Load and follow the **bdr-explore** skill.
 ### 任务 5：重写 bdr-analyze / bdr-plan / bdr-apply
 
 **Files:**
-- Modify: `skills/bdr-analyze/SKILL.md`
-- Modify: `skills/bdr-plan/SKILL.md`
-- Modify: `skills/bdr-apply/SKILL.md`
+- Modify: `skills/bdr-analyze-change/SKILL.md`
+- Modify: `skills/bdr-plan-change/SKILL.md`
+- Modify: `skills/bdr-apply-change/SKILL.md`
 
 每个 Skill 须含：
 - **工作区解析**（同 explore，读 config → `{change_dir}`；无 current_change → 停止并提示先 explore）
@@ -293,23 +293,23 @@ Load and follow the **bdr-explore** skill.
 - **BDR 规约摘要**（粘贴 snippet）
 - **RED FLAGS**
 
-- [ ] **步骤 1：重写 `skills/bdr-analyze/SKILL.md`**
-- [ ] **步骤 2：重写 `skills/bdr-plan/SKILL.md`** — analyze 门禁比较 **同 change** 内 badsmells vs tasks 版本
-- [ ] **步骤 3：重写 `skills/bdr-apply/SKILL.md`** — 读写 `{change_dir}/tasks.md`；回写 `{change_dir}/badsmells.md` §2.0
+- [ ] **步骤 1：重写 `skills/bdr-analyze-change/SKILL.md`**
+- [ ] **步骤 2：重写 `skills/bdr-plan-change/SKILL.md`** — analyze 门禁比较 **同 change** 内 badsmells vs tasks 版本
+- [ ] **步骤 3：重写 `skills/bdr-apply-change/SKILL.md`** — 读写 `{change_dir}/tasks.md`；回写 `{change_dir}/badsmells.md` §2.0
 
 ---
 
 ### 任务 6：新增 bdr-archive
 
 **Files:**
-- Create: `skills/bdr-archive/SKILL.md`
+- Create: `skills/bdr-archive-change/SKILL.md`
 - Create: `commands/bdr-archive.md`
 
-- [ ] **步骤 1：创建 `skills/bdr-archive/SKILL.md`**
+- [ ] **步骤 1：创建 `skills/bdr-archive-change/SKILL.md`**
 
 ```markdown
 ---
-name: bdr-archive
+name: bdr-archive-change
 description: bdr:archive — 检查 change 完成度并归档至 bdr/changes/archive/
 ---
 
@@ -346,7 +346,7 @@ mv bdr/changes/<name> bdr/changes/archive/$(date +%Y-%m-%d)-<name>/
 description: 归档当前 BDR change 至 bdr/changes/archive/
 ---
 
-Load and follow the **bdr-archive** skill.
+Load and follow the **bdr-archive-change** skill.
 ```
 
 ---

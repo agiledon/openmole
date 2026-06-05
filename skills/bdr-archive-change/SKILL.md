@@ -1,35 +1,37 @@
 ---
-name: bdr-analyze
-description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～F）
+name: bdr-archive-change
+description: bdr:archive — 检查 change 完成度并归档至 bdr/changes/archive/
 ---
 
-# BDR Analyze — 差分分析
+# BDR Archive — 归档 change
 
 ## 何时使用
 
-- 当前 change 的 `badsmells.md` 变更后 **必须** 运行
-- `bdr:plan` / `bdr:apply` 前发现 tasks 与 badsmells 不一致
+用户运行 `bdr:archive`，当前 change 重构周期结束或需封存。
 
 ## 工作区解析
 
 1. 读取 `bdr/config.yaml` → `current_change`
 2. `{change_dir}` = `bdr/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `bdr:explore`
+3. 无 `current_change` → **停止**，无活跃 change 可归档
 
-## 强制差分步骤
+## 完成度检查
 
-| 步骤 | 动作 |
-|------|------|
-| A | 列出 `{change_dir}/badsmells.md` 全部 BS-ID |
-| B | 列出 `{change_dir}/tasks.md` 各任务 BS-ID |
-| C | 新增 BS-ID → 增补 B-Txx |
-| D | 删除/合并 BS-ID → 处理孤儿任务 |
-| E | 验收标准变更 → 同步 DoD |
-| F | 摘要写入 `{change_dir}/analysis.md` §2.1 + 修订历史 |
+1. `{change_dir}/badsmells.md` §2.0 — 不得有 **未清除** / **部分残余**（除非用户确认豁免）
+2. `{change_dir}/tasks.md` §3 — 不得有 `[ ]` 未完成任务
 
-## 输出
+## 用户确认门
 
-更新 `{change_dir}/analysis.md` 与 `{change_dir}/tasks.md`（必要时）。模板：`templates/analysis-header.md`
+若有未完成项 → 列出 BS-ID / B-Txx → **必须** 询问用户是否仍归档。
+
+## 归档动作
+
+```bash
+mv bdr/changes/<name> bdr/changes/archive/$(date +%Y-%m-%d)-<name>/
+```
+
+- 更新 `.bdr-change.yaml` → `status: archived`
+- `bdr/config.yaml` 清空 `current_change`
 
 ## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -60,5 +62,5 @@ description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～
 
 ## RED FLAGS
 
-- 差分未完成即 plan/apply
-- 发现冲突先改代码而非文档
+- 未完成仍归档且未经用户确认
+- 归档后仍保留 stale 的 current_change

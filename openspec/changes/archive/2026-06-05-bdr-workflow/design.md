@@ -2,7 +2,7 @@
 
 本仓库已在 `docs/prd/`（目标运行时路径为 `docs/bdr/`）定义 BDR 宪法、元规约与示例工件（badsmells、tasks、analysis）。这些文档描述了 **做什么** 与 **门禁**，但缺少 **如何让编码 Agent 自动执行** 的实现载体。
 
-BDR 框架采用 **Skill-first + Plugin 多 harness 分发** 分层：以 **Skill（SKILL.md）** 为行为单元，以 **Plugin 元数据** 注册到 Cursor / Claude Code / Codex / OpenCode，以 **Commands** 作为用户入口委托 Skill。将 explore / plan / apply 三阶段映射为独立 Skill + Command，并增加 `using-bdr` 元 Skill 与 `bdr-analyze` 闭环。
+BDR 框架采用 **Skill-first + Plugin 多 harness 分发** 分层：以 **Skill（SKILL.md）** 为行为单元，以 **Plugin 元数据** 注册到 Cursor / Claude Code / Codex / OpenCode，以 **Commands** 作为用户入口委托 Skill。将 explore / plan / apply 三阶段映射为独立 Skill + Command，并增加 `using-bdr` 元 Skill 与 `bdr-analyze-change` 闭环。
 
 ### 实现阶段（Phased Delivery）
 
@@ -28,7 +28,7 @@ BDR Plugin 采用 **零第三方运行时依赖、Markdown-first、多 harness J
 
 | 层级 | 技术 | 用途 |
 |------|------|------|
-| 行为单元 | `skills/*/SKILL.md` | `using-bdr`、`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply` |
+| 行为单元 | `skills/*/SKILL.md` | `using-bdr`、`bdr-explore-to-change`、`bdr-analyze-change`、`bdr-plan-change`、`bdr-apply-change` |
 | 命令入口 | `commands/*.md`（frontmatter + 委托 skill） | `commands/bdr-*.md` |
 | Subagent | `agents/code-reviewer.md` | apply 阶段可选审查 **（v1.1）** |
 | Cursor 插件 | `.cursor-plugin/plugin.json` | 注册 skills / commands **（MVP）**；agents / hooks **（v1.1）** |
@@ -82,7 +82,7 @@ BDR Plugin 采用 **零第三方运行时依赖、Markdown-first、多 harness J
 
 ### D1：Skill-first，Command 为薄包装
 
-**选择**：核心逻辑全部写入 `skills/<name>/SKILL.md`；`commands/bdr-explore.md` 等仅含 frontmatter +「请加载 bdr-explore skill 并执行」。
+**选择**：核心逻辑全部写入 `skills/<name>/SKILL.md`；`commands/bdr-explore.md` 等仅含 frontmatter +「请加载 bdr-explore-to-change skill 并执行」。
 
 **理由**：Skill 可跨 harness 复用；Command 在不同平台的格式略有差异，薄包装降低维护成本。
 

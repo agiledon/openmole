@@ -69,7 +69,7 @@ For each IDE selected, `bdr init` SHALL run an IDE-specific adapter that registe
 #### Scenario: Cursor adapter
 
 - **WHEN** Cursor is selected
-- **THEN** init SHALL install BDR so Cursor exposes skills `bdr-explore`, `bdr-analyze`, `bdr-plan`, `bdr-apply`, and `bdr-archive`
+- **THEN** init SHALL install BDR so Cursor exposes skills `bdr-explore-to-change`, `bdr-analyze-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-archive-change`
 - **AND** slash commands `/bdr-explore` through `/bdr-archive` become available after Cursor restart
 
 #### Scenario: OpenCode adapter

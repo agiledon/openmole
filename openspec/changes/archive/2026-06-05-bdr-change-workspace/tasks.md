@@ -47,7 +47,7 @@
 
 ## 7. bdr-archive（新增）
 
-- [x] 7.1 `skills/bdr-archive/SKILL.md`
+- [x] 7.1 `skills/bdr-archive-change/SKILL.md`
 - [x] 7.2 `commands/bdr-archive.md`
 - [x] 7.3 完成度检查 + 用户确认 + mv 至 archive/
 

@@ -1,12 +1,12 @@
-# bdr-archive
+# bdr-archive-change
 
 Archive completed BDR changes.
 
 ## Requirements
 
-### Requirement: bdr-archive completes and archives a change
+### Requirement: bdr-archive-change completes and archives a change
 
-The `bdr-archive` skill SHALL verify the current change for completion and move it to `bdr/changes/archive/YYYY-MM-DD-<change-name>/`.
+The `bdr-archive-change` skill SHALL verify the current change for completion and move it to `bdr/changes/archive/YYYY-MM-DD-<change-name>/`.
 
 #### Scenario: Archive fully completed change
 
@@ -20,7 +20,7 @@ The `bdr-archive` skill SHALL verify the current change for completion and move 
 
 ### Requirement: archive command is registered in plugin manifests
 
-Cursor and OpenCode SHALL include `bdr-archive` skill and `bdr:archive` command.
+Cursor and OpenCode SHALL include `bdr-archive-change` skill and `bdr:archive` command.
 
 #### Scenario: Cursor exposes archive command
 

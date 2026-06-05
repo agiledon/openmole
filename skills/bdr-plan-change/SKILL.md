@@ -1,5 +1,5 @@
 ---
-name: bdr-plan
+name: bdr-plan-change
 description: bdr:plan — 从未清除/部分残余坏味道生成 tasks.md
 ---
 

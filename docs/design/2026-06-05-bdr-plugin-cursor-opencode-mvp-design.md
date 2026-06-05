@@ -36,8 +36,8 @@ BDR 规约已在 `docs/prd/` 定义完整文档链，但缺少可安装的 Agent
 └──────────────────────────┬───────────────────────────────┘
                            ▼
 ┌──────────────────────────────────────────────────────────┐
-│  行为层：skills/using-bdr, bdr-explore, bdr-analyze,     │
-│         bdr-plan, bdr-apply                             │
+│  行为层：bdr-explore-to-change, bdr-analyze-change,     │
+│         bdr-plan-change, bdr-apply-change                             │
 └──────────────────────────┬───────────────────────────────┘
                            ▼
 ┌──────────────────────────────────────────────────────────┐
@@ -53,10 +53,10 @@ BDR 规约已在 `docs/prd/` 定义完整文档链，但缺少可安装的 Agent
 | 组件 | 职责 | 依赖 |
 |------|------|------|
 | `using-bdr` | 阶段路由、docs root 解析、RED FLAGS | constitution |
-| `bdr-explore` | 扫描源码 → `badsmells.md` | specification §4 |
-| `bdr-analyze` | badsmells 变更差分 A～F → 同步 tasks | analysis §2 |
-| `bdr-plan` | 未清除/部分残余 → `B-Txx` 任务 | tasks §2 模板 |
-| `bdr-apply` | 单任务执行 + 用户确认门 | constitution §4 |
+| `bdr-explore-to-change` | 扫描源码 → `badsmells.md` | specification §4 |
+| `bdr-analyze-change` | badsmells 变更差分 A～F → 同步 tasks | analysis §2 |
+| `bdr-plan-change` | 未清除/部分残余 → `B-Txx` 任务 | tasks §2 模板 |
+| `bdr-apply-change` | 单任务执行 + 用户确认门 | constitution §4 |
 | `templates/` | 工件骨架 | — |
 | `docs/reference/bdr/` | 绿field 初始化副本 | 同步自 `docs/prd/` |
 
@@ -171,7 +171,7 @@ BDR 规约已在 `docs/prd/` 定义完整文档链，但缺少可安装的 Agent
 
 ### Phase 2 — Skill + Command（≈2 天）
 
-- [ ] `using-bdr`、`bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`
+- [ ] `using-bdr`、`bdr-explore-to-change`、`bdr-analyze-change`、`bdr-plan-change`、`bdr-apply-change`
 - [ ] 四个 `commands/bdr-*.md`
 - [ ] 更新根 `README.md` 安装说明
 

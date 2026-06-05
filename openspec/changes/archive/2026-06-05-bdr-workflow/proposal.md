@@ -9,9 +9,9 @@ BDR（Bad smell Driven Refactoring，坏味道驱动重构）已在 `docs/prd/` 
   - **v1.1**：`.claude-plugin`、`.codex-plugin`、Gemini 扩展、hooks
 - 新增 **核心 Skill 库**：
   - `using-bdr` — 元 Skill，引导 Agent 在 BDR 任务前加载正确 Skill 与工件路径。
-  - `bdr-explore` — 对应 `bdr:explore`：扫描指定目录/项目源码，依据 constitution §3 第一性原则、SOLID、迪米特法则、Fowler 重构坏味道及语言最佳实践，输出/更新 `docs/bdr/badsmells.md`（条目含已清除/未清除状态）。
-  - `bdr-plan` — 对应 `bdr:plan`：针对未清除坏味道制订重构计划，输出/更新 `docs/bdr/tasks.md`（任务与步骤含已执行/未执行状态；含补测、覆盖率、mock 测绿、重构等步骤）。
-  - `bdr-apply` — 对应 `bdr:apply`：按 `tasks.md` 执行未完成任务，严格遵循 constitution §4 标准步骤（补测→测绿→重构→回归→用户确认）。
+  - `bdr-explore-to-change` — 对应 `bdr:explore`：扫描指定目录/项目源码，依据 constitution §3 第一性原则、SOLID、迪米特法则、Fowler 重构坏味道及语言最佳实践，输出/更新 `docs/bdr/badsmells.md`（条目含已清除/未清除状态）。
+  - `bdr-plan-change` — 对应 `bdr:plan`：针对未清除坏味道制订重构计划，输出/更新 `docs/bdr/tasks.md`（任务与步骤含已执行/未执行状态；含补测、覆盖率、mock 测绿、重构等步骤）。
+  - `bdr-apply-change` — 对应 `bdr:apply`：按 `tasks.md` 执行未完成任务，严格遵循 constitution §4 标准步骤（补测→测绿→重构→回归→用户确认）。
 - 新增 **Commands** 薄层：`bdr:explore`、`bdr:plan`、`bdr:apply`（及 `bdr:analyze` 用于 badsmells 变更后的 tasks 差分同步），各命令委托对应 Skill。
 - 内置 **规约引用**：Skill 运行时读取项目内 `docs/bdr/constitution.md`、`docs/bdr/specification.md`（或 `docs/prd/` 等价路径，可配置）作为约束，不硬编码业务坏味道清单。
 - 新增 **工件模板与校验辅助**：badsmells 条目格式、tasks 任务模板、修订历史「提交版本」列提醒（对齐 specification §7）。
@@ -31,10 +31,10 @@ BDR（Bad smell Driven Refactoring，坏味道驱动重构）已在 `docs/prd/` 
 ### New Capabilities
 
 - `bdr-core`: BDR 元 Skill（`using-bdr`）、共享常量（工件路径、状态枚举、门禁摘要）、多 harness 插件清单（Phase 1：Cursor + OpenCode；v1.1：其余平台 + hooks）。
-- `bdr-explore`: 源码扫描与坏味道识别 Skill + `bdr:explore` 命令；输出符合 specification §4 的 `badsmells.md`。
-- `bdr-plan`: 重构任务分解 Skill + `bdr:plan` 命令；基于未清除坏味道生成符合 constitution §4 的 `tasks.md`。
-- `bdr-apply`: 重构执行 Skill + `bdr:apply` 命令；逐步执行 tasks 并更新状态，强制测绿与用户确认门。
-- `bdr-analyze`: badsmells 变更后的差分分析 Skill，同步 `analysis.md` 与 `tasks.md`（对齐 constitution §2.4）。
+- `bdr-explore-to-change`: 源码扫描与坏味道识别 Skill + `bdr:explore` 命令；输出符合 specification §4 的 `badsmells.md`。
+- `bdr-plan-change`: 重构任务分解 Skill + `bdr:plan` 命令；基于未清除坏味道生成符合 constitution §4 的 `tasks.md`。
+- `bdr-apply-change`: 重构执行 Skill + `bdr:apply` 命令；逐步执行 tasks 并更新状态，强制测绿与用户确认门。
+- `bdr-analyze-change`: badsmells 变更后的差分分析 Skill，同步 `analysis.md` 与 `tasks.md`（对齐 constitution §2.4）。
 
 ### Modified Capabilities
 

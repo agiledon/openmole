@@ -1,37 +1,41 @@
 ---
-name: bdr-archive
-description: bdr:archive — 检查 change 完成度并归档至 bdr/changes/archive/
+name: bdr-apply-change
+description: bdr:apply — 执行当前 change 下一个未完成的 B-Txx
 ---
 
-# BDR Archive — 归档 change
+# BDR Apply — 执行重构
 
 ## 何时使用
 
-用户运行 `bdr:archive`，当前 change 重构周期结束或需封存。
+用户运行 `bdr:apply`，且当前 change 有未完成任务。
 
 ## 工作区解析
 
 1. 读取 `bdr/config.yaml` → `current_change`
 2. `{change_dir}` = `bdr/changes/{change_name}/`
-3. 无 `current_change` → **停止**，无活跃 change 可归档
+3. 无 `current_change` → **停止**，提示先 `bdr:explore`
 
-## 完成度检查
+## 选取任务
 
-1. `{change_dir}/badsmells.md` §2.0 — 不得有 **未清除** / **部分残余**（除非用户确认豁免）
-2. `{change_dir}/tasks.md` §3 — 不得有 `[ ]` 未完成任务
+1. 读取 `{change_dir}/tasks.md` §3
+2. 下一 `[ ]` 的 **B-Txx**，依赖均已 `[x]`
+3. **每次 invocation 仅一个任务**
 
-## 用户确认门
+## 执行步骤
 
-若有未完成项 → 列出 BS-ID / B-Txx → **必须** 询问用户是否仍归档。
+| 步骤 | 动作 |
+|------|------|
+| ① | 确认 BS-ID 与 badsmells 一致 |
+| ② | 补测（pytest/JUnit 等） |
+| ③ | 测绿 |
+| ④ | 重构（`[SDD]` 须先确认 SDD 已修订） |
+| ⑤ | 回归测绿 |
+| ⑥ | **用户确认** |
 
-## 归档动作
+## 完成后
 
-```bash
-mv bdr/changes/<name> bdr/changes/archive/$(date +%Y-%m-%d)-<name>/
-```
-
-- 更新 `.bdr-change.yaml` → `status: archived`
-- `bdr/config.yaml` 清空 `current_change`
+- `{change_dir}/tasks.md` 标记 `[x]`
+- 满足 DoD 时更新 `{change_dir}/badsmells.md` §2.0
 
 ## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -62,5 +66,6 @@ mv bdr/changes/<name> bdr/changes/archive/$(date +%Y-%m-%d)-<name>/
 
 ## RED FLAGS
 
-- 未完成仍归档且未经用户确认
-- 归档后仍保留 stale 的 current_change
+- 测试未绿仍标记完成
+- 跳过用户确认
+- 一次 apply 多个任务

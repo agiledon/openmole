@@ -78,7 +78,15 @@ function filterExtendMode(targetDir, ides, force) {
   const config = readConfigFile(workspacePaths(targetDir).configPath);
   if (!config?.installed_ides?.length) return ides;
   const installed = new Set(config.installed_ides);
-  return ides.filter((ide) => !installed.has(ide));
+  return ides.filter((ide) => {
+    if (!installed.has(ide)) return true;
+    // Re-run Cursor if project .cursor/ is missing (e.g. after adapter fix)
+    if (ide === 'cursor') {
+      const skillPath = path.join(targetDir, '.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md');
+      return !fs.existsSync(skillPath);
+    }
+    return false;
+  });
 }
 
 function printSummary({ targetDir, results, extended, dryRun }) {
@@ -100,7 +108,8 @@ function printSummary({ targetDir, results, extended, dryRun }) {
   console.log('');
   console.log('Next steps:');
   if (results.some((r) => r.ide === 'cursor' && !r.skipped)) {
-    console.log('  • Cursor: Cmd+Q 重启，验证 /bdr-explore');
+    console.log('  • Cursor: 检查项目 .cursor/skills/ 与 .cursor/commands/');
+    console.log('  • Cursor: Cmd+Q 重启后验证 /bdr-explore');
   }
   if (results.some((r) => r.ide === 'opencode' && !r.skipped)) {
     console.log('  • OpenCode: 重启后运行 /bdr-explore . demo-change');
@@ -136,7 +145,14 @@ export async function runInit(argv) {
     }
 
     if (ide === 'cursor') {
-      results.push(installCursor({ packageRoot, dryRun: opts.dryRun }));
+      results.push(
+        installCursor({
+          packageRoot,
+          targetDir: opts.targetDir,
+          dryRun: opts.dryRun,
+          force: opts.force,
+        }),
+      );
     } else if (ide === 'opencode') {
       results.push(
         installOpenCode({

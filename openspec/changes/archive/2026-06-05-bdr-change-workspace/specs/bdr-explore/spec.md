@@ -1,8 +1,8 @@
 ## MODIFIED Requirements
 
-### Requirement: bdr-explore scans source and produces badsmells.md
+### Requirement: bdr-explore-to-change scans source and produces badsmells.md
 
-The `bdr-explore` skill and `bdr:explore` command SHALL scan a user-specified directory or project root, identify code bad smells aligned with constitution §3 and specification §4, and write output to `bdr/changes/<change-name>/badsmells.md`. Each `bdr:explore` invocation that starts a new BDR cycle SHALL create or designate a **new change** unless the user explicitly continues the current change.
+The `bdr-explore-to-change` skill and `bdr:explore` command SHALL scan a user-specified directory or project root, identify code bad smells aligned with constitution §3 and specification §4, and write output to `bdr/changes/<change-name>/badsmells.md`. Each `bdr:explore` invocation that starts a new BDR cycle SHALL create or designate a **new change** unless the user explicitly continues the current change.
 
 #### Scenario: Full project scan with explicit change name
 

@@ -1,8 +1,8 @@
 ## MODIFIED Requirements
 
-### Requirement: bdr-analyze diffs badsmells against tasks
+### Requirement: bdr-analyze-change diffs badsmells against tasks
 
-The `bdr-analyze` skill and `bdr:analyze` command SHALL compare `bdr/changes/<current-change>/badsmells.md` against `bdr/changes/<current-change>/tasks.md` and record output in `bdr/changes/<current-change>/analysis.md`.
+The `bdr-analyze-change` skill and `bdr:analyze` command SHALL compare `bdr/changes/<current-change>/badsmells.md` against `bdr/changes/<current-change>/tasks.md` and record output in `bdr/changes/<current-change>/analysis.md`.
 
 #### Scenario: Analyze within current change
 

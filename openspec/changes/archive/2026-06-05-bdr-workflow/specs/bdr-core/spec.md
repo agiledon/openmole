@@ -7,7 +7,7 @@ The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plug
 #### Scenario: Cursor installation
 
 - **WHEN** a user installs the BDR plugin in Cursor via marketplace or local path
-- **THEN** the agent SHALL expose skills `using-bdr`, `bdr-explore`, `bdr-plan`, `bdr-apply`, and `bdr-analyze`
+- **THEN** the agent SHALL expose skills `using-bdr`, `bdr-explore-to-change`, `bdr-plan-change`, `bdr-apply-change`, and `bdr-analyze-change`
 - **AND** commands `bdr:explore`, `bdr:plan`, `bdr:apply`, and `bdr:analyze` SHALL be available
 
 #### Scenario: Multi-harness skill path consistency

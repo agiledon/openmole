@@ -33,35 +33,35 @@
 - [x] 4.2 在 skill 中嵌入 constitution §3～§5 与 specification §4～§7 摘要引用
 - [x] 4.3 定义 RED FLAGS（跳过测绿、无 BS-ID 任务、未确认继续等）
 
-## 5. Skill — bdr-explore
+## 5. Skill — bdr-explore-to-change
 
-- [x] 5.1 编写 `skills/bdr-explore/SKILL.md`：扫描流程、语言检测、Fowler 坏味道对照表
+- [x] 5.1 编写 `skills/bdr-explore-to-change/SKILL.md`：扫描流程、语言检测、Fowler 坏味道对照表
 - [x] 5.2 添加 Python 最佳实践附录（pytest、类型注解、模块边界）
 - [x] 5.3 添加 Java 最佳实践附录（JUnit、Mockito、包结构）
 - [x] 5.4 添加 TypeScript/JavaScript 最佳实践附录（可选）
 - [x] 5.5 定义输出校验清单（§4 必填字段、§2.0 状态枚举、修订历史提交版本）
-- [x] 5.6 编写 `commands/bdr-explore.md`（frontmatter + 委托 bdr-explore skill，支持 `[path]` 参数）
+- [x] 5.6 编写 `commands/bdr-explore.md`（frontmatter + 委托 bdr-explore-to-change skill，支持 `[path]` 参数）
 
-## 6. Skill — bdr-plan
+## 6. Skill — bdr-plan-change
 
-- [x] 6.1 编写 `skills/bdr-plan/SKILL.md`：读取 badsmells 未清除/部分残余条目、生成 tasks
+- [x] 6.1 编写 `skills/bdr-plan-change/SKILL.md`：读取 badsmells 未清除/部分残余条目、生成 tasks
 - [x] 6.2 嵌入 constitution §4 步骤到任务模板（确认→补测→测绿→重构→回归→用户确认）
 - [x] 6.3 实现 badsmells 版本门禁：过期 tasks 时提示先运行 analyze
 - [x] 6.4 定义覆盖率可选步骤（pytest --cov / jacoco 等）写入指南
 - [x] 6.5 编写 `commands/bdr-plan.md`
 
-## 7. Skill — bdr-apply
+## 7. Skill — bdr-apply-change
 
-- [x] 7.1 编写 `skills/bdr-apply/SKILL.md`：选取下一未执行任务、逐步执行、测绿验证
+- [x] 7.1 编写 `skills/bdr-apply-change/SKILL.md`：选取下一未执行任务、逐步执行、测绿验证
 - [x] 7.2 强制单任务/确认门：完成后暂停等待用户确认
 - [x] 7.3 定义 SDD 联动检查（`[SDD]` 标记任务阻塞逻辑）
 - [x] 7.4 定义完成后回写 badsmells §2.0 状态与 tasks checkbox 规则
 - [x] 7.5 步骤 ① 补测可软引用用户环境中已有的 TDD 类 skill（不硬依赖）
 - [x] 7.6 编写 `commands/bdr-apply.md`
 
-## 8. Skill — bdr-analyze
+## 8. Skill — bdr-analyze-change
 
-- [x] 8.1 编写 `skills/bdr-analyze/SKILL.md`：badsmells ↔ tasks 差分、obsolete/gap 检测
+- [x] 8.1 编写 `skills/bdr-analyze-change/SKILL.md`：badsmells ↔ tasks 差分、obsolete/gap 检测
 - [x] 8.2 定义 analysis.md 输出结构（最近一次差分、冲突项、建议 tasks 修订）
 - [x] 8.3 编写 `commands/bdr-analyze.md`
 

@@ -15,13 +15,13 @@ MVP 使用单目录 `docs/prd` 与 Eywa 真实工件，无法按 change 隔离 B
 
 ### New Capabilities
 
-- `bdr-archive`: 完成度检查、用户确认、归档至 `bdr/changes/archive/`
+- `bdr-archive-change`: 完成度检查、用户确认、归档至 `bdr/changes/archive/`
 
 ### Modified Capabilities
 
 - `bdr-core`: `bdr/config.yaml`、移除 docs_root/using-bdr/docs 树
-- `bdr-explore`: change 模型、D3、去重
-- `bdr-analyze` / `bdr-plan` / `bdr-apply`: change 作用域
+- `bdr-explore-to-change`: change 模型、D3、去重
+- `bdr-analyze-change` / `bdr-plan-change` / `bdr-apply-change`: change 作用域
 - `bdr-core` spec: 移除 bundle fallback requirement → Skill-embedded rules
 
 ## Impact

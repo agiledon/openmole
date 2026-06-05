@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: bdr-explore scans source and produces badsmells.md
+### Requirement: bdr-explore-to-change scans source and produces badsmells.md
 
-The `bdr-explore` skill and `bdr:explore` command SHALL scan a user-specified directory or project root, identify code bad smells aligned with constitution §3 first principles (clarity, consistency, readability, reuse, extensibility, robustness, security, simplicity), SOLID, Law of Demeter, Martin Fowler refactoring smells, and language-specific best practices. The output SHALL be written to `{docs_root}/badsmells.md`.
+The `bdr-explore-to-change` skill and `bdr:explore` command SHALL scan a user-specified directory or project root, identify code bad smells aligned with constitution §3 first principles (clarity, consistency, readability, reuse, extensibility, robustness, security, simplicity), SOLID, Law of Demeter, Martin Fowler refactoring smells, and language-specific best practices. The output SHALL be written to `{docs_root}/badsmells.md`.
 
 #### Scenario: Full project scan
 

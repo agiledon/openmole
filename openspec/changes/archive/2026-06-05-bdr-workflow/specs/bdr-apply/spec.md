@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: bdr-apply executes uncleared tasks per constitution
+### Requirement: bdr-apply-change executes uncleared tasks per constitution
 
-The `bdr-apply` skill and `bdr:apply` command SHALL read `{docs_root}/tasks.md`, select the next task or step marked **未执行**, and execute it following constitution §4 and §5 without skipping test-green-refactor-verify loop.
+The `bdr-apply-change` skill and `bdr:apply` command SHALL read `{docs_root}/tasks.md`, select the next task or step marked **未执行**, and execute it following constitution §4 and §5 without skipping test-green-refactor-verify loop.
 
 #### Scenario: Execute next pending task
 

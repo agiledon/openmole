@@ -1,5 +1,5 @@
 ---
-name: bdr-explore
+name: bdr-explore-to-change
 description: bdr:explore — 创建/继续 change，扫描源码产出 badsmells.md
 ---
 
