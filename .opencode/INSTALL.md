@@ -21,7 +21,10 @@
 
 1. 重启 OpenCode
 2. 使用 `skill` 工具列出 skills → 应看到 `bdr-explore`、`bdr-analyze`、`bdr-plan`、`bdr-apply`、`bdr-archive`
-3. 输入：`bdr:explore . demo-change`
+3. 输入 `/` 查看命令 → 应看到 `/bdr-explore`、`/bdr-analyze`、`/bdr-plan`、`/bdr-apply`、`/bdr-archive`
+4. 运行：`/bdr-explore . demo-change`
+
+> **说明**：OpenCode 通过 `bdr.js` 的 `config` hook 注册 commands（非 skills 自动发现）。命令名为 `/bdr-<phase>`，不是 `bdr:explore`。
 
 ## 工作区
 
