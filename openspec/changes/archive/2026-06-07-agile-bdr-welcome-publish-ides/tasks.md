@@ -20,11 +20,11 @@
 - [x] 3.1 `package.json`：`name` → `agile-bdr`，bump 版本（如 0.5.0）
 - [x] 3.2 更新 README 中英文：registry 安装 `npm install -g agile-bdr`
 - [x] 3.3 更新 `test-package-publish.sh` 断言包名
-- [ ] 3.4 `npm publish --access public`（需 npm login）
-- [ ] 3.5 验证 `npm install -g agile-bdr` 后 `bdr --version`
+- [x] 3.4 `npm publish --access public`（需 npm login）
+- [x] 3.5 验证 `npm install -g agile-bdr` 后 `bdr --version`
 
 ## 4. 文档与验收
 
 - [x] 4.1 更新 `templates/bdr-config.yaml.example` installed_ides 注释（7 IDE）
 - [x] 4.2 `bash scripts/validate-cli.sh` 全绿
-- [ ] 4.3 手动：TTY 运行 `bdr` → 见闪烁 R → Enter → 7 IDE 清单
+- [x] 4.3 手动：TTY 运行 `bdr` → 见闪烁 R → Enter → 7 IDE 清单

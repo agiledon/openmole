@@ -2,6 +2,9 @@
 
 **Version 0.5.0** · CLI: `bdr init` · `bdr update`
 
+> **npm 官方包名 / npm package name:** [`agile-bdr`](https://www.npmjs.com/package/agile-bdr)  
+> 安装：`npm install -g agile-bdr` · CLI 命令仍为 **`bdr`**
+
 [English](#english) · [中文](#中文)
 
 ---
@@ -9,6 +12,8 @@
 <a id="english"></a>
 
 ## English
+
+> **npm official package name:** [`agile-bdr`](https://www.npmjs.com/package/agile-bdr) — install with `npm install -g agile-bdr`. The CLI command remains **`bdr`**.
 
 BDR is a refactoring methodology and agent plugin framework driven by code bad smells. Rules live in phase skills; project artifacts live under `bdr/changes/<change-name>/`.
 
@@ -172,6 +177,8 @@ npm link && bdr --help
 <a id="中文"></a>
 
 ## 中文
+
+> **BDR 框架在 npm 官方包名为 [`agile-bdr`](https://www.npmjs.com/package/agile-bdr)** — 安装：`npm install -g agile-bdr`。CLI 命令仍为 **`bdr`**。
 
 BDR（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 phase skill；目标项目工件位于 `bdr/changes/<change-name>/`。
 
