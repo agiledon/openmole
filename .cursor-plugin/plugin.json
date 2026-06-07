@@ -2,7 +2,7 @@
   "name": "bdr",
   "displayName": "BDR — Bad smell Driven Refactoring",
   "description": "Bad smell Driven Refactoring workflow for coding agents",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "license": "MIT",
   "keywords": ["bdr", "refactoring", "bad-smells"],
   "skills": "./skills/",

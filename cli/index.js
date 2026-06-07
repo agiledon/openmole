@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { runInit } from './commands/init.js';
 import { runUpdate } from './commands/update.js';
+import { isInteractiveWelcome, showWelcome } from './prompts/welcome.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,13 +16,14 @@ function printHelp() {
   console.log(`bdr — Bad smell Driven Refactoring CLI (${readVersion()})
 
 Usage:
+  bdr [path] [options]         Welcome + initialize (interactive TTY)
   bdr init [path] [options]    Initialize BDR workspace and configure AI IDEs
   bdr update [path] [options]  Re-install IDE configs from installed_ides
   bdr --help                     Show this help
   bdr --version                  Show version
 
 Init options:
-  --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex
+  --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex,kiro,qoder
   --all               Configure all IDEs
   --none              Workspace only, skip IDE configuration
   --force             Overwrite existing config
@@ -46,8 +48,18 @@ Examples:
 export async function main(argv) {
   const args = argv.slice(2);
 
-  if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
+  if (args.includes('--help') || args.includes('-h')) {
     printHelp();
+    return;
+  }
+
+  if (args.length === 0) {
+    if (isInteractiveWelcome()) {
+      await showWelcome();
+      await runInit([], { skipWelcome: true });
+    } else {
+      printHelp();
+    }
     return;
   }
 

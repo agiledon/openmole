@@ -7,6 +7,8 @@ export const IDE_DEFINITIONS = [
   { value: 'gemini', label: 'Gemini CLI', phase: 'b' },
   { value: 'claude', label: 'Claude Code', phase: 'b' },
   { value: 'codex', label: 'Codex', phase: 'b' },
+  { value: 'kiro', label: 'Kiro', phase: 'b' },
+  { value: 'qoder', label: 'Qoder', phase: 'b' },
 ];
 
 export const ALL_IDE_VALUES = IDE_DEFINITIONS.map((d) => d.value);

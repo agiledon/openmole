@@ -11,6 +11,7 @@ import {
 } from '../lib/ide-install.js';
 import { printInstallSummary } from '../lib/summary.js';
 import { mergeGitignoreSnippet } from '../workspace/gitignore.js';
+import { isInteractiveWelcome, showWelcome } from '../prompts/welcome.js';
 
 function parseIdesFlag(value) {
   if (!value) return [];
@@ -75,6 +76,13 @@ async function resolveSelectedIdes(opts) {
   return promptIdeSelection();
 }
 
+function shouldShowWelcome(opts) {
+  if (!isInteractiveWelcome()) return false;
+  if (opts.none || opts.all) return false;
+  if (opts.ides !== null) return false;
+  return true;
+}
+
 function filterExtendMode(targetDir, ides, force) {
   if (force) return ides;
   const config = readConfigFile(workspacePaths(targetDir).configPath);
@@ -83,10 +91,14 @@ function filterExtendMode(targetDir, ides, force) {
   return ides.filter((ide) => !installed.has(ide) || needsReinstall(targetDir, ide, force));
 }
 
-export async function runInit(argv) {
+export async function runInit(argv, { skipWelcome = false } = {}) {
   const opts = parseInitArgv(argv);
   const packageRoot = resolvePackageRoot(import.meta.url);
   const version = readPackageVersion(packageRoot);
+
+  if (!skipWelcome && shouldShowWelcome(opts)) {
+    await showWelcome();
+  }
 
   const ws = bootstrapWorkspace({
     targetDir: opts.targetDir,

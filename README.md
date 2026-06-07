@@ -1,6 +1,6 @@
 # BDR — Bad smell Driven Refactoring
 
-**Version 0.4.0** · CLI: `bdr init` · `bdr update`
+**Version 0.5.0** · CLI: `bdr init` · `bdr update`
 
 [English](#english) · [中文](#中文)
 
@@ -62,31 +62,39 @@ bdr/                         # npm package root
 ### Tech stack
 
 - **Skills / Commands**: Markdown + YAML frontmatter
-- **Plugin harnesses**: Cursor, OpenCode, Claude Code, Codex, Gemini CLI
+- **Plugin harnesses**: Cursor, OpenCode, Claude Code, Codex, Gemini CLI, Kiro, Qoder
 - **CLI**: Node.js ESM + `@clack/prompts` (CLI only; plugin runtime has no third-party npm deps)
 - **License**: MIT
 
 ### Installation
 
-> **Distribution**: Not published to the npm registry (`bdr` is taken). Use **`npm link`** or **install from GitHub**.
+**npm registry (recommended)**
 
-**Recommended: clone + link**
+```bash
+npm install -g agile-bdr
+cd /path/to/your-project
+bdr init              # welcome screen → interactive IDE selection
+```
+
+**Clone + link (development)**
 
 ```bash
 git clone https://github.com/agiledon/bdr.git
 cd bdr && npm install && npm link
 
 cd /path/to/your-project
-bdr init              # interactive IDE selection
+bdr init
 ```
 
-**Install CLI from GitHub (no fixed clone path)**
+**Install CLI from GitHub**
 
 ```bash
 npm install -g github:agiledon/bdr
 cd /path/to/your-project
 bdr init
 ```
+
+> Package name on npm is **`agile-bdr`** (the `bdr` name is taken). The CLI command remains **`bdr`**.
 
 After upgrading BDR, run `bdr update` in the target project to refresh IDE configs.
 
@@ -95,7 +103,7 @@ After upgrading BDR, run `bdr update` in the target project to refresh IDE confi
 | Flag | Description |
 |------|-------------|
 | `--ides cursor,opencode,...` | Non-interactive IDE list |
-| `--all` | Configure all 5 IDEs |
+| `--all` | Configure all 7 IDEs |
 | `--none` | Workspace only (`bdr/`) |
 | `--force` | Overwrite existing workspace / IDE config |
 | `--global` | OpenCode user config (`~/.config/opencode/`) |
@@ -114,6 +122,8 @@ After upgrading BDR, run `bdr update` in the target project to refresh IDE confi
 | **Claude Code** | User symlink `~/.claude/plugins/local/bdr` |
 | **Codex** | Project `plugins/bdr` symlink + `.agents/plugins/marketplace.json` |
 | **Gemini CLI** | Project `.gemini/skills/`, `.gemini/commands/`, `.gemini/extensions/bdr` symlink |
+| **Kiro** | Project `.kiro/skills/`, `.kiro/commands/` |
+| **Qoder** | Project `.qoder/skills/`, `.qoder/commands/` |
 
 **Extend mode**: If `bdr/config.yaml` exists, workspace is preserved; only IDEs missing from `installed_ides` are configured.
 
@@ -136,6 +146,8 @@ bdr update --dry-run
 | Claude Code | [.claude/INSTALL.md](.claude/INSTALL.md) |
 | Codex | [.codex/INSTALL.md](.codex/INSTALL.md) |
 | Gemini CLI | [.gemini/INSTALL.md](.gemini/INSTALL.md) |
+| Kiro | [.kiro/INSTALL.md](.kiro/INSTALL.md) |
+| Qoder | [.qoder/INSTALL.md](.qoder/INSTALL.md) |
 
 ### Development
 
@@ -146,7 +158,7 @@ bash scripts/npm-pack-check.sh    # tarball content check
 npm link && bdr --help
 ```
 
-**Maintainers**: `package.json` includes `files` / `repository` for future publish; **not** publishing to npm registry for now.
+**Maintainers**: publish with `npm publish --access public` (package name `agile-bdr`).
 
 ### References
 
@@ -163,7 +175,7 @@ npm link && bdr --help
 
 BDR（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 phase skill；目标项目工件位于 `bdr/changes/<change-name>/`。
 
-**当前版本**：0.4.0（CLI：`bdr init` · `bdr update`）
+**当前版本**：0.5.0（CLI：`bdr init` · `bdr update`）
 
 ### 命令与 Skill
 
@@ -215,31 +227,39 @@ bdr/                         # npm package root
 ### 技术栈
 
 - **Skill / Command**：Markdown + YAML frontmatter
-- **Plugin harness**：Cursor、OpenCode、Claude Code、Codex、Gemini CLI
+- **Plugin harness**：Cursor、OpenCode、Claude Code、Codex、Gemini CLI、Kiro、Qoder
 - **CLI**：Node.js ESM + `@clack/prompts`（仅 CLI；plugin 运行时零第三方依赖）
 - **许可证**：MIT
 
 ### 安装
 
-> **分发方式**：暂不发布 npm registry（`bdr` 包名已被占用）。请使用 **`npm link`** 或 **从 GitHub 克隆** 安装 CLI。
+**npm registry（推荐）**
 
-**推荐：本仓库开发 / 本地 link**
+```bash
+npm install -g agile-bdr
+cd /path/to/your-project
+bdr init              # welcome 画面 → 交互式选择 IDE
+```
+
+**本仓库开发 / 本地 link**
 
 ```bash
 git clone https://github.com/agiledon/bdr.git
 cd bdr && npm install && npm link
 
 cd /path/to/your-project
-bdr init              # 交互式选择 IDE
+bdr init
 ```
 
-**从 GitHub 安装 CLI（无需 clone 到固定路径）**
+**从 GitHub 安装 CLI**
 
 ```bash
 npm install -g github:agiledon/bdr
 cd /path/to/your-project
 bdr init
 ```
+
+> npm 包名为 **`agile-bdr`**（`bdr` 已被占用）；CLI 命令仍为 **`bdr`**。
 
 升级 BDR 后，在目标项目执行 `bdr update` 刷新 IDE 配置。
 
@@ -248,7 +268,7 @@ bdr init
 | 选项 | 说明 |
 |------|------|
 | `--ides cursor,opencode,...` | 非交互指定 IDE |
-| `--all` | 配置全部 5 个 IDE |
+| `--all` | 配置全部 7 个 IDE |
 | `--none` | 仅创建 `bdr/` 工作区 |
 | `--force` | 覆盖已有 workspace / IDE 配置 |
 | `--global` | OpenCode 写入用户级 `~/.config/opencode/` |
@@ -267,6 +287,8 @@ bdr init
 | **Claude Code** | 用户级 `~/.claude/plugins/local/bdr` symlink |
 | **Codex** | 项目 `plugins/bdr` symlink + `.agents/plugins/marketplace.json` |
 | **Gemini CLI** | 项目 `.gemini/skills/`、`.gemini/commands/`、`.gemini/extensions/bdr` symlink |
+| **Kiro** | 项目 `.kiro/skills/`、`.kiro/commands/` |
+| **Qoder** | 项目 `.qoder/skills/`、`.qoder/commands/` |
 
 **Extend 模式**：已存在 `bdr/config.yaml` 时保留 workspace，仅为 `installed_ides` 中缺失的 IDE 追加配置。
 
@@ -289,6 +311,8 @@ bdr update --dry-run
 | Claude Code | [.claude/INSTALL.md](.claude/INSTALL.md) |
 | Codex | [.codex/INSTALL.md](.codex/INSTALL.md) |
 | Gemini CLI | [.gemini/INSTALL.md](.gemini/INSTALL.md) |
+| Kiro | [.kiro/INSTALL.md](.kiro/INSTALL.md) |
+| Qoder | [.qoder/INSTALL.md](.qoder/INSTALL.md) |
 
 ### 开发验证
 
@@ -299,7 +323,7 @@ bash scripts/npm-pack-check.sh    # 发布前 tarball 内容检查
 npm link && bdr --help
 ```
 
-**维护者**：`package.json` 已具备 `files` / `repository` 等字段，便于日后发布；当前 **不发布** 到 npm registry。
+**维护者**：`npm publish --access public` 发布（包名 `agile-bdr`）。
 
 ```bash
 bash scripts/npm-pack-check.sh    # 验证 tarball 内容
