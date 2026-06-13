@@ -1,3 +1,7 @@
+export function notify(msg) {
+  console.log(msg);
+}
+
 export function printInstallSummary({ title, targetDir, results, extraLines = [], dryRun }) {
   console.log('');
   console.log(dryRun ? `Dry run — planned actions (${title}):` : `${title} complete.`);
