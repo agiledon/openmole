@@ -1,0 +1,33 @@
+import fs from 'fs';
+import path from 'path';
+import { installCursor } from '../adapters/cursor.js';
+import { installOpenCode } from '../adapters/opencode.js';
+import { installClaudeCode } from '../adapters/claude-code.js';
+import { installCodex } from '../adapters/codex.js';
+import { installGeminiCli } from '../adapters/gemini-cli.js';
+import { installKiro } from '../adapters/kiro.js';
+import { installQoder } from '../adapters/qoder.js';
+
+export const ADAPTERS = {
+  cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+  opencode: { install: installOpenCode },
+  claude: { install: installClaudeCode },
+  codex: { install: installCodex, checkPath: ['plugins', 'bdr', '.codex-plugin', 'plugin.json'] },
+  gemini: { install: installGeminiCli, checkPath: ['.gemini', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+  kiro: { install: installKiro, checkPath: ['.kiro', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+  qoder: { install: installQoder, checkPath: ['.qoder', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+};
+
+export function resolveAdapter(ide) {
+  const adapter = ADAPTERS[ide];
+  if (!adapter) {
+    throw new Error(`Unknown IDE: ${ide}`);
+  }
+  return adapter;
+}
+
+export function isAdapterInstalled(targetDir, adapter) {
+  if (!adapter.checkPath) return true;
+  const checkFile = path.join(targetDir, ...adapter.checkPath);
+  return fs.existsSync(checkFile);
+}
