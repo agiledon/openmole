@@ -12,8 +12,8 @@ for (const k of required) {
 if (!Array.isArray(pkg.files) || !pkg.files.includes('cli/')) {
   console.error('FAIL: files must include cli/'); process.exit(1);
 }
-if (pkg.name !== 'agile-bdr') {
-  console.error('FAIL: package name must be agile-bdr, got', pkg.name); process.exit(1);
+if (pkg.name !== 'openmole') {
+  console.error('FAIL: package name must be openmole, got', pkg.name); process.exit(1);
 }
 console.log('PASS: package.json publish fields');
 "

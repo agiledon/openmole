@@ -6,7 +6,7 @@ export function installOpenCode({ packageRoot, targetDir, global, dryRun }) {
     throw new Error('targetDir required for project-level OpenCode config');
   }
 
-  const pluginPath = path.join(packageRoot, '.opencode', 'plugins', 'bdr.js');
+  const pluginPath = path.join(packageRoot, '.opencode', 'plugins', 'openmole.js');
   const configPath = global
     ? path.join(process.env.HOME || '', '.config', 'opencode', 'opencode.json')
     : path.join(targetDir, 'opencode.json');

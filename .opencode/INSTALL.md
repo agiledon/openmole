@@ -1,23 +1,23 @@
-# 在 OpenCode 上安装 BDR
+# 在 OpenCode 上安装 OpenMole
 
 ## 推荐
 
 ```bash
-npm link   # 在 bdr 仓库根目录
+npm link   # 在 openmole 仓库根目录
 cd /path/to/your-project
-bdr init --ides opencode
+openmole init --ides opencode
 # 重启 OpenCode
 ```
 
-`bdr init` 会在项目根目录创建或更新 `opencode.json`：
+`openmole init` 会在项目根目录创建或更新 `opencode.json`：
 
 ```json
 {
-  "plugin": ["/absolute/path/to/bdr/.opencode/plugins/bdr.js"]
+  "plugin": ["/absolute/path/to/openmole/.opencode/plugins/openmole.js"]
 }
 ```
 
-用户级配置：`bdr init --ides opencode --global`
+用户级配置：`openmole init --ides opencode --global`
 
 ## 手动安装
 
@@ -25,10 +25,10 @@ bdr init --ides opencode
 
 ## 验证
 
-1. `skill` 工具 — 5 个 bdr-* skill
-2. `/` — `/bdr-explore` … `/bdr-archive`
-3. `/bdr-explore . demo-change`
+1. `skill` 工具 — 5 个 openmole-* skill
+2. `/` — `/openmole-explore` … `/openmole-archive`
+3. `/openmole-explore . demo-change`
 
 ## 工作区
 
-`bdr/config.yaml` + `bdr/changes/<change-name>/`（由 `bdr init` 创建）
+`openmole/config.yaml` + `openmole/changes/<change-name>/`（由 `openmole init` 创建）

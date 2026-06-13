@@ -7,8 +7,8 @@ import { resolveAdapter, isAdapterInstalled } from '../../../cli/lib/adapter-reg
 
 const KNOWN_IDES = ['cursor', 'opencode', 'claude', 'codex', 'gemini', 'kiro', 'qoder'];
 const BASE_OPTS = {
-  packageRoot: '/tmp/bdr-test',
-  targetDir: '/tmp/bdr-test-target',
+  packageRoot: '/tmp/openmole-test',
+  targetDir: '/tmp/openmole-test-target',
   dryRun: true,
   force: false,
   global: false,

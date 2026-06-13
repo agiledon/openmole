@@ -86,7 +86,7 @@ temp/
 .bdr.yaml.local
 
 # Dogfooding: bdr init artifacts in this plugin repo
-/bdr/
+/openmole/
 /.cursor/skills/bdr-*-change/
 /.cursor/commands/bdr-*.md
 

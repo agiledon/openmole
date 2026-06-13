@@ -8,21 +8,21 @@ const WHITE = '\x1b[97m';
 const GRAY = '\x1b[90m';
 const YELLOW = '\x1b[33m';
 
-const R_LOGO = [
-  '██████╗ ',
-  '██╔══██╗',
-  '██████╔╝',
-  '██╔██╗ ',
-  '██║ ╚██╗',
-  '╚═╝  ╚═╝',
+const MOLE_LOGO = [
+  '  ▄▄▄▄▄▄▄▄  ',
+  ' █▀▀▀▀▀▀▀▀█ ',
+  '█   •   •  █',
+  '█   ═▃▃═   █',
+  ' ▀█▄▄▄▄▄▄█▀ ',
+  '  ▀▀▀▀▀▀▀▀  ',
 ];
 
 const QUICK_START = [
-  { cmd: '/bdr-explore', desc: 'Create/continue change, identify bad smells' },
-  { cmd: '/bdr-verify', desc: 'Verify coverage' },
-  { cmd: '/bdr-plan', desc: 'Task breakdown' },
-  { cmd: '/bdr-apply', desc: 'Execute refactoring' },
-  { cmd: '/bdr-archive', desc: 'Archive change' },
+  { cmd: '/mole-explore', desc: 'Create/continue change, identify bad smells' },
+  { cmd: '/mole-verify', desc: 'Verify coverage' },
+  { cmd: '/mole-plan', desc: 'Task breakdown' },
+  { cmd: '/mole-apply', desc: 'Execute refactoring' },
+  { cmd: '/mole-archive', desc: 'Archive change' },
 ];
 
 export function isInteractiveWelcome() {
@@ -31,13 +31,13 @@ export function isInteractiveWelcome() {
 
 function buildTextLines() {
   const lines = [
-    `${BOLD}${WHITE}Welcome to BDR${RESET}`,
-    `${GRAY}Bad smell Driven Refactoring${RESET}`,
+    `${BOLD}${WHITE}Welcome to OpenMole${RESET}`,
+    `${GRAY}AI-driven Refactoring${RESET}`,
     '',
     `${WHITE}This setup will configure:${RESET}`,
     `${GRAY}  • Agent Skills for AI tools${RESET}`,
-    `${GRAY}  • /bdr-* slash commands${RESET}`,
-    `${GRAY}  • bdr/ workspace${RESET}`,
+    `${GRAY}  • /mole-* slash commands${RESET}`,
+    `${GRAY}  • openmole/ workspace${RESET}`,
     `${GRAY}  • 7 AI IDE harnesses${RESET}`,
     '',
     `${WHITE}Quick start after setup:${RESET}`,
@@ -52,11 +52,11 @@ function buildTextLines() {
 
 function composeFrame(logoColor) {
   const textLines = buildTextLines();
-  const height = Math.max(R_LOGO.length, textLines.length);
+  const height = Math.max(MOLE_LOGO.length, textLines.length);
   const rows = [];
 
   for (let i = 0; i < height; i++) {
-    const logo = R_LOGO[i] ? `${logoColor}${R_LOGO[i]}${RESET}` : '         ';
+    const logo = MOLE_LOGO[i] ? `${logoColor}${MOLE_LOGO[i]}${RESET}` : '            ';
     const text = textLines[i] ?? '';
     rows.push(`${logo}  ${text}`);
   }
@@ -105,7 +105,7 @@ function waitForEnter() {
   });
 }
 
-/** OpenSpec-style welcome: blinking R logo, BDR copy, Enter to continue. */
+/** OpenMole welcome: blinking mole logo, copy text, Enter to continue. */
 export async function showWelcome() {
   if (!isInteractiveWelcome()) return;
 

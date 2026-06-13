@@ -46,7 +46,7 @@ export async function runUpdate(argv) {
 
   if (!fs.existsSync(configPath)) {
     throw new Error(
-      `BDR workspace not found at ${configPath}. Run \`bdr init\` in this project first.`,
+      `OpenMole workspace not found at ${configPath}. Run \`openmole init\` in this project first.`,
     );
   }
 
@@ -54,7 +54,7 @@ export async function runUpdate(argv) {
   const ides = config?.installed_ides || [];
   if (!ides.length) {
     throw new Error(
-      'No installed_ides in bdr/config.yaml. Run `bdr init --ides <list>` to configure IDEs first.',
+      'No installed_ides in openmole/config.yaml. Run `openmole init --ides <list>` to configure IDEs first.',
     );
   }
 
@@ -88,7 +88,7 @@ export async function runUpdate(argv) {
   }
 
   printInstallSummary({
-    title: 'BDR update',
+    title: 'OpenMole update',
     targetDir: opts.targetDir,
     results,
     extraLines,

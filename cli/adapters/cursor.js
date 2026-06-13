@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { BDR_PHASES } from '../lib/bdr-phases.js';
+import { OPENMOLE_PHASES } from '../lib/openmole-phases.js';
 
 function ensureDir(dir, dryRun) {
   if (dryRun) return;
@@ -30,8 +30,8 @@ export function toCursorProjectCommand(content, commandBase) {
     '---',
     `name: ${slashName}`,
     `id: ${commandBase}`,
-    'category: BDR',
-    `description: ${description || `BDR ${commandBase}`}`,
+    'category: OpenMole',
+    `description: ${description || `OpenMole ${commandBase}`}`,
     '---',
     '',
   ].join('\n');
@@ -40,7 +40,7 @@ export function toCursorProjectCommand(content, commandBase) {
 }
 
 /**
- * Install BDR into target project .cursor/ (OpenSpec-style).
+ * Install OpenMole into target project .cursor/ (OpenSpec-style).
  * Cursor loads project skills/commands reliably from here.
  */
 export function installCursorProject({ packageRoot, targetDir, dryRun, force }) {
@@ -49,7 +49,7 @@ export function installCursorProject({ packageRoot, targetDir, dryRun, force }) 
   const skillsDir = path.join(cursorDir, 'skills');
   const commandsDir = path.join(cursorDir, 'commands');
 
-  for (const { command, skill } of BDR_PHASES) {
+  for (const { command, skill } of OPENMOLE_PHASES) {
     const src = path.join(packageRoot, 'skills', skill);
     const dest = path.join(skillsDir, skill);
     actions.push(`copy ${src} -> ${dest}`);
@@ -62,7 +62,7 @@ export function installCursorProject({ packageRoot, targetDir, dryRun, force }) 
     }
   }
 
-  for (const { command, skill } of BDR_PHASES) {
+  for (const { command, skill } of OPENMOLE_PHASES) {
     const src = path.join(packageRoot, 'commands', `${command}.md`);
     const dest = path.join(commandsDir, `${command}.md`);
     actions.push(`write ${dest}`);
@@ -78,11 +78,11 @@ export function installCursorProject({ packageRoot, targetDir, dryRun, force }) 
   return { scope: 'project', cursorDir, actions };
 }
 
-/** Optional user-level plugin symlink (~/.cursor/plugins/local/bdr). */
+/** Optional user-level plugin symlink (~/.cursor/plugins/local/openmole). */
 export function installCursorGlobal({ packageRoot, dryRun, homeDir = process.env.HOME }) {
   if (!homeDir) throw new Error('HOME is not set');
 
-  const target = path.join(homeDir, '.cursor', 'plugins', 'local', 'bdr');
+  const target = path.join(homeDir, '.cursor', 'plugins', 'local', 'openmole');
   const action = `symlink ${packageRoot} -> ${target}`;
 
   if (dryRun) {

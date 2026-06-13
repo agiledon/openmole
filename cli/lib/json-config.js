@@ -22,8 +22,8 @@ export function writeJsonWithBackup(filePath, data, dryRun) {
 /** Merge or replace a plugin entry in a Codex-style marketplace.json. */
 export function mergeMarketplacePlugin(existing, { name, pluginPath }) {
   const marketplace = { ...existing };
-  if (!marketplace.name) marketplace.name = 'bdr-local';
-  if (!marketplace.interface) marketplace.interface = { displayName: 'BDR Local' };
+  if (!marketplace.name) marketplace.name = 'openmole-local';
+  if (!marketplace.interface) marketplace.interface = { displayName: 'OpenMole Local' };
   if (!Array.isArray(marketplace.plugins)) marketplace.plugins = [];
 
   const entry = {

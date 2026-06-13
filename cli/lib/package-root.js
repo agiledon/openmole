@@ -9,14 +9,14 @@ function hasMarkers(dir) {
 }
 
 /**
- * Resolve BDR plugin package root.
- * Priority: BDR_HOME → walk up from cli module → null
+ * Resolve OpenMole plugin package root.
+ * Priority: OPENMOLE_HOME → walk up from cli module → null
  */
 export function resolvePackageRoot(fromModuleUrl = import.meta.url) {
-  if (process.env.BDR_HOME) {
-    const home = path.resolve(process.env.BDR_HOME);
+  if (process.env.OPENMOLE_HOME) {
+    const home = path.resolve(process.env.OPENMOLE_HOME);
     if (!hasMarkers(home)) {
-      throw new Error(`BDR_HOME is not a valid BDR package root: ${home}`);
+      throw new Error(`OPENMOLE_HOME is not a valid OpenMole package root: ${home}`);
     }
     return home;
   }
@@ -29,5 +29,5 @@ export function resolvePackageRoot(fromModuleUrl = import.meta.url) {
     dir = parent;
   }
 
-  throw new Error('Could not resolve BDR package root. Set BDR_HOME or run from a linked bdr install.');
+  throw new Error('Could not resolve OpenMole package root. Set OPENMOLE_HOME or run from a linked openmole install.');
 }

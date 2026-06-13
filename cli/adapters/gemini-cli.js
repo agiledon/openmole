@@ -9,10 +9,8 @@ export const installGeminiCli = createSkillCommandAdapter({
   ideDir: '.gemini',
   extras: {
     symlink: {
-      // source is resolved at call time (packageRoot), so we pass a placeholder
-      // that gets replaced in the factory; or simpler: the factory uses the caller's packageRoot
       source: null,
-      dest: ['extensions', 'bdr'],
+      dest: ['extensions', 'openmole'],
     },
     actionSuffix: ', extension symlink',
   },

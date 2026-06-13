@@ -9,13 +9,13 @@ import { installKiro } from '../adapters/kiro.js';
 import { installQoder } from '../adapters/qoder.js';
 
 export const ADAPTERS = {
-  cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+  cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'openmole-explore', 'SKILL.md'] },
   opencode: { install: installOpenCode },
   claude: { install: installClaudeCode },
-  codex: { install: installCodex, checkPath: ['plugins', 'bdr', '.codex-plugin', 'plugin.json'] },
-  gemini: { install: installGeminiCli, checkPath: ['.gemini', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
-  kiro: { install: installKiro, checkPath: ['.kiro', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
-  qoder: { install: installQoder, checkPath: ['.qoder', 'skills', 'bdr-explore-to-change', 'SKILL.md'] },
+  codex: { install: installCodex, checkPath: ['plugins', 'openmole', '.codex-plugin', 'plugin.json'] },
+  gemini: { install: installGeminiCli, checkPath: ['.gemini', 'skills', 'openmole-explore', 'SKILL.md'] },
+  kiro: { install: installKiro, checkPath: ['.kiro', 'skills', 'openmole-explore', 'SKILL.md'] },
+  qoder: { install: installQoder, checkPath: ['.qoder', 'skills', 'openmole-explore', 'SKILL.md'] },
 };
 
 export function resolveAdapter(ide) {

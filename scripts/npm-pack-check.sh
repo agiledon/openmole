@@ -8,9 +8,9 @@ TARBALL=$(npm pack --silent)
 trap 'rm -f "$TARBALL"' EXIT
 
 echo "==> packed $TARBALL"
-tar -tzf "$TARBALL" | grep -q 'package/bin/bdr.js'
+tar -tzf "$TARBALL" | grep -q 'package/bin/openmole.js'
 tar -tzf "$TARBALL" | grep -q 'package/cli/index.js'
-tar -tzf "$TARBALL" | grep -q 'package/skills/bdr-explore-to-change/SKILL.md'
+tar -tzf "$TARBALL" | grep -q 'package/skills/openmole-explore/SKILL.md'
 tar -tzf "$TARBALL" | grep -q 'package/.codex-plugin/plugin.json'
 tar -tzf "$TARBALL" | grep -q 'package/gemini-extension.json'
 

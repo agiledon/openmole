@@ -108,7 +108,7 @@ export async function runInit(argv, { skipWelcome = false } = {}) {
   });
 
   if (ws.extended) {
-    notify('BDR 已初始化，正在追加 IDE 配置…');
+    notify('OpenMole 已初始化，正在追加 IDE 配置…');
   }
 
   let ides = await resolveSelectedIdes(opts);
@@ -142,7 +142,7 @@ export async function runInit(argv, { skipWelcome = false } = {}) {
   const extraLines = ws.extended ? ['(extend mode: existing config preserved)'] : [];
 
   printInstallSummary({
-    title: 'BDR init',
+    title: 'OpenMole init',
     targetDir: opts.targetDir,
     results,
     extraLines,

@@ -3,20 +3,20 @@ import path from 'path';
 import { readConfigFile, writeConfigFile, DEFAULT_CONFIG, mergeInstalledIdes } from '../lib/config-yaml.js';
 
 export function workspacePaths(targetDir) {
-  const bdrDir = path.join(targetDir, 'bdr');
+  const openmoleDir = path.join(targetDir, 'openmole');
   return {
-    bdrDir,
-    configPath: path.join(bdrDir, 'config.yaml'),
-    changesDir: path.join(bdrDir, 'changes'),
-    archiveDir: path.join(bdrDir, 'changes', 'archive'),
+    openmoleDir,
+    configPath: path.join(openmoleDir, 'config.yaml'),
+    changesDir: path.join(openmoleDir, 'changes'),
+    archiveDir: path.join(openmoleDir, 'changes', 'archive'),
   };
 }
 
 /**
- * Bootstrap bdr/ workspace. Returns { config, created, extended }.
+ * Bootstrap openmole/ workspace. Returns { config, created, extended }.
  */
 export function bootstrapWorkspace({ targetDir, packageVersion, force, dryRun }) {
-  const { bdrDir, configPath, changesDir, archiveDir } = workspacePaths(targetDir);
+  const { openmoleDir, configPath, changesDir, archiveDir } = workspacePaths(targetDir);
   const existing = readConfigFile(configPath);
   const extended = Boolean(existing) && !force;
 
@@ -54,7 +54,7 @@ export function bootstrapWorkspace({ targetDir, packageVersion, force, dryRun })
   fs.mkdirSync(archiveDir, { recursive: true });
 
   if (!extended || force) {
-    fs.mkdirSync(bdrDir, { recursive: true });
+    fs.mkdirSync(openmoleDir, { recursive: true });
     writeConfigFile(configPath, config);
   }
 

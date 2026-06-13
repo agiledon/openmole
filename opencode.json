@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "/Users/zhangyi/workspace/projects/bdr/.opencode/plugins/bdr.js"
+    "/Users/zhangyi/workspace/projects/openmole/.opencode/plugins/openmole.js"
   ]
 }

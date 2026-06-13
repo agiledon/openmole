@@ -19,7 +19,7 @@ function parseScalar(raw) {
   return v.replace(/^['"]|['"]$/g, '');
 }
 
-/** Minimal YAML reader for bdr/config.yaml (known keys only). */
+/** Minimal YAML reader for openmole/config.yaml (known keys only). */
 export function readConfig(content) {
   const config = { ...DEFAULT_CONFIG };
   let inInstalledIdes = false;
@@ -67,7 +67,7 @@ export function readConfigFile(filePath) {
 
 export function serializeConfig(config) {
   const lines = [
-    '# BDR workspace config (managed by bdr init)',
+    '# OpenMole workspace config (managed by openmole init)',
     `current_change: ${formatScalar(config.current_change)}`,
   ];
 

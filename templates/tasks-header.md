@@ -1,4 +1,4 @@
-# 坏味道驱动重构任务（BDR Tasks）
+# 坏味道驱动重构任务（OpenMole Tasks）
 
 **版本**：0.1.0
 **状态**：草案
@@ -38,4 +38,4 @@
 
 ## 3. 任务 backlog
 
-（由 bdr:plan 生成）
+（由 mole:plan 生成）

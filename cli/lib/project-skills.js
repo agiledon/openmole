@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import { BDR_PHASES } from './bdr-phases.js';
+import { OPENMOLE_PHASES } from './openmole-phases.js';
 import { copyRecursive, ensureDir, symlinkDir } from './fs-helpers.js';
 
-/** Copy BDR skills from package into a target skills directory. */
+/** Copy OpenMole skills from package into a target skills directory. */
 export function installProjectSkills({ packageRoot, skillsDir, dryRun, force }) {
   const actions = [];
 
-  for (const { skill } of BDR_PHASES) {
+  for (const { skill } of OPENMOLE_PHASES) {
     const src = path.join(packageRoot, 'skills', skill);
     const dest = path.join(skillsDir, skill);
     actions.push(`copy ${src} -> ${dest}`);
@@ -22,11 +22,11 @@ export function installProjectSkills({ packageRoot, skillsDir, dryRun, force }) 
   return actions;
 }
 
-/** Copy BDR command markdown files into a target commands directory. */
+/** Copy OpenMole command markdown files into a target commands directory. */
 export function installProjectCommands({ packageRoot, commandsDir, dryRun, force, transform }) {
   const actions = [];
 
-  for (const { command } of BDR_PHASES) {
+  for (const { command } of OPENMOLE_PHASES) {
     const src = path.join(packageRoot, 'commands', `${command}.md`);
     const dest = path.join(commandsDir, `${command}.md`);
     actions.push(`write ${dest}`);

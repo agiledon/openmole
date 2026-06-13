@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-export BDR_HOME="$ROOT"
+export OpenMole_HOME="$ROOT"
 node -e "
 import { resolvePackageRoot } from '$ROOT/cli/lib/package-root.js';
 const root = resolvePackageRoot();

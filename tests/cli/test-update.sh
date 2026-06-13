@@ -4,10 +4,10 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 TMP=$(mktemp -d)
 HOME_TMP=$(mktemp -d)
 trap 'rm -rf "$TMP" "$HOME_TMP"' EXIT
-export BDR_HOME="$ROOT"
+export OpenMole_HOME="$ROOT"
 export HOME="$HOME_TMP"
 
-node "$ROOT/bin/bdr.js" init "$TMP" --ides cursor,gemini
+node "$ROOT/bin/openmole.js" init "$TMP" --ides cursor,gemini
 
 # Simulate package upgrade
 node -e "
@@ -18,11 +18,11 @@ j.version='9.9.9-test';
 fs.writeFileSync(p, JSON.stringify(j,null,2)+'\n');
 "
 
-node "$ROOT/bin/bdr.js" update "$TMP"
+node "$ROOT/bin/openmole.js" update "$TMP"
 
-grep -q '9.9.9-test' "$TMP/bdr/config.yaml"
-test -f "$TMP/.cursor/skills/bdr-explore-to-change/SKILL.md"
-test -f "$TMP/.gemini/skills/bdr-explore-to-change/SKILL.md"
+grep -q '9.9.9-test' "$TMP/openmole/config.yaml"
+test -f "$TMP/.cursor/skills/mole-explore-to-change/SKILL.md"
+test -f "$TMP/.gemini/skills/mole-explore-to-change/SKILL.md"
 
 # Restore version
 node -e "
@@ -33,4 +33,4 @@ j.version='0.5.0';
 fs.writeFileSync(p, JSON.stringify(j,null,2)+'\n');
 "
 
-echo "PASS: bdr update refreshes IDE configs and init_version"
+echo "PASS: openmole update refreshes IDE configs and init_version"

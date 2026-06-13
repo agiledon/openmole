@@ -77,8 +77,8 @@ describe('isAdapterInstalled', () => {
   });
 
   it('returns true when checkPath file exists', () => {
-    // Check against the actual BDR project — its own cursor skill should exist
-    // since BDR is installed in its own workspace
+    // Check against the actual OpenMole project — its own cursor skill should exist
+    // since OpenMole is installed in its own workspace
     const projectRoot = new URL('../../../', import.meta.url).pathname;
     assert.equal(isAdapterInstalled(projectRoot, ADAPTERS.cursor), true);
   });

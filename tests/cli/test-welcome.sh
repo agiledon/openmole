@@ -2,15 +2,15 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
-# Non-TTY bare bdr shows help (no welcome hang)
-node "$ROOT/bin/bdr.js" 2>&1 | grep -q 'Usage:'
+# Non-TTY bare openmole shows help (no welcome hang)
+node "$ROOT/bin/openmole.js" 2>&1 | grep -q 'Usage:'
 
 # Non-TTY init with --ides skips welcome
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
-export BDR_HOME="$ROOT"
-node "$ROOT/bin/bdr.js" init "$TMP" --ides cursor
-test -f "$TMP/.cursor/skills/bdr-explore-to-change/SKILL.md"
+export OpenMole_HOME="$ROOT"
+node "$ROOT/bin/openmole.js" init "$TMP" --ides cursor
+test -f "$TMP/.cursor/skills/mole-explore-to-change/SKILL.md"
 
 # Module exports
 node --input-type=module -e "

@@ -1,12 +1,12 @@
 {
-  "name": "bdr",
+  "name": "openmole",
   "version": "0.5.0",
   "description": "Bad smell Driven Refactoring workflow for coding agents",
   "author": {
-    "name": "BDR"
+    "name": "OpenMole"
   },
   "license": "MIT",
-  "keywords": ["bdr", "refactoring", "bad-smells"],
+  "keywords": ["openmole", "refactoring", "bad-smells"],
   "skills": "./skills/",
   "commands": "./commands/"
 }

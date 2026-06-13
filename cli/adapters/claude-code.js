@@ -1,11 +1,11 @@
 import path from 'path';
 import { symlinkDir } from '../lib/fs-helpers.js';
 
-/** User-level Claude Code plugin symlink (~/.claude/plugins/local/bdr). */
+/** User-level Claude Code plugin symlink (~/.claude/plugins/local/openmole). */
 export function installClaudeCode({ packageRoot, dryRun, homeDir = process.env.HOME, force = true }) {
   if (!homeDir) throw new Error('HOME is not set');
 
-  const target = path.join(homeDir, '.claude', 'plugins', 'local', 'bdr');
+  const target = path.join(homeDir, '.claude', 'plugins', 'local', 'openmole');
   const link = symlinkDir({ source: packageRoot, target, dryRun, force });
 
   return {

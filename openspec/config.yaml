@@ -6,10 +6,10 @@ context: |
   - Markdown + YAML frontmatter: skills (SKILL.md), commands, agents
   - JSON: .cursor-plugin, .claude-plugin, .codex-plugin, gemini-extension.json
   - Bash: hooks (session-start), scripts/, tests/
-  - JavaScript ESM: .opencode/plugins/bdr.js (Node built-ins only, zero npm deps)
+  - JavaScript ESM: .opencode/plugins/openmole.js (Node built-ins only, zero npm deps)
   - Minimal package.json: type module, no runtime dependencies
   - Harness docs: AGENTS.md, CLAUDE.md, GEMINI.md
   - License: MIT
   - Zero third-party runtime dependencies
-  - BDR workspace: bdr/config.yaml + bdr/changes/<change-name>/
+  - OpenMole workspace: openmole/config.yaml + openmole/changes/<change-name>/
   - Rules embedded in skills (no docs/prd runtime path)

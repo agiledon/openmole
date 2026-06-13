@@ -1,0 +1,5 @@
+# 复制到目标项目 openmole/config.yaml（openmole init 也会生成此结构）
+current_change: null   # 活跃 change 名；explore 新建时更新；archive 后清空
+installed_ides: []     # openmole init 配置的 IDE：cursor | opencode | gemini | claude | codex | kiro | qoder
+init_version: null     # 执行 openmole init 的 OpenMole 包版本
+init_at: null          # ISO-8601 时间戳

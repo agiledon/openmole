@@ -1,4 +1,4 @@
-# 坏味道驱动重构分析（BDR Analysis）
+# 坏味道驱动重构分析（OpenMole Analysis）
 
 **版本**：0.1.0
 **状态**：草案
@@ -8,7 +8,7 @@
 
 ## 1. 目的
 
-在 **重构编码之前**，校验 **BDR 文档链** 一致性：
+在 **重构编码之前**，校验 **OpenMole 文档链** 一致性：
 
 - **宪法**（[constitution.md](./constitution.md)）— 最高规范是否被遵守；
 - **元规约**（[specification.md](./specification.md)）— 条目格式与门禁；
@@ -36,7 +36,7 @@
 
 ### 2.1 最近一次差分记录
 
-（由 bdr:verify 填写）
+（由 mole:verify 填写）
 
 ---
 
@@ -48,4 +48,4 @@
 | 元规约 ↔ badsmells | §4 必填字段齐全；`[SDD]` 是否标注 |
 | badsmells ↔ 任务 | 每个 B-Txx 是否引用 BS-ID；无遗漏、无孤儿任务 |
 | 任务 ↔ 宪法 | DoD 含测试绿 + 用户确认 |
-| BDR ↔ SDD | 对外行为变更是否已在 SDD 立项 |
+| OpenMole ↔ SDD | 对外行为变更是否已在 SDD 立项 |

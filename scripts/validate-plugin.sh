@@ -5,7 +5,7 @@ cd "$ROOT"
 echo "Running plugin tests..."
 bash tests/run-tests.sh
 echo "Checking commands reference existing skills..."
-for cmd in commands/bdr-*.md; do
+for cmd in commands/mole-*.md; do
   [[ -f "$cmd" ]] || continue
   skill=$(basename "$cmd" .md)
   grep -q "$skill" "$cmd" || { echo "FAIL: $cmd missing skill ref"; exit 1; }

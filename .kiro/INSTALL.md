@@ -3,28 +3,28 @@
 ## 推荐
 
 ```bash
-npm install -g agile-bdr   # 或 npm link（在 bdr 仓库根目录）
+npm install -g agile-openmole   # 或 npm link（在 openmole 仓库根目录）
 cd /path/to/your-project
-bdr init --ides kiro
+openmole init --ides kiro
 ```
 
-`bdr init` 会在项目内创建：
+`openmole init` 会在项目内创建：
 
-- `.kiro/skills/bdr-*-change/SKILL.md`
-- `.kiro/commands/bdr-*.md`
+- `.kiro/skills/openmole-*-change/SKILL.md`
+- `.kiro/commands/openmole-*.md`
 
 Kiro 使用 [Agent Skills](https://agentskills.io) 标准；项目级 skills 由 Kiro 自动发现。
 
 ## 验证
 
 1. 重启 Kiro
-2. 在 Agent 对话中应可发现 `bdr-explore-to-change` 等 skill
-3. 使用 `/bdr-explore` 等 slash 命令开始 BDR change
+2. 在 Agent 对话中应可发现 `openmole-explore-to-change` 等 skill
+3. 使用 `/openmole-explore` 等 slash 命令开始 OpenMole change
 
 ## 故障排除
 
 ```bash
-bdr init --ides kiro --force
+openmole init --ides kiro --force
 ```
 
 ## Git

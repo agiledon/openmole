@@ -17,7 +17,7 @@ export async function promptIdeSelection() {
   const { multiselect, isCancel, cancel } = await import('@clack/prompts');
 
   const selected = await multiselect({
-    message: '选择要配置 BDR 的 AI IDE（空格选择，Enter 确认）',
+    message: '选择要配置 OpenMole 的 AI IDE（空格选择，Enter 确认）',
     options: IDE_DEFINITIONS.map((d) => ({
       value: d.value,
       label: d.label,

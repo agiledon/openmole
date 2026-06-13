@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-export const GITIGNORE_MARKER_START = '# >>> bdr (managed by bdr init/update — do not edit) >>>';
-export const GITIGNORE_MARKER_END = '# <<< bdr <<<';
+export const GITIGNORE_MARKER_START = '# >>> openmole (managed by openmole init/update — do not edit) >>>';
+export const GITIGNORE_MARKER_END = '# <<< openmole <<<';
 
 export function loadGitignoreSnippet(packageRoot) {
-  const snippetPath = path.join(packageRoot, 'templates', 'bdr-gitignore.snippet');
+  const snippetPath = path.join(packageRoot, 'templates', 'openmole-gitignore.snippet');
   if (!fs.existsSync(snippetPath)) {
     throw new Error(`Missing gitignore template: ${snippetPath}`);
   }
@@ -25,12 +25,12 @@ function replaceManagedBlock(content, block) {
   return `${before}${block}${after}`;
 }
 
-/** Merge BDR gitignore snippet into target project .gitignore (idempotent). */
+/** Merge OpenMole gitignore snippet into target project .gitignore (idempotent). */
 export function mergeGitignoreSnippet({ packageRoot, targetDir, dryRun }) {
   const gitignorePath = path.join(targetDir, '.gitignore');
   const snippet = loadGitignoreSnippet(packageRoot);
   const block = buildGitignoreBlock(snippet);
-  const action = `merge BDR snippet into ${gitignorePath}`;
+  const action = `merge OpenMole snippet into ${gitignorePath}`;
 
   const existing = fs.existsSync(gitignorePath) ? fs.readFileSync(gitignorePath, 'utf8') : '';
   const replaced = replaceManagedBlock(existing, block);

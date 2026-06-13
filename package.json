@@ -1,11 +1,11 @@
 {
-  "name": "agile-bdr",
-  "version": "0.6.0",
-  "description": "Bad smell Driven Refactoring — Agent skill plugin and CLI",
+  "name": "openmole",
+  "version": "0.7.0",
+  "description": "OpenMole — AI-driven refactoring skill plugin and CLI",
   "type": "module",
-  "main": ".opencode/plugins/bdr.js",
+  "main": ".opencode/plugins/openmole.js",
   "bin": {
-    "bdr": "./bin/bdr.js"
+    "openmole": "./bin/openmole.js"
   },
   "files": [
     "bin/",
@@ -24,16 +24,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agiledon/bdr.git"
+    "url": "git+https://github.com/agiledon/openmole.git"
   },
   "bugs": {
-    "url": "https://github.com/agiledon/bdr/issues"
+    "url": "https://github.com/agiledon/openmole/issues"
   },
-  "homepage": "https://github.com/agiledon/bdr#readme",
+  "homepage": "https://github.com/agiledon/openmole#readme",
   "license": "MIT",
   "keywords": [
-    "bdr",
-    "agile-bdr",
+    "openmole",
+    "mole",
     "refactoring",
     "skills",
     "agent",

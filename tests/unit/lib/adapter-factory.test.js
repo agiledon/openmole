@@ -4,8 +4,8 @@ import assert from 'node:assert';
 import { createSkillCommandAdapter } from '../../../cli/lib/project-skills.js';
 
 const BASE_OPTS = {
-  packageRoot: '/tmp/bdr-test',
-  targetDir: '/tmp/bdr-target',
+  packageRoot: '/tmp/openmole-test',
+  targetDir: '/tmp/openmole-target',
   dryRun: true,
   force: false,
 };
@@ -33,7 +33,7 @@ describe('createSkillCommandAdapter — with symlink extra (gemini pattern)', ()
     ide: 'gemini',
     ideDir: '.gemini',
     extras: {
-      symlink: { source: '/tmp/bdr-test', dest: ['extensions', 'bdr'] },
+      symlink: { source: '/tmp/openmole-test', dest: ['extensions', 'openmole'] },
       actionSuffix: ', extension symlink',
     },
   });

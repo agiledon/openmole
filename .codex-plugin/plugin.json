@@ -1,23 +1,23 @@
 {
-  "name": "bdr",
+  "name": "openmole",
   "version": "0.5.0",
   "description": "Bad smell Driven Refactoring workflow for Codex",
   "author": {
-    "name": "BDR",
-    "email": "bdr@example.com",
-    "url": "https://github.com/agiledon/bdr"
+    "name": "OpenMole",
+    "email": "openmole@example.com",
+    "url": "https://github.com/agiledon/openmole"
   },
-  "homepage": "https://github.com/agiledon/bdr",
-  "repository": "https://github.com/agiledon/bdr",
+  "homepage": "https://github.com/agiledon/openmole",
+  "repository": "https://github.com/agiledon/openmole",
   "license": "MIT",
-  "keywords": ["bdr", "refactoring", "bad-smells"],
+  "keywords": ["openmole", "refactoring", "bad-smells"],
   "skills": "./skills/",
   "commands": "./commands/",
   "interface": {
-    "displayName": "BDR — Bad smell Driven Refactoring",
+    "displayName": "OpenMole — Bad smell Driven Refactoring",
     "shortDescription": "Bad smell driven refactoring workflow",
-    "longDescription": "Identify code bad smells, plan refactoring tasks, apply changes, and archive BDR changes.",
-    "developerName": "BDR",
+    "longDescription": "Identify code bad smells, plan refactoring tasks, apply changes, and archive OpenMole changes.",
+    "developerName": "OpenMole",
     "category": "Productivity",
     "capabilities": ["Read", "Write"]
   }

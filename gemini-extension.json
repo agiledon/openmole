@@ -1,9 +1,9 @@
 {
-  "name": "bdr",
-  "version": "0.5.0",
-  "description": "Bad smell Driven Refactoring workflow for Gemini CLI",
+  "name": "openmole",
+  "version": "0.6.0",
+  "description": "OpenMole — AI-driven refactoring workflow for Gemini CLI",
   "license": "MIT",
-  "keywords": ["bdr", "refactoring", "bad-smells"],
+  "keywords": ["openmole", "mole", "refactoring", "bad-smells"],
   "skills": "./skills/",
   "commands": "./commands/"
 }

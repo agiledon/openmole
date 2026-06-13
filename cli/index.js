@@ -13,14 +13,14 @@ function readVersion() {
 }
 
 function printHelp() {
-  console.log(`bdr — Bad smell Driven Refactoring CLI (${readVersion()})
+  console.log(`openmole — AI-driven Refactoring CLI (${readVersion()})
 
 Usage:
-  bdr [path] [options]         Welcome + initialize (interactive TTY)
-  bdr init [path] [options]    Initialize BDR workspace and configure AI IDEs
-  bdr update [path] [options]  Re-install IDE configs from installed_ides
-  bdr --help                     Show this help
-  bdr --version                  Show version
+  openmole [path] [options]         Welcome + initialize (interactive TTY)
+  openmole init [path] [options]    Initialize OpenMole workspace and configure AI IDEs
+  openmole update [path] [options]  Re-install IDE configs from installed_ides
+  openmole --help                     Show this help
+  openmole --version                  Show version
 
 Init options:
   --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex,kiro,qoder
@@ -29,19 +29,19 @@ Init options:
   --force             Overwrite existing config
   --global            Write OpenCode config to user-level (~/.config/opencode/)
   --dry-run           Print planned actions without writing files
-  --skip-gitignore    Do not merge templates/bdr-gitignore.snippet
+  --skip-gitignore    Do not merge templates/openmole-gitignore.snippet
 
 Update options:
   --global            Pass --global to OpenCode adapter when re-installing
   --dry-run           Print planned actions without writing files
-  --skip-gitignore    Do not refresh .gitignore BDR snippet
+  --skip-gitignore    Do not refresh .gitignore OpenMole snippet
 
 Examples:
-  bdr init
-  bdr init . --ides cursor,opencode
-  bdr init /path/to/project --none
-  bdr update
-  bdr update . --dry-run
+  openmole init
+  openmole init . --ides cursor,opencode
+  openmole init /path/to/project --none
+  openmole update
+  openmole update . --dry-run
 `);
 }
 
@@ -81,5 +81,5 @@ export async function main(argv) {
     return;
   }
 
-  throw new Error(`Unknown command: ${cmd}. Run bdr --help.`);
+  throw new Error(`Unknown command: ${cmd}. Run openmole --help.`);
 }
