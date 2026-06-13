@@ -80,7 +80,7 @@ bdr:explore [path] [change-name]
     → 步骤 0：跨 change 去重
     → 写入 badsmells.md
 
-bdr:analyze  → 读写 bdr/changes/{current}/analysis.md + tasks.md
+bdr:verify  → 读写 bdr/changes/{current}/analysis.md + tasks.md
 bdr:plan     → 读写 bdr/changes/{current}/badsmells.md + tasks.md
 bdr:apply    → 读写 bdr/changes/{current}/tasks.md；回写 badsmells §2.0
 bdr:archive  → 完成度检查 → 用户确认门 → mv 至 archive/

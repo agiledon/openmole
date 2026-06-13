@@ -17,9 +17,9 @@ The `bdr-plan-change` skill SHALL read `bdr/changes/<current-change>/badsmells.m
 
 Each task SHALL map to constitution §4 six steps with checkbox status trackable by `bdr:apply`.
 
-### Requirement: plan enforces analyze gate after badsmells changes
+### Requirement: plan enforces verify gate after badsmells changes
 
-When badsmells version is newer than tasks header reference within the same change, plan SHALL require `bdr:analyze` first.
+When badsmells version is newer than tasks header reference within the same change, plan SHALL require `bdr:verify` first.
 
 ### Requirement: plan updates tasks revision history
 

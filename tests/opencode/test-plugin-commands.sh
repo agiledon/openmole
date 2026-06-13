@@ -8,7 +8,7 @@ import('$ROOT/.opencode/plugins/bdr.js').then(async (m) => {
   if (typeof plugin.config !== 'function') throw new Error('config hook missing');
   const config = { skills: { paths: [] }, command: {} };
   await plugin.config(config);
-  const expected = ['bdr-explore', 'bdr-analyze', 'bdr-plan', 'bdr-apply', 'bdr-archive'];
+  const expected = ['bdr-explore', 'bdr-plan', 'bdr-verify', 'bdr-apply', 'bdr-archive'];
   for (const name of expected) {
     if (!config.command[name]?.template) throw new Error('missing command: ' + name);
     if (!config.command[name]?.description) throw new Error('missing description: ' + name);

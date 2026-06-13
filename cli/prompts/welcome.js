@@ -19,7 +19,7 @@ const R_LOGO = [
 
 const QUICK_START = [
   { cmd: '/bdr-explore', desc: 'Create/continue change, identify bad smells' },
-  { cmd: '/bdr-analyze', desc: 'Diff analysis' },
+  { cmd: '/bdr-verify', desc: 'Verify coverage' },
   { cmd: '/bdr-plan', desc: 'Task breakdown' },
   { cmd: '/bdr-apply', desc: 'Execute refactoring' },
   { cmd: '/bdr-archive', desc: 'Archive change' },

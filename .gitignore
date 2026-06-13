@@ -100,3 +100,9 @@ test-results/
 *.zip
 *.tar.gz
 *.tgz
+
+# >>> bdr (managed by bdr init/update — do not edit) >>>
+# Machine-local BDR plugin symlinks (absolute paths differ per developer)
+/plugins/bdr
+/.gemini/extensions/bdr
+# <<< bdr <<<

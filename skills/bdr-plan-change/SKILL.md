@@ -17,7 +17,7 @@ description: bdr:plan — 从未清除/部分残余坏味道生成 tasks.md
 
 ## 门禁
 
-若 `{change_dir}/badsmells.md` 版本 **高于** 同目录 `tasks.md` 页眉依据版本 → **停止**，先 `bdr:analyze`
+若 `{change_dir}/badsmells.md` 版本 **高于** 同目录 `tasks.md` 页眉依据版本 → **停止**，先 `bdr:verify`
 
 ## 任务生成
 
@@ -54,7 +54,11 @@ description: bdr:plan — 从未清除/部分残余坏味道生成 tasks.md
 
 升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
 
+## 完成后建议
+
+规划完成后，建议继续执行 `bdr:verify` 验证 badsmells 与 tasks 覆盖一致性。
+
 ## RED FLAGS
 
-- 跳过 analyze 门禁
+- 跳过 verify 门禁
 - 任务无法追溯到 BS-ID

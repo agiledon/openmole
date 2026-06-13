@@ -60,6 +60,10 @@ mv bdr/changes/<name> bdr/changes/archive/$(date +%Y-%m-%d)-<name>/
 
 升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
 
+## 完成后建议
+
+归档完成后，建议执行 `bdr:explore` 开始新的重构周期。
+
 ## RED FLAGS
 
 - 未完成仍归档且未经用户确认

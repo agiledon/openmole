@@ -1,14 +1,14 @@
 ---
-name: bdr-analyze-change
-description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～F）
+name: bdr-verify-change
+description: bdr:verify — 当前 change 内 badsmells 与 tasks 差分验证
 ---
 
-# BDR Analyze — 差分分析
+# BDR Verify — 差分验证
 
 ## 何时使用
 
 - 当前 change 的 `badsmells.md` 变更后 **必须** 运行
-- `bdr:plan` / `bdr:apply` 前发现 tasks 与 badsmells 不一致
+- `bdr:plan` 执行后 / `bdr:apply` 前验证 tasks 与 badsmells 一致性
 
 ## 工作区解析
 
@@ -30,6 +30,10 @@ description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～
 ## 输出
 
 更新 `{change_dir}/analysis.md` 与 `{change_dir}/tasks.md`（必要时）。模板：`templates/analysis-header.md`
+
+## 完成后建议
+
+验证完成后，建议继续执行 `bdr:apply` 开始执行重构任务。
 
 ## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -60,5 +64,5 @@ description: bdr:analyze — 当前 change 内 badsmells 与 tasks 差分（A～
 
 ## RED FLAGS
 
-- 差分未完成即 plan/apply
+- 差分验证未完成即 apply
 - 发现冲突先改代码而非文档

@@ -31,7 +31,7 @@ The welcome screen SHALL list the five BDR slash commands with one-line descript
 #### Scenario: Quick start content
 
 - **WHEN** the welcome screen is displayed
-- **THEN** the user SHALL see `/bdr-explore`, `/bdr-analyze`, `/bdr-plan`, `/bdr-apply`, and `/bdr-archive` with phase descriptions
+- **THEN** the user SHALL see `/bdr-explore`, `/bdr-plan`, `/bdr-verify`, `/bdr-apply`, and `/bdr-archive` with phase descriptions
 
 ### Requirement: Welcome prompts Enter to continue
 

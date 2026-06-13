@@ -1,17 +1,4 @@
-# bdr-core
-
-BDR workspace model, plugin manifests, embedded rules in skills, zero-dependency stack.
-
-## Requirements
-
-### Requirement: CLI is the recommended BDR installation path
-
-The BDR framework SHALL document and support `bdr init` as the primary way to install BDR skills, commands, and workspace structure in a target project.
-
-#### Scenario: README installation guidance
-
-- **WHEN** a user reads BDR installation documentation
-- **THEN** `bdr init` SHALL be listed before manual symlink or hand-edited config steps
+## MODIFIED Requirements
 
 ### Requirement: Plugin manifest declares BDR skills and commands
 
@@ -44,33 +31,6 @@ The BDR plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plug
 - **WHEN** a user runs `bdr init --ides qoder`
 - **THEN** Qoder SHALL load BDR skills from `.qoder/skills/`
 
-### Requirement: npm package identity is agile-bdr
-
-The BDR plugin npm package SHALL be named `agile-bdr`. Documentation SHALL refer to registry install as `npm install -g agile-bdr` while preserving the `bdr` CLI command and existing skill/command artifact names.
-
-#### Scenario: README install instructions
-
-- **WHEN** a user reads installation documentation
-- **THEN** npm registry install SHALL document `npm install -g agile-bdr`
-
-### Requirement: Plugin supports Kiro harness
-
-The BDR plugin SHALL support Kiro IDE via project-level `.kiro/skills/` and `.kiro/commands/` installation through `bdr init --ides kiro`.
-
-#### Scenario: Kiro skills discoverable
-
-- **WHEN** BDR is installed for Kiro in a project
-- **THEN** Kiro SHALL discover `bdr-*-change` skills under `.kiro/skills/`
-
-### Requirement: Plugin supports Qoder harness
-
-The BDR plugin SHALL support Qoder via project-level `.qoder/skills/` and `.qoder/commands/` installation through `bdr init --ides qoder`.
-
-#### Scenario: Qoder skills discoverable
-
-- **WHEN** BDR is installed for Qoder in a project
-- **THEN** Qoder SHALL discover `bdr-*-change` skills under `.qoder/skills/`
-
 ### Requirement: BDR workspace and change directory model
 
 The framework SHALL use `{project-root}/bdr/` as the BDR workspace. Per-change artifacts SHALL live under `bdr/changes/<change-name>/`. Active change name SHALL be tracked in `bdr/config.yaml` as `current_change`.
@@ -86,22 +46,26 @@ The framework SHALL use `{project-root}/bdr/` as the BDR workspace. Per-change a
 - **WHEN** the user runs `bdr:plan`, `bdr:verify`, or `bdr:apply` without specifying a change
 - **THEN** the agent SHALL read and write artifacts under `bdr/changes/{current_change}/`
 
-### Requirement: BDR rules embedded in phase skills
+### Requirement: BDR workflow follows explore → plan → verify → apply → archive
 
-The framework SHALL embed constitution and specification summaries directly in each phase skill. No standalone constitution or specification files are required in the plugin or target project.
+The BDR framework SHALL define the phase order as: `bdr:explore` → `bdr:plan` → `bdr:verify` → `bdr:apply` → `bdr:archive`. Each phase skill SHALL recommend the next step upon completion.
 
-#### Scenario: Fresh project without BDR docs
+#### Scenario: Explore recommends plan
 
-- **WHEN** the target project has no `bdr/` directory
-- **THEN** BDR skills SHALL execute using embedded rule summaries
-- **AND** SHALL NOT prompt the user to copy reference files during plugin installation
+- **WHEN** `bdr:explore` completes successfully
+- **THEN** the agent SHALL recommend running `bdr:plan` next
 
-### Requirement: Zero-dependency plugin tech stack
+#### Scenario: Plan recommends verify
 
-The BDR plugin SHALL use a zero-dependency technology stack: Markdown skills/commands, JSON manifests, Bash scripts, minimal ESM `package.json`, OpenCode `bdr.js` with Node built-ins only, Shell tests.
+- **WHEN** `bdr:plan` completes successfully
+- **THEN** the agent SHALL recommend running `bdr:verify` next
 
-#### Scenario: OpenCode bootstrap without using-bdr file read
+#### Scenario: Verify recommends apply
 
-- **WHEN** OpenCode loads the BDR plugin
-- **THEN** `bdr.js` SHALL inject a short fixed bootstrap message
-- **AND** SHALL NOT read or inject the full body of a removed `using-bdr` skill file
+- **WHEN** `bdr:verify` completes successfully
+- **THEN** the agent SHALL recommend running `bdr:apply` next
+
+#### Scenario: Apply recommends archive
+
+- **WHEN** `bdr:apply` completes all tasks in the change
+- **THEN** the agent SHALL recommend running `bdr:archive` next

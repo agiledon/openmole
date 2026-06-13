@@ -36,6 +36,8 @@ description: bdr:apply — 执行当前 change 下一个未完成的 B-Txx
 
 - `{change_dir}/tasks.md` 标记 `[x]`
 - 满足 DoD 时更新 `{change_dir}/badsmells.md` §2.0
+- 若还有未完成的任务，建议继续执行 `bdr:apply`
+- 若所有任务已完成，建议执行 `bdr:archive` 归档此 change
 
 ## BDR 规约摘要（内嵌于各 Skill，非独立文件）
 

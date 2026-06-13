@@ -81,6 +81,10 @@ description: bdr:explore — 创建/继续 change，扫描源码产出 badsmells
 
 升版时 **提交版本** = `git rev-parse HEAD`，未提交填 `—`。
 
+## 完成后建议
+
+探索完成后，建议继续执行 `bdr:plan` 进行任务分解。
+
 ## RED FLAGS
 
 - 跳过测绿直接重构
