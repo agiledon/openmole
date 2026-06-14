@@ -1,5 +1,7 @@
 # OpenMole — AI-driven Refactoring
 
+![OpenMole Logo](docs/images/openmole-logo.jpg)
+
 **Version 0.7.0** · CLI: `openmole init` · `openmole update`
 
 > **npm 官方包名 / npm package name:** [`openmole`](https://www.npmjs.com/package/openmole)  
