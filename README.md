@@ -1,6 +1,6 @@
 # OpenMole — AI-driven Refactoring
 
-![OpenMole Logo](docs/images/openmole-logo.jpg)
+![OpenMole Logo](docs/images/logo.jpg)
 
 **Version 0.7.0** · CLI: `openmole init` · `openmole update`
 
