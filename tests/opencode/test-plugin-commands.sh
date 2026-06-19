@@ -3,8 +3,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 node -e "
 import('$ROOT/.opencode/plugins/openmole.js').then(async (m) => {
-  if (typeof m.BdrPlugin !== 'function') throw new Error('BdrPlugin export missing');
-  const plugin = await m.BdrPlugin();
+  if (typeof m.OpenMolePlugin !== 'function') throw new Error('OpenMolePlugin export missing');
+  const plugin = await m.OpenMolePlugin();
   if (typeof plugin.config !== 'function') throw new Error('config hook missing');
   const config = { skills: { paths: [] }, command: {} };
   await plugin.config(config);

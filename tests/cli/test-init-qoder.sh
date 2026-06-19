@@ -7,7 +7,7 @@ export OpenMole_HOME="$ROOT"
 
 node "$ROOT/bin/openmole.js" init "$TMP" --ides qoder
 
-test -f "$TMP/.qoder/skills/mole-explore-to-change/SKILL.md"
+test -f "$TMP/.qoder/skills/openmole-explore/SKILL.md"
 test -f "$TMP/.qoder/commands/mole-explore.md"
 grep -q 'qoder' "$TMP/openmole/config.yaml"
 

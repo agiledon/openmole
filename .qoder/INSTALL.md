@@ -10,16 +10,16 @@ openmole init --ides qoder
 
 `openmole init` 会在项目内创建：
 
-- `.qoder/skills/openmole-*-change/SKILL.md`
-- `.qoder/commands/openmole-*.md`
+- `.qoder/skills/openmole-*/SKILL.md`
+- `.qoder/commands/mole-*.md`
 
 路径与 Qoder skills CLI（`-a qoder`）一致，详见 [Qoder 文档](https://docs.qoder.com)。
 
 ## 验证
 
 1. 重启 Qoder
-2. 应可发现 `openmole-explore-to-change` 等 skill
-3. 使用 `/openmole-explore` … `/openmole-archive` 开始 OpenMole 工作流
+2. 应可发现 `openmole-explore` 等 skill
+3. 使用 `/mole-explore` … `/mole-archive` 开始 OpenMole 工作流
 
 ## 故障排除
 

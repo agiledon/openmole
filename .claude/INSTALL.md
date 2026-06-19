@@ -20,7 +20,7 @@ openmole init --ides claude
 
 1. 重启 Claude Code
 2. 运行 `/plugin` 确认 **openmole** 已加载
-3. Skills 应包含 `openmole-explore-to-change` 等（namespace 为 `/openmole:…`）
+3. Skills 应包含 `openmole-explore` 等
 
 ## 故障排除
 

@@ -13,9 +13,9 @@ openmole init --ides cursor
 
 验证：
 
-1. 项目内存在 `.cursor/skills/openmole-explore-to-change/SKILL.md`
-2. 项目内存在 `.cursor/commands/openmole-explore.md`（`name: /openmole-explore`）
-3. Agent 输入 `/` → `/openmole-explore` … `/openmole-archive`（command 名不变；对应 skill 为 `openmole-*-change`）
+1. 项目内存在 `.cursor/skills/openmole-explore/SKILL.md`
+2. 项目内存在 `.cursor/commands/mole-explore.md`（`name: mole-explore`）
+3. Agent 输入 `/` → `/mole-explore` … `/mole-archive`（command 名不变；对应 skill 为 `openmole-*`）
 
 若之前只装过用户级 symlink 而无 `.cursor/`，请重跑：
 

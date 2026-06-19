@@ -10,16 +10,16 @@ openmole init --ides kiro
 
 `openmole init` 会在项目内创建：
 
-- `.kiro/skills/openmole-*-change/SKILL.md`
-- `.kiro/commands/openmole-*.md`
+- `.kiro/skills/openmole-*/SKILL.md`
+- `.kiro/commands/mole-*.md`
 
 Kiro 使用 [Agent Skills](https://agentskills.io) 标准；项目级 skills 由 Kiro 自动发现。
 
 ## 验证
 
 1. 重启 Kiro
-2. 在 Agent 对话中应可发现 `openmole-explore-to-change` 等 skill
-3. 使用 `/openmole-explore` 等 slash 命令开始 OpenMole change
+2. 在 Agent 对话中应可发现 `openmole-explore` 等 skill
+3. 使用 `/mole-explore` 等 slash 命令开始 OpenMole change
 
 ## 故障排除
 

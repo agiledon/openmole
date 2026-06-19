@@ -9,10 +9,10 @@ export HOME="$HOME_TMP"
 
 node "$ROOT/bin/openmole.js" init "$TMP" --ides cursor
 
-test -f "$TMP/.cursor/skills/mole-explore-to-change/SKILL.md"
+test -f "$TMP/.cursor/skills/openmole-explore/SKILL.md"
 test -f "$TMP/.cursor/commands/mole-explore.md"
 grep -q '^name: /mole-explore' "$TMP/.cursor/commands/mole-explore.md"
-grep -q 'mole-explore-to-change' "$TMP/.cursor/commands/mole-explore.md"
+grep -q 'openmole-explore' "$TMP/.cursor/commands/mole-explore.md"
 test -L "$HOME_TMP/.cursor/plugins/local/openmole"
 grep -q 'cursor' "$TMP/openmole/config.yaml"
 

@@ -7,7 +7,7 @@ export OpenMole_HOME="$ROOT"
 
 node "$ROOT/bin/openmole.js" init "$TMP" --ides gemini
 
-test -f "$TMP/.gemini/skills/mole-explore-to-change/SKILL.md"
+test -f "$TMP/.gemini/skills/openmole-explore/SKILL.md"
 test -f "$TMP/.gemini/commands/mole-explore.md"
 test -L "$TMP/.gemini/extensions/openmole"
 grep -q 'gemini' "$TMP/openmole/config.yaml"

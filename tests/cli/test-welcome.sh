@@ -10,7 +10,7 @@ TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 export OpenMole_HOME="$ROOT"
 node "$ROOT/bin/openmole.js" init "$TMP" --ides cursor
-test -f "$TMP/.cursor/skills/mole-explore-to-change/SKILL.md"
+test -f "$TMP/.cursor/skills/openmole-explore/SKILL.md"
 
 # Module exports
 node --input-type=module -e "
