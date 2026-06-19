@@ -2,7 +2,7 @@
 
 ![OpenMole Logo](docs/images/logo.jpg)
 
-**Version 0.7.0** · CLI: `openmole init` · `openmole update`
+**Version 0.8.0** · CLI: `openmole init` · `openmole update`
 
 > **npm 官方包名 / npm package name:** [`openmole`](https://www.npmjs.com/package/openmole)  
 > 安装：`npm install -g openmole` · CLI 命令已更名 **`openmole`**
@@ -126,7 +126,7 @@ After upgrading OpenMole, run `openmole update` in the target project to refresh
 |-----|---------------|
 | **Cursor** | Project `.cursor/skills/` + `.cursor/commands/`; user symlink `~/.cursor/plugins/local/openmole` |
 | **OpenCode** | Project `opencode.json` → `.opencode/plugins/openmole.js` (`--global` → user config) |
-| **Claude Code** | User symlink `~/.claude/plugins/local/openmole` |
+| **Claude Code** | Project `.claude/skills/` + `.claude/commands/`; user symlink `~/.claude/plugins/local/openmole` |
 | **Codex** | Project `plugins/openmole` symlink + `.agents/plugins/marketplace.json` |
 | **Gemini CLI** | Project `.gemini/skills/`, `.gemini/commands/`, `.gemini/extensions/openmole` symlink |
 | **Kiro** | Project `.kiro/skills/`, `.kiro/commands/` |
@@ -184,7 +184,7 @@ npm link && openmole --help
 
 OpenMole（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 phase skill；目标项目工件位于 `openmole/changes/<change-name>/`。
 
-**当前版本**：0.7.0（CLI：`openmole init` · `openmole update`）
+**当前版本**：0.8.0（CLI：`openmole init` · `openmole update`）
 
 ### 命令与 Skill
 
@@ -293,7 +293,7 @@ openmole init
 |-----|----------|
 | **Cursor** | 项目 `.cursor/skills/` + `.cursor/commands/`；用户级 `~/.cursor/plugins/local/openmole` symlink |
 | **OpenCode** | 项目 `opencode.json` 注册 `.opencode/plugins/openmole.js`（`--global` → 用户配置） |
-| **Claude Code** | 用户级 `~/.claude/plugins/local/openmole` symlink |
+| **Claude Code** | 项目 `.claude/skills/` + `.claude/commands/`；用户级 `~/.claude/plugins/local/openmole` symlink |
 | **Codex** | 项目 `plugins/openmole` symlink + `.agents/plugins/marketplace.json` |
 | **Gemini CLI** | 项目 `.gemini/skills/`、`.gemini/commands/`、`.gemini/extensions/openmole` symlink |
 | **Kiro** | 项目 `.kiro/skills/`、`.kiro/commands/` |

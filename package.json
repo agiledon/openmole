@@ -1,6 +1,6 @@
 {
   "name": "openmole",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "OpenMole — AI-driven refactoring skill plugin and CLI",
   "type": "module",
   "main": ".opencode/plugins/openmole.js",
