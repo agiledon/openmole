@@ -73,7 +73,6 @@ describe('isAdapterInstalled', () => {
     assert.equal(isAdapterInstalled('/tmp', {}), true);
     assert.equal(isAdapterInstalled('/tmp', { checkPath: undefined }), true);
     assert.equal(isAdapterInstalled('/tmp', ADAPTERS.opencode), true);
-    assert.equal(isAdapterInstalled('/tmp', ADAPTERS.claude), true);
   });
 
   it('returns true when checkPath file exists', () => {
@@ -91,13 +90,12 @@ describe('isAdapterInstalled', () => {
 describe('checkPath coverage', () => {
   it('checkPath is defined for adapters with filesystem markers', () => {
     // These have filesystem markers
-    ['cursor', 'codex', 'gemini', 'kiro', 'qoder'].forEach((ide) => {
+    ['cursor', 'codex', 'gemini', 'kiro', 'qoder', 'claude'].forEach((ide) => {
       assert.ok(Array.isArray(ADAPTERS[ide].checkPath), `${ide} should have checkPath`);
     });
   });
 
   it('checkPath is undefined for adapters without filesystem markers', () => {
     assert.equal(ADAPTERS.opencode.checkPath, undefined);
-    assert.equal(ADAPTERS.claude.checkPath, undefined);
   });
 });

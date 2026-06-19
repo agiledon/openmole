@@ -11,7 +11,7 @@ import { installQoder } from '../adapters/qoder.js';
 export const ADAPTERS = {
   cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'openmole-explore', 'SKILL.md'] },
   opencode: { install: installOpenCode },
-  claude: { install: installClaudeCode },
+  claude: { install: installClaudeCode, checkPath: ['.claude', 'skills', 'openmole-explore', 'SKILL.md'] },
   codex: { install: installCodex, checkPath: ['plugins', 'openmole', '.codex-plugin', 'plugin.json'] },
   gemini: { install: installGeminiCli, checkPath: ['.gemini', 'skills', 'openmole-explore', 'SKILL.md'] },
   kiro: { install: installKiro, checkPath: ['.kiro', 'skills', 'openmole-explore', 'SKILL.md'] },
