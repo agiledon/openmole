@@ -1,4 +1,5 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { OPENMOLE_PHASES } from '../lib/openmole-phases.js';
 
@@ -79,7 +80,7 @@ export function installCursorProject({ packageRoot, targetDir, dryRun, force }) 
 }
 
 /** Optional user-level plugin symlink (~/.cursor/plugins/local/openmole). */
-export function installCursorGlobal({ packageRoot, dryRun, homeDir = process.env.HOME }) {
+export function installCursorGlobal({ packageRoot, dryRun, homeDir = os.homedir() }) {
   if (!homeDir) throw new Error('HOME is not set');
 
   const target = path.join(homeDir, '.cursor', 'plugins', 'local', 'openmole');

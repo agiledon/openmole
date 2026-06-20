@@ -1,6 +1,6 @@
 {
   "name": "openmole",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Bad smell Driven Refactoring workflow for coding agents",
   "author": {
     "name": "OpenMole"

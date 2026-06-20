@@ -2,7 +2,7 @@
 
 ![OpenMole Logo](docs/images/logo.jpg)
 
-**Version 0.8.0** · CLI: `openmole init` · `openmole update`
+**Version 0.8.1** · CLI: `openmole init` · `openmole update`
 
 > **npm 官方包名 / npm package name:** [`openmole`](https://www.npmjs.com/package/openmole)  
 > 安装：`npm install -g openmole` · CLI 命令已更名 **`openmole`**
@@ -184,7 +184,7 @@ npm link && openmole --help
 
 OpenMole（坏味道驱动重构）是一套面向编码 Agent 的软件重构方法论与 Plugin 框架。规约内嵌于各 phase skill；目标项目工件位于 `openmole/changes/<change-name>/`。
 
-**当前版本**：0.8.0（CLI：`openmole init` · `openmole update`）
+**当前版本**：0.8.1（CLI：`openmole init` · `openmole update`）
 
 ### 命令与 Skill
 

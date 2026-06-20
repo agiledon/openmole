@@ -1,3 +1,4 @@
+import os from 'os';
 import path from 'path';
 import { symlinkDir } from '../lib/fs-helpers.js';
 import { installProjectSkills, installProjectCommands } from '../lib/project-skills.js';
@@ -19,7 +20,7 @@ export function installClaudeProject({ packageRoot, targetDir, dryRun, force }) 
 }
 
 /** User-level Claude Code plugin symlink (~/.claude/plugins/local/openmole). */
-export function installClaudeGlobal({ packageRoot, dryRun, homeDir = process.env.HOME, force = true }) {
+export function installClaudeGlobal({ packageRoot, dryRun, homeDir = os.homedir(), force = true }) {
   if (!homeDir) throw new Error('HOME is not set');
 
   const target = path.join(homeDir, '.claude', 'plugins', 'local', 'openmole');
