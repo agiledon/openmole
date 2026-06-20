@@ -91,7 +91,7 @@ For each IDE selected, `openmole init` SHALL run an IDE-specific adapter that re
 #### Scenario: Codex adapter
 
 - **WHEN** Codex is selected
-- **THEN** init SHALL symlink the OpenMole package under `plugins/openmole` and register it in `.agents/plugins/marketplace.json`
+- **THEN** init SHALL install skills under project `.codex/skills/` and commands under `~/.codex/prompts/` (or `$CODEX_HOME/prompts/`)
 
 #### Scenario: Gemini CLI adapter
 

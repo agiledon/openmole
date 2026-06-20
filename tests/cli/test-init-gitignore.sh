@@ -5,10 +5,10 @@ TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 export OpenMole_HOME="$ROOT"
 
-node "$ROOT/bin/openmole.js" init "$TMP" --ides codex
+node "$ROOT/bin/openmole.js" init "$TMP" --ides gemini
 
 grep -q '# >>> openmole' "$TMP/.gitignore"
-grep -q '/plugins/openmole' "$TMP/.gitignore"
+grep -q '/.gemini/extensions/openmole' "$TMP/.gitignore"
 
 node "$ROOT/bin/openmole.js" update "$TMP"
 count=$(grep -c '# >>> openmole' "$TMP/.gitignore" || true)

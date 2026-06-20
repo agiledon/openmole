@@ -1,6 +1,6 @@
 {
   "name": "openmole",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "OpenMole — AI-driven refactoring workflow for Gemini CLI",
   "license": "MIT",
   "keywords": ["openmole", "mole", "refactoring", "bad-smells"],

@@ -8,18 +8,15 @@ cd /path/to/your-project
 openmole init --ides codex
 ```
 
-`openmole init` 会：
+`openmole init` 在项目 `.codex/skills/` 写入 OpenMole skill 文件。
 
-1. 创建 `plugins/openmole` → OpenMole 包根目录 symlink
-2. 合并 `.agents/plugins/marketplace.json` 注册本地 plugin
-
-插件清单：`.codex-plugin/plugin.json`。
+> **注意**：Codex 仅支持 skill（通过 `$` 符号引用），没有独立的 slash 命令机制。
 
 ## 验证
 
-1. 运行 `codex /plugins` 或在 Codex 中打开插件列表
-2. 确认 **openmole** 可用并已启用
-3. 使用 `@openmole` 或插件内 skills 触发 OpenMole 工作流
+1. 重启 Codex
+2. 通过 `$` 查看可用 skill，应包含 `openmole-explore` 等
+3. skills 自动从 `.codex/skills/` 发现，无需额外配置
 
 ## 故障排除
 

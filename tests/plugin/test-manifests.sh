@@ -19,7 +19,6 @@ console.log('PASS: $file');
 
 check_manifest "$ROOT/.cursor-plugin/plugin.json" openmole
 check_manifest "$ROOT/.claude-plugin/plugin.json" openmole
-check_manifest "$ROOT/.codex-plugin/plugin.json" openmole
 check_manifest "$ROOT/gemini-extension.json" openmole
 
 echo "PASS: all plugin manifests ok"

@@ -1,33 +1,24 @@
 import path from 'path';
-import { symlinkDir } from '../lib/fs-helpers.js';
-import { mergeMarketplacePlugin, readJson, writeJsonWithBackup } from '../lib/json-config.js';
+import { installProjectSkills } from '../lib/project-skills.js';
 
-const PLUGIN_LINK = './plugins/openmole';
+/** Codex: project .codex/skills/ (Codex auto-discovers SKILL.md here).
+ *  Codex does not have a separate slash-command mechanism. */
+function installCodexProject({ packageRoot, targetDir, dryRun, force }) {
+  const skillsDir = path.join(targetDir, '.codex', 'skills');
+  const actions = installProjectSkills({ packageRoot, skillsDir, dryRun, force });
+  return {
+    scope: 'project',
+    skillsDir,
+    actions,
+  };
+}
 
-/** Project-level Codex: plugins/openmole symlink + .agents/plugins/marketplace.json entry. */
-export function installCodex({ packageRoot, targetDir, dryRun, force = true }) {
-  const pluginLink = path.join(targetDir, 'plugins', 'openmole');
-  const marketplacePath = path.join(targetDir, '.agents', 'plugins', 'marketplace.json');
-
-  const link = symlinkDir({ source: packageRoot, target: pluginLink, dryRun, force });
-  const action = `symlink ${packageRoot} -> ${pluginLink}; merge ${marketplacePath}`;
-
-  if (dryRun) {
-    return { ide: 'codex', action, pluginLink, marketplacePath, dryRun: true };
-  }
-
-  const merged = mergeMarketplacePlugin(readJson(marketplacePath), {
-    name: 'openmole',
-    pluginPath: PLUGIN_LINK,
-  });
-  const { written, backup } = writeJsonWithBackup(marketplacePath, merged, dryRun);
+export function installCodex({ packageRoot, targetDir, dryRun, force }) {
+  const project = installCodexProject({ packageRoot, targetDir, dryRun, force });
 
   return {
     ide: 'codex',
-    action,
-    pluginLink: link.target || pluginLink,
-    marketplacePath,
-    written,
-    backup,
+    project,
+    action: 'project .codex/skills/',
   };
 }

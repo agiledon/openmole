@@ -110,5 +110,7 @@ test-results/
 # >>> openmole (managed by openmole init/update — do not edit) >>>
 # Machine-local OpenMole plugin symlinks (absolute paths differ per developer)
 /plugins/openmole
+/plugins/
+/.agents/
 /.gemini/extensions/openmole
 # <<< openmole <<<

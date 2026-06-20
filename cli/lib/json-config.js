@@ -18,24 +18,3 @@ export function writeJsonWithBackup(filePath, data, dryRun) {
   fs.writeFileSync(filePath, content, 'utf8');
   return { written: true, backup: fs.existsSync(`${filePath}.bak`) ? `${filePath}.bak` : null };
 }
-
-/** Merge or replace a plugin entry in a Codex-style marketplace.json. */
-export function mergeMarketplacePlugin(existing, { name, pluginPath }) {
-  const marketplace = { ...existing };
-  if (!marketplace.name) marketplace.name = 'openmole-local';
-  if (!marketplace.interface) marketplace.interface = { displayName: 'OpenMole Local' };
-  if (!Array.isArray(marketplace.plugins)) marketplace.plugins = [];
-
-  const entry = {
-    name,
-    source: { source: 'local', path: pluginPath },
-    policy: { installation: 'AVAILABLE', authentication: 'ON_INSTALL' },
-    category: 'Productivity',
-  };
-
-  const idx = marketplace.plugins.findIndex((p) => p.name === name);
-  if (idx >= 0) marketplace.plugins[idx] = entry;
-  else marketplace.plugins.push(entry);
-
-  return marketplace;
-}

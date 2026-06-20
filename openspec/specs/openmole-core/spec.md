@@ -15,7 +15,7 @@ The OpenMole framework SHALL document and support `openmole init` as the primary
 
 ### Requirement: Plugin manifest declares OpenMole skills and commands
 
-The OpenMole plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json`, OpenCode install via `openmole.js`, `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, and `gemini-extension.json`) that register the `skills/` and `commands/` directories. Manifests SHALL expose skills `openmole-explore`, `openmole-plan`, `openmole-verify`, `openmole-apply`, and `openmole-archive` (and SHALL NOT register `using-openmole`). The `openmole init` CLI SHALL configure these manifests or equivalent paths for Cursor, OpenCode, Gemini CLI, Claude Code, Codex, Kiro, and Qoder.
+The OpenMole plugin SHALL ship platform-specific manifest files (`.cursor-plugin/plugin.json`, OpenCode install via `openmole.js`, `.claude-plugin/plugin.json`, and `gemini-extension.json`) that register the `skills/` and `commands/` directories. Codex SHALL use project `.codex/skills/` for skills and global `~/.codex/prompts/` for commands. Manifests SHALL expose skills `openmole-explore`, `openmole-plan`, `openmole-verify`, `openmole-apply`, and `openmole-archive` (and SHALL NOT register `using-openmole`). The `openmole init` CLI SHALL configure these manifests or equivalent paths for Cursor, OpenCode, Gemini CLI, Claude Code, Codex, Kiro, and Qoder.
 
 #### Scenario: Cursor installation
 

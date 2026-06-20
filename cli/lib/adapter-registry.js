@@ -12,7 +12,7 @@ export const ADAPTERS = {
   cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'openmole-explore', 'SKILL.md'] },
   opencode: { install: installOpenCode },
   claude: { install: installClaudeCode, checkPath: ['.claude', 'skills', 'openmole-explore', 'SKILL.md'] },
-  codex: { install: installCodex, checkPath: ['plugins', 'openmole', '.codex-plugin', 'plugin.json'] },
+  codex: { install: installCodex, checkPath: ['.codex', 'skills', 'openmole-explore', 'SKILL.md'] },
   gemini: { install: installGeminiCli, checkPath: ['.gemini', 'skills', 'openmole-explore', 'SKILL.md'] },
   kiro: { install: installKiro, checkPath: ['.kiro', 'skills', 'openmole-explore', 'SKILL.md'] },
   qoder: { install: installQoder, checkPath: ['.qoder', 'skills', 'openmole-explore', 'SKILL.md'] },

@@ -29,7 +29,7 @@ node -e "
 const fs=require('fs');
 const p='$ROOT/package.json';
 const j=JSON.parse(fs.readFileSync(p,'utf8'));
-j.version='0.8.1';
+j.version='0.8.2';
 fs.writeFileSync(p, JSON.stringify(j,null,2)+'\n');
 "
 
