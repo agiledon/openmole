@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.9.1 — 2026-08-13
 
 - 新增 **Pi** 适配：`openmole init --ides pi` 写入项目级 `.pi/settings.json` 注册 `.pi/extensions/openmole.ts`（`--global` → 用户级 `~/.pi/agent/settings.json`）
 - Pi 扩展注册 5 个 openmole-* skill 与 `/mole-*` 命令，并注入 bootstrap（与 OpenCode 插件一致）
