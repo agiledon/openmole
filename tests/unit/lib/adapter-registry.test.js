@@ -12,11 +12,12 @@ import { installKiro } from '../../../cli/adapters/kiro.js';
 import { installQoder } from '../../../cli/adapters/qoder.js';
 import { installWorkBuddy } from '../../../cli/adapters/workbuddy.js';
 import { installTrae } from '../../../cli/adapters/trae.js';
+import { installPi } from '../../../cli/adapters/pi.js';
 
-const KNOWN_IDES = ['cursor', 'opencode', 'claude', 'codex', 'gemini', 'kiro', 'qoder', 'workbuddy', 'trae'];
+const KNOWN_IDES = ['cursor', 'opencode', 'claude', 'codex', 'gemini', 'kiro', 'qoder', 'workbuddy', 'trae', 'pi'];
 
 describe('adapter-registry dispatch', () => {
-  it('all 9 IDEs are registered in ADAPTERS', () => {
+  it('all 10 IDEs are registered in ADAPTERS', () => {
     for (const ide of KNOWN_IDES) {
       const entry = ADAPTERS[ide];
       assert.ok(entry, `missing registry entry for ${ide}`);
@@ -24,8 +25,8 @@ describe('adapter-registry dispatch', () => {
     }
   });
 
-  it('ADAPTERS has exactly 9 entries', () => {
-    assert.equal(Object.keys(ADAPTERS).length, 9);
+  it('ADAPTERS has exactly 10 entries', () => {
+    assert.equal(Object.keys(ADAPTERS).length, 10);
   });
 
   it('resolveAdapter returns correct entry for each known IDE', () => {
@@ -57,6 +58,7 @@ describe('adapter-registry dispatch', () => {
     assert.equal(resolveAdapter('qoder').install, installQoder);
     assert.equal(resolveAdapter('workbuddy').install, installWorkBuddy);
     assert.equal(resolveAdapter('trae').install, installTrae);
+    assert.equal(resolveAdapter('pi').install, installPi);
   });
 
   it('installIdes: all IDEs dispatch without error (dryRun)', () => {
@@ -65,7 +67,7 @@ describe('adapter-registry dispatch', () => {
     for (const ide of KNOWN_IDES) {
       results.push(resolveAdapter(ide).install(opts));
     }
-    assert.equal(results.length, 9);
+    assert.equal(results.length, 10);
     for (const r of results) {
       assert.ok(r, 'each install should return a result value');
     }
@@ -77,6 +79,7 @@ describe('isAdapterInstalled', () => {
     assert.equal(isAdapterInstalled('/tmp', {}), true);
     assert.equal(isAdapterInstalled('/tmp', { checkPath: undefined }), true);
     assert.equal(isAdapterInstalled('/tmp', ADAPTERS.opencode), true);
+    assert.equal(isAdapterInstalled('/tmp', ADAPTERS.pi), true);
   });
 
   it('returns true when checkPath file exists', () => {
@@ -101,5 +104,6 @@ describe('checkPath coverage', () => {
 
   it('checkPath is undefined for adapters without filesystem markers', () => {
     assert.equal(ADAPTERS.opencode.checkPath, undefined);
+    assert.equal(ADAPTERS.pi.checkPath, undefined);
   });
 });

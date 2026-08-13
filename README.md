@@ -63,13 +63,14 @@ openmole/                         # npm package root
 ├── .codex/                  # Codex install guide
 ├── gemini-extension.json    # Gemini CLI extension
 ├── .opencode/plugins/openmole.js # OpenCode plugin (zero npm deps at runtime)
+├── .pi/extensions/openmole.ts  # Pi extension (zero npm deps at runtime)
 └── templates/               # config / gitignore templates
 ```
 
 ### Tech stack
 
 - **Skills / Commands**: Markdown + YAML frontmatter
-- **Plugin harnesses**: Cursor, OpenCode, Claude Code, Codex, Gemini CLI, Kiro, Qoder, WorkBuddy, Trae
+- **Plugin harnesses**: Cursor, OpenCode, Claude Code, Codex, Gemini CLI, Kiro, Qoder, WorkBuddy, Trae, Pi
 - **CLI**: Node.js ESM + `@clack/prompts` (CLI only; plugin runtime has no third-party npm deps)
 - **License**: MIT
 
@@ -110,10 +111,10 @@ After upgrading OpenMole, run `openmole update` in the target project to refresh
 | Flag | Description |
 |------|-------------|
 | `--ides cursor,opencode,...` | Non-interactive IDE list |
-| `--all` | Configure all 9 IDEs |
+| `--all` | Configure all 10 IDEs |
 | `--none` | Workspace only (`openmole/`) |
 | `--force` | Overwrite existing workspace / IDE config |
-| `--global` | OpenCode user config (`~/.config/opencode/`) |
+| `--global` | OpenCode/Pi user config (`~/.config/opencode/` / `~/.pi/agent/`) |
 | `--dry-run` | Print plan only |
 
 `openmole init` will:
@@ -133,6 +134,7 @@ After upgrading OpenMole, run `openmole update` in the target project to refresh
 | **Qoder** | Project `.qoder/skills/`, `.qoder/commands/` |
 | **WorkBuddy** | Project `.workbuddy/skills/`, `.workbuddy/commands/` |
 | **Trae** | Project `.trae/skills/` (no slash commands; skills auto-discovered) |
+| **Pi** | Project `.pi/settings.json` → `.pi/extensions/openmole.ts` (`--global` → user config) |
 
 **Extend mode**: If `openmole/config.yaml` exists, workspace is preserved; only IDEs missing from `installed_ides` are configured.
 
@@ -159,6 +161,7 @@ openmole update --dry-run
 | Qoder | [.qoder/INSTALL.md](.qoder/INSTALL.md) |
 | WorkBuddy | [.workbuddy/INSTALL.md](.workbuddy/INSTALL.md) |
 | Trae | [.trae/INSTALL.md](.trae/INSTALL.md) |
+| Pi | [.pi/INSTALL.md](.pi/INSTALL.md) |
 
 ### Development
 
@@ -234,13 +237,14 @@ openmole/                         # npm package root
 ├── .codex/                  # Codex install guide
 ├── gemini-extension.json    # Gemini CLI extension
 ├── .opencode/plugins/openmole.js # OpenCode plugin（零 npm 依赖）
+├── .pi/extensions/openmole.ts  # Pi extension（零 npm 依赖）
 └── templates/               # config / gitignore 模板
 ```
 
 ### 技术栈
 
 - **Skill / Command**：Markdown + YAML frontmatter
-- **Plugin harness**：Cursor、OpenCode、Claude Code、Codex、Gemini CLI、Kiro、Qoder、WorkBuddy、Trae
+- **Plugin harness**：Cursor、OpenCode、Claude Code、Codex、Gemini CLI、Kiro、Qoder、WorkBuddy、Trae、Pi
 - **CLI**：Node.js ESM + `@clack/prompts`（仅 CLI；plugin 运行时零第三方依赖）
 - **许可证**：MIT
 
@@ -281,10 +285,10 @@ openmole init
 | 选项 | 说明 |
 |------|------|
 | `--ides cursor,opencode,...` | 非交互指定 IDE |
-| `--all` | 配置全部 9 个 IDE |
+| `--all` | 配置全部 10 个 IDE |
 | `--none` | 仅创建 `openmole/` 工作区 |
 | `--force` | 覆盖已有 workspace / IDE 配置 |
-| `--global` | OpenCode 写入用户级 `~/.config/opencode/` |
+| `--global` | OpenCode/Pi 写入用户级（`~/.config/opencode/` / `~/.pi/agent/`） |
 | `--dry-run` | 只打印计划，不写文件 |
 
 `openmole init` 会：
@@ -304,6 +308,7 @@ openmole init
 | **Qoder** | 项目 `.qoder/skills/`、`.qoder/commands/` |
 | **WorkBuddy** | 项目 `.workbuddy/skills/`、`.workbuddy/commands/` |
 | **Trae** | 项目 `.trae/skills/`（无 slash 命令；skill 自动发现） |
+| **Pi** | 项目 `.pi/settings.json` 注册 `.pi/extensions/openmole.ts`（`--global` → 用户配置） |
 
 **Extend 模式**：已存在 `openmole/config.yaml` 时保留 workspace，仅为 `installed_ides` 中缺失的 IDE 追加配置。
 
@@ -330,6 +335,7 @@ openmole update --dry-run
 | Qoder | [.qoder/INSTALL.md](.qoder/INSTALL.md) |
 | WorkBuddy | [.workbuddy/INSTALL.md](.workbuddy/INSTALL.md) |
 | Trae | [.trae/INSTALL.md](.trae/INSTALL.md) |
+| Pi | [.pi/INSTALL.md](.pi/INSTALL.md) |
 
 ### 开发验证
 

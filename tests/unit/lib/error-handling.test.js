@@ -5,7 +5,7 @@ import assert from 'node:assert';
 import { needsReinstall, installIde, installIdes } from '../../../cli/lib/ide-install.js';
 import { resolveAdapter, isAdapterInstalled } from '../../../cli/lib/adapter-registry.js';
 
-const KNOWN_IDES = ['cursor', 'opencode', 'claude', 'codex', 'gemini', 'kiro', 'qoder', 'workbuddy', 'trae'];
+const KNOWN_IDES = ['cursor', 'opencode', 'claude', 'codex', 'gemini', 'kiro', 'qoder', 'workbuddy', 'trae', 'pi'];
 const BASE_OPTS = {
   packageRoot: '/tmp/openmole-test',
   targetDir: '/tmp/openmole-test-target',
@@ -93,7 +93,7 @@ describe('installIdes error handling', () => {
 
   it('processes all known IDEs without error (dryRun)', () => {
     const results = installIdes(KNOWN_IDES, BASE_OPTS);
-    assert.equal(results.length, 9);
+    assert.equal(results.length, 10);
     for (const r of results) {
       assert.ok(r, 'each install result should be defined');
     }
@@ -130,6 +130,29 @@ describe('adapter-specific error throwing (top-level)', () => {
   it('openCode adapter does not throw with global=true and no targetDir', () => {
     assert.doesNotThrow(() =>
       installIde('opencode', {
+        packageRoot: '/tmp',
+        targetDir: null,
+        global: true,
+        dryRun: true,
+      }),
+    );
+  });
+
+  it('pi adapter throws without targetDir (non-global)', () => {
+    assert.throws(
+      () => installIde('pi', {
+        packageRoot: '/tmp',
+        targetDir: null,
+        global: false,
+        dryRun: true,
+      }),
+      { message: 'targetDir required for project-level Pi config' },
+    );
+  });
+
+  it('pi adapter does not throw with global=true and no targetDir', () => {
+    assert.doesNotThrow(() =>
+      installIde('pi', {
         packageRoot: '/tmp',
         targetDir: null,
         global: true,

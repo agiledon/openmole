@@ -15,8 +15,10 @@
     "templates/",
     ".cursor-plugin/",
     ".claude-plugin/",
+    ".codex/",
     "gemini-extension.json",
-    ".opencode/"
+    ".opencode/",
+    ".pi/"
   ],
   "engines": {
     "node": ">=18"
@@ -41,7 +43,8 @@
     "kiro",
     "qoder",
     "workbuddy",
-    "trae"
+    "trae",
+    "pi"
   ],
   "publishConfig": {
     "access": "public"

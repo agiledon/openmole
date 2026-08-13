@@ -41,5 +41,8 @@ export function printInstallSummary({ title, targetDir, results, extraLines = []
   if (results.some((r) => r.ide === 'trae' && !r.skipped)) {
     console.log('  • Trae: 重启后在 Rules & Skills 中确认 openmole-* skills');
   }
+  if (results.some((r) => r.ide === 'pi' && !r.skipped)) {
+    console.log('  • Pi: 重启后运行 /mole-explore . demo-change');
+  }
   console.log('  • 运行 /mole-explore . <change-name> 开始第一个 change');
 }

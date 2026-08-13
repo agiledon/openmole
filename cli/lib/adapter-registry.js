@@ -9,6 +9,7 @@ import { installKiro } from '../adapters/kiro.js';
 import { installQoder } from '../adapters/qoder.js';
 import { installWorkBuddy } from '../adapters/workbuddy.js';
 import { installTrae } from '../adapters/trae.js';
+import { installPi } from '../adapters/pi.js';
 
 export const ADAPTERS = {
   cursor: { install: installCursor, checkPath: ['.cursor', 'skills', 'openmole-explore', 'SKILL.md'] },
@@ -20,6 +21,7 @@ export const ADAPTERS = {
   qoder: { install: installQoder, checkPath: ['.qoder', 'skills', 'openmole-explore', 'SKILL.md'] },
   workbuddy: { install: installWorkBuddy, checkPath: ['.workbuddy', 'skills', 'openmole-explore', 'SKILL.md'] },
   trae: { install: installTrae, checkPath: ['.trae', 'skills', 'openmole-explore', 'SKILL.md'] },
+  pi: { install: installPi },
 };
 
 export function resolveAdapter(ide) {

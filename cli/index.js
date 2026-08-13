@@ -23,16 +23,16 @@ Usage:
   openmole --version                  Show version
 
 Init options:
-  --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex,kiro,qoder,workbuddy,trae
+  --ides <list>       Comma-separated: cursor,opencode,gemini,claude,codex,kiro,qoder,workbuddy,trae,pi
   --all               Configure all IDEs
   --none              Workspace only, skip IDE configuration
   --force             Overwrite existing config
-  --global            Write OpenCode config to user-level (~/.config/opencode/)
+  --global            Write OpenCode/Pi config to user-level (~/.config/opencode/ or ~/.pi/agent/)
   --dry-run           Print planned actions without writing files
   --skip-gitignore    Do not merge templates/openmole-gitignore.snippet
 
 Update options:
-  --global            Pass --global to OpenCode adapter when re-installing
+  --global            Pass --global to OpenCode/Pi adapter when re-installing
   --dry-run           Print planned actions without writing files
   --skip-gitignore    Do not refresh .gitignore OpenMole snippet
 

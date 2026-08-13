@@ -1,0 +1,5 @@
+# Machine-local Pi artifacts (not part of the plugin artifact).
+# `.pi/extensions/openmole.ts` and `.pi/INSTALL.md` are package source and stay tracked.
+settings.json
+sessions/
+npm/

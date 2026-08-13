@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- 新增 **Pi** 适配：`openmole init --ides pi` 写入项目级 `.pi/settings.json` 注册 `.pi/extensions/openmole.ts`（`--global` → 用户级 `~/.pi/agent/settings.json`）
+- Pi 扩展注册 5 个 openmole-* skill 与 `/mole-*` 命令，并注入 bootstrap（与 OpenCode 插件一致）
+- IDE 总数 9 → 10；同步更新 README、`ide-select` 交互列表、`summary` 提示与单元测试
+
 ## 0.9.0 — 2026-07-25
 
 - 架构级重构扩展：新增 ARCH/DESIGN/IMPL 三级坏味道层次

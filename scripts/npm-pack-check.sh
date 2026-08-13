@@ -13,5 +13,6 @@ tar -tzf "$TARBALL" | grep -q 'package/cli/index.js'
 tar -tzf "$TARBALL" | grep -q 'package/skills/openmole-explore/SKILL.md'
 tar -tzf "$TARBALL" | grep -q 'package/.codex/INSTALL.md'
 tar -tzf "$TARBALL" | grep -q 'package/gemini-extension.json'
+tar -tzf "$TARBALL" | grep -q 'package/.pi/extensions/openmole.ts'
 
 echo "PASS: npm pack contains expected paths"
