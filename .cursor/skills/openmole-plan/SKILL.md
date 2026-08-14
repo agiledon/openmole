@@ -1,6 +1,6 @@
 ---
 name: openmole-plan
-description: mole:plan — 从未清除/部分残余坏味道生成 tasks.md
+description: mole-plan — 从未清除/部分残余坏味道生成 tasks.md
 ---
 
 # OpenMole Plan — 任务分解
@@ -11,17 +11,17 @@ description: mole:plan — 从未清除/部分残余坏味道生成 tasks.md
 
 ## 何时使用
 
-用户运行 `mole:plan`，或在 analyze 完成后生成/更新任务。
+用户运行 `mole-plan`，或在 analyze 完成后生成/更新任务。
 
 ## 工作区解析
 
 1. 读取 `{cwd}/openmole/config.yaml` → `current_change`
 2. `{change_dir}` = `{cwd}/openmole/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `mole:explore`
+3. 无 `current_change` → **停止**，提示先 `mole-explore`
 
 ## 门禁
 
-若 `{change_dir}/badsmells.md` 版本 **高于** 同目录 `tasks.md` 页眉依据版本 → **停止**，先 `mole:verify`
+若 `{change_dir}/badsmells.md` 版本 **高于** 同目录 `tasks.md` 页眉依据版本 → **停止**，先 `mole-verify`
 
 ## 任务生成
 
@@ -48,7 +48,7 @@ description: mole:plan — 从未清除/部分残余坏味道生成 tasks.md
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

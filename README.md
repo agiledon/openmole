@@ -23,11 +23,11 @@ OpenMole is a refactoring methodology and agent plugin framework driven by code 
 
 | Command (IDE slash / protocol) | Skill | Phase |
 |--------------------------------|-------|-------|
-| `/mole-explore` · `mole:explore` | `openmole-explore` | Create/continue change; identify bad smells |
-| `/mole-plan` · `mole:plan` | `openmole-plan` | Task breakdown |
-| `/mole-verify` · `mole:verify` | `openmole-verify` | Verify coverage |
-| `/mole-apply` · `mole:apply` | `openmole-apply` | Execute refactoring |
-| `/mole-archive` · `mole:archive` | `openmole-archive` | Archive change |
+| `/mole-explore` · `mole-explore` | `openmole-explore` | Create/continue change; identify bad smells |
+| `/mole-plan` · `mole-plan` | `openmole-plan` | Task breakdown |
+| `/mole-verify` · `mole-verify` | `openmole-verify` | Verify coverage |
+| `/mole-apply` · `mole-apply` | `openmole-apply` | Execute refactoring |
+| `/mole-archive` · `mole-archive` | `openmole-archive` | Archive change |
 
 Main outputs per phase: `badsmells.md`, `tasks.md`, `analysis.md`, and code changes.
 
@@ -47,7 +47,7 @@ openmole/
 ### Workflow
 
 ```
-mole:explore → review badsmells → mole:plan → review tasks → mole:verify → mole:apply → user confirm → mole:archive
+mole-explore → review badsmells → mole-plan → review tasks → mole-verify → mole-apply → user confirm → mole-archive
 ```
 
 ### Package layout
@@ -197,11 +197,11 @@ OpenMole（坏味道驱动重构）是一套面向编码 Agent 的软件重构�
 
 | 命令（IDE slash / 协议） | Skill | 阶段 |
 |--------------------------|-------|------|
-| `/mole-explore` · `mole:explore` | `openmole-explore` | 创建/继续 change，识别坏味道 |
-| `/mole-plan` · `mole:plan` | `openmole-plan` | 任务分解 |
-| `/mole-verify` · `mole:verify` | `openmole-verify` | 覆盖验证 |
-| `/mole-apply` · `mole:apply` | `openmole-apply` | 重构执行 |
-| `/mole-archive` · `mole:archive` | `openmole-archive` | 归档 change |
+| `/mole-explore` · `mole-explore` | `openmole-explore` | 创建/继续 change，识别坏味道 |
+| `/mole-plan` · `mole-plan` | `openmole-plan` | 任务分解 |
+| `/mole-verify` · `mole-verify` | `openmole-verify` | 覆盖验证 |
+| `/mole-apply` · `mole-apply` | `openmole-apply` | 重构执行 |
+| `/mole-archive` · `mole-archive` | `openmole-archive` | 归档 change |
 
 各阶段主要产出：`badsmells.md`、`tasks.md`、`analysis.md`、代码变更。
 
@@ -221,7 +221,7 @@ openmole/
 ### 工作流
 
 ```
-mole:explore → 审阅 badsmells → mole:plan → 审阅 tasks → mole:verify → mole:apply → 用户确认 → mole:archive
+mole-explore → 审阅 badsmells → mole-plan → 审阅 tasks → mole-verify → mole-apply → 用户确认 → mole-archive
 ```
 
 ### 包结构

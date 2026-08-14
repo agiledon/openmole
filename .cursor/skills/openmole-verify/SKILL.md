@@ -1,6 +1,6 @@
 ---
 name: openmole-verify
-description: mole:verify — 当前 change 内 badsmells 与 tasks 差分（A～F）
+description: mole-verify — 当前 change 内 badsmells 与 tasks 差分（A～F）
 ---
 
 # OpenMole Verify — 差分分析
@@ -12,13 +12,13 @@ description: mole:verify — 当前 change 内 badsmells 与 tasks 差分（A～
 ## 何时使用
 
 - 当前 change 的 `badsmells.md` 变更后 **必须** 运行
-- `mole:plan` / `mole:apply` 前发现 tasks 与 badsmells 不一致
+- `mole-plan` / `mole-apply` 前发现 tasks 与 badsmells 不一致
 
 ## 工作区解析
 
 1. 读取 `{cwd}/openmole/config.yaml` → `current_change`
 2. `{change_dir}` = `{cwd}/openmole/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `mole:explore`
+3. 无 `current_change` → **停止**，提示先 `mole-explore`
 
 ## 强制差分步骤
 
@@ -52,7 +52,7 @@ description: mole:verify — 当前 change 内 badsmells 与 tasks 差分（A～
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

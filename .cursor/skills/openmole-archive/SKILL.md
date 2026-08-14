@@ -1,6 +1,6 @@
 ---
 name: openmole-archive
-description: mole:archive — 检查 change 完成度并归档至 openmole/changes/archive/
+description: mole-archive — 检查 change 完成度并归档至 openmole/changes/archive/
 ---
 
 # OpenMole Archive — 归档 change
@@ -11,7 +11,7 @@ description: mole:archive — 检查 change 完成度并归档至 openmole/chang
 
 ## 何时使用
 
-用户运行 `mole:archive`，当前 change 重构周期结束或需封存。
+用户运行 `mole-archive`，当前 change 重构周期结束或需封存。
 
 ## 工作区解析
 
@@ -54,7 +54,7 @@ mv {cwd}/openmole/changes/<name> {cwd}/openmole/changes/archive/$(date +%Y-%m-%d
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

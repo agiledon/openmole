@@ -1,6 +1,6 @@
 ---
 name: openmole-explore
-description: mole:explore — 创建/继续 change，扫描源码产出 badsmells.md
+description: mole-explore — 创建/继续 change，扫描源码产出 badsmells.md
 ---
 
 # OpenMole Explore — 识别坏味道
@@ -12,7 +12,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 ## 何时使用
 
-用户运行 `mole:explore` 或需要识别/更新坏味道清单时。
+用户运行 `mole-explore` 或需要识别/更新坏味道清单时。
 
 ## 工作区解析
 
@@ -76,7 +76,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

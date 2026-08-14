@@ -26,7 +26,7 @@
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

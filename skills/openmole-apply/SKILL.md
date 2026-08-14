@@ -1,6 +1,6 @@
 ---
 name: openmole-apply
-description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
+description: mole-apply — 执行当前 change 下一个未完成的 B-Txx
 ---
 
 # OpenMole Apply — 执行重构
@@ -13,13 +13,13 @@ description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
 
 ## 何时使用
 
-用户运行 `mole:apply`，且当前 change 有未完成任务。
+用户运行 `mole-apply`，且当前 change 有未完成任务。
 
 ## 工作区解析
 
 1. 读取 `{cwd}/openmole/config.yaml` → `current_change`
 2. `{change_dir}` = `{cwd}/openmole/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `mole:explore`
+3. 无 `current_change` → **停止**，提示先 `mole-explore`
 
 ## 级别感知
 
@@ -84,8 +84,8 @@ description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
 
 - `{change_dir}/{level}/tasks.md` 标记 `[x]`
 - 满足 DoD 时更新 `{change_dir}/{level}/badsmells.md` §2.0
-- 若还有未完成的任务，建议继续执行 `mole:apply`
-- 若所有任务已完成，建议执行 `mole:archive` 归档此 change
+- 若还有未完成的任务，建议继续执行 `mole-apply`
+- 若所有任务已完成，建议执行 `mole-archive` 归档此 change
 
 ## OpenMole 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -115,7 +115,7 @@ description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

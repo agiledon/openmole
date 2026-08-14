@@ -42,4 +42,4 @@
 
 ## 3. 任务 backlog
 
-（由 mole:plan 生成）
+（由 mole-plan 生成）

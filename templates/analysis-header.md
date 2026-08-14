@@ -36,7 +36,7 @@
 
 ### 2.1 最近一次差分记录
 
-（由 mole:verify 填写）
+（由 mole-verify 填写）
 
 ---
 

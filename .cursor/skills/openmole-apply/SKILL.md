@@ -1,6 +1,6 @@
 ---
 name: openmole-apply
-description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
+description: mole-apply — 执行当前 change 下一个未完成的 B-Txx
 ---
 
 # OpenMole Apply — 执行重构
@@ -11,13 +11,13 @@ description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
 
 ## 何时使用
 
-用户运行 `mole:apply`，且当前 change 有未完成任务。
+用户运行 `mole-apply`，且当前 change 有未完成任务。
 
 ## 工作区解析
 
 1. 读取 `{cwd}/openmole/config.yaml` → `current_change`
 2. `{change_dir}` = `{cwd}/openmole/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `mole:explore`
+3. 无 `current_change` → **停止**，提示先 `mole-explore`
 
 ## 选取任务
 
@@ -58,7 +58,7 @@ description: mole:apply — 执行当前 change 下一个未完成的 B-Txx
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 

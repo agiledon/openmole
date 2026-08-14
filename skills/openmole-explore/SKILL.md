@@ -1,6 +1,6 @@
 ---
 name: openmole-explore
-description: mole:explore — 创建/继续 change，扫描源码产出 badsmells.md
+description: mole-explore — 创建/继续 change，扫描源码产出 badsmells.md
 ---
 
 # OpenMole Explore — 识别坏味道
@@ -13,7 +13,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 ## 何时使用
 
-用户运行 `mole:explore` 或需要识别/更新坏味道清单时。可选指定级别：`mole:explore arch` / `mole:explore design` / `mole:explore impl`。
+用户运行 `mole-explore` 或需要识别/更新坏味道清单时。可选指定级别：`mole-explore arch` / `mole-explore design` / `mole-explore impl`。
 
 ## 工作区解析
 
@@ -38,7 +38,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 | 条件 | 行为 |
 |------|------|
-| 显式指定级别（`mole:explore arch`） | 锁定为 ARCH |
+| 显式指定级别（`mole-explore arch`） | 锁定为 ARCH |
 | 隐式 | 使用 `.openmole-change.yaml` 的 `default_level`；若未设置则询问用户 |
 | 同一 change 内跨级别 | 创建子目录 `arch/`、`design/`、`impl/`，互不覆盖 |
 
@@ -135,7 +135,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 
@@ -147,7 +147,7 @@ description: mole:explore — 创建/继续 change，扫描源码产出 badsmell
 
 ## 完成后建议
 
-探索完成后，建议继续执行 `mole:plan` 进行任务分解。
+探索完成后，建议继续执行 `mole-plan` 进行任务分解。
 
 ## RED FLAGS
 

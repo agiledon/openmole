@@ -1,6 +1,6 @@
 ---
 name: openmole-verify
-description: mole:verify — 当前 change 内 badsmells 与 tasks 差分验证
+description: mole-verify — 当前 change 内 badsmells 与 tasks 差分验证
 ---
 
 # OpenMole Verify — 差分验证
@@ -14,13 +14,13 @@ description: mole:verify — 当前 change 内 badsmells 与 tasks 差分验证
 ## 何时使用
 
 - 当前 change 的 `badsmells.md` 变更后 **必须** 运行
-- `mole:plan` 执行后 / `mole:apply` 前验证 tasks 与 badsmells 一致性
+- `mole-plan` 执行后 / `mole-apply` 前验证 tasks 与 badsmells 一致性
 
 ## 工作区解析
 
 1. 读取 `{cwd}/openmole/config.yaml` → `current_change`
 2. `{change_dir}` = `{cwd}/openmole/changes/{change_name}/`
-3. 无 `current_change` → **停止**，提示先 `mole:explore`
+3. 无 `current_change` → **停止**，提示先 `mole-explore`
 
 ## 级别感知
 
@@ -50,7 +50,7 @@ description: mole:verify — 当前 change 内 badsmells 与 tasks 差分验证
 
 ## 完成后建议
 
-验证完成后，建议继续执行 `mole:apply` 开始执行重构任务。
+验证完成后，建议继续执行 `mole-apply` 开始执行重构任务。
 
 ## OpenMole 规约摘要（内嵌于各 Skill，非独立文件）
 
@@ -80,7 +80,7 @@ description: mole:verify — 当前 change 内 badsmells 与 tasks 差分验证
 
 ### constitution §5 — 执行粒度
 
-每次 `mole:apply` 仅处理一个未完成任务。
+每次 `mole-apply` 仅处理一个未完成任务。
 
 ### specification §4 — badsmells 条目
 
