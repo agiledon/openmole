@@ -12,7 +12,7 @@ description: mole-explore — 创建/继续 change，扫描源码产出 badsmell
 
 ## 何时使用
 
-用户运行 `mole-explore` 或需要识别/更新坏味道清单时。
+用户运行 `mole-explore` 或需要识别/更新坏味道清单时。运行后先让用户选择级别（架构级 / 设计级 / 实现级，可单选/多选/全选），详见主版本 §级别选择。
 
 ## 工作区解析
 

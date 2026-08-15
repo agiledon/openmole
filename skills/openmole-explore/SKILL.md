@@ -1,6 +1,6 @@
 ---
 name: openmole-explore
-description: mole-explore — 创建/继续 change，扫描源码产出 badsmells.md
+description: mole-explore — 创建/继续 change，按用户选择的级别（ARCH/DESIGN/IMPL，可多选）扫描坏味道写入对应子目录
 ---
 
 # OpenMole Explore — 识别坏味道
@@ -13,7 +13,7 @@ description: mole-explore — 创建/继续 change，扫描源码产出 badsmell
 
 ## 何时使用
 
-用户运行 `mole-explore` 或需要识别/更新坏味道清单时。可选指定级别：`mole-explore arch` / `mole-explore design` / `mole-explore impl`。
+用户运行 `mole-explore` 或需要识别/更新坏味道清单时。运行后先按 §级别选择 让用户选择要识别的级别（架构级 / 设计级 / 实现级，可单选/多选/全选）。
 
 ## 工作区解析
 
@@ -34,13 +34,29 @@ description: mole-explore — 创建/继续 change，扫描源码产出 badsmell
 1. 创建 `{cwd}/openmole/changes/<name>/`、`{cwd}/openmole/changes/<name>/.openmole-change.yaml`（参考 `{config_dir}/templates/openmole-change.yaml`）
 2. 更新 `{cwd}/openmole/config.yaml` 的 `current_change`
 
-## 级别选择
+## 级别选择（单选 / 多选 / 全选）
 
-| 条件 | 行为 |
-|------|------|
-| 显式指定级别（`mole-explore arch`） | 锁定为 ARCH |
-| 隐式 | 使用 `.openmole-change.yaml` 的 `default_level`；若未设置则询问用户 |
-| 同一 change 内跨级别 | 创建子目录 `arch/`、`design/`、`impl/`，互不覆盖 |
+运行 `mole-explore` 后，Agent **必须**先向用户展示以下三个级别选项，让用户自由选择要识别的坏味道级别：
+
+| 选项 | 级别 | 识别范围 |
+|------|------|---------|
+| `arch` | 架构级 ARCH | 模块化、耦合、内聚、层次、边界、演进 |
+| `design` | 设计级 DESIGN | 封装、继承、模块化、冗余（Fowler 主 + PHAME 补） |
+| `impl` | 实现级 IMPL | 函数、命名、参数、注释、语言惯用法（IMPL-COMMON + IMPL-LANG） |
+
+**选择方式**：
+
+- 使用可用的多选交互工具（如 AskUserQuestion / 多选提示）展示以上选项，允许**单选、多选或全选**。
+- 用户也可通过命令参数直接指定（逗号分隔）：`mole-explore arch`、`mole-explore arch,design`、`mole-explore all`（`all` = arch + design + impl）。
+- 未显式指定级别时，**必须交互式询问**（不要静默使用默认值）。
+
+**结果落盘**：对用户选择的每个级别分别执行扫描，写入对应子目录，互不覆盖：
+
+| 选择的级别 | 写入文件 |
+|-----------|---------|
+| ARCH | `{change_dir}/arch/badsmells.md` |
+| DESIGN | `{change_dir}/design/badsmells.md` |
+| IMPL | `{change_dir}/impl/badsmells.md` |
 
 子目录结构：
 
@@ -62,7 +78,7 @@ description: mole-explore — 创建/继续 change，扫描源码产出 badsmell
 
 1. **确定范围**：`[path]` 默认 `.`
 2. **检测语言**：通过文件扩展名、配置文件（`pom.xml`/`Cargo.toml`/`package.json`）、依赖分析自动识别。识别结果写入 `.openmole-change.yaml` 的 `detected_languages`
-3. **按级别识别坏味道**：
+3. **按所选级别识别坏味道**（仅扫描用户在 §级别选择 中选中的级别）：
    - ARCH：扫描模块化、耦合、内聚、层次、边界、演进问题
    - DESIGN：扫描封装、继承、模块化、冗余问题（Fowler 主 + PHAME 补）
    - IMPL：加载 **IMPL-COMMON**（通用） + **IMPL-LANG**（语言特定，激活匹配语言的条目）

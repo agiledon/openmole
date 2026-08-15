@@ -1,6 +1,6 @@
 # 复制到目标项目 openmole/config.yaml（openmole init 也会生成此结构）
 current_change: null   # 活跃 change 名；explore 新建时更新；archive 后清空
-default_level: impl   # arch | design | impl（默认级别，用于未指定级别时）
-installed_ides: []     # openmole init 配置的 IDE：cursor | opencode | gemini | claude | codex | kiro | qoder | workbuddy | trae
+levels: [impl]   # 当前 change 覆盖的级别：arch / design / impl，可多选
+installed_ides: []     # openmole init 配置的 IDE：cursor | opencode | gemini | claude | codex | kiro | qoder | workbuddy | trae | pi
 init_version: null     # 执行 openmole init 的 OpenMole 包版本
 init_at: null          # ISO-8601 时间戳
